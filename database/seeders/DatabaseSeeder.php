@@ -3,7 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use BlogListSeeder;
+use ForumListSeeder;
 use Illuminate\Database\Seeder;
+use MembersSeeder;
+use PostsSeeder;
+use UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(UserSeeder::class);
+        $this->call(ForumListSeeder::class);
+        $this->call(BlogListSeeder::class);
+        // $this->call(MessagesSeeder::class);
+        $this->call(PostsSeeder::class);
+        $this->call(MembersSeeder::class);
     }
 }
