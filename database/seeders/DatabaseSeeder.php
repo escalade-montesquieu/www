@@ -3,12 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use BlogListSeeder;
-use ForumListSeeder;
 use Illuminate\Database\Seeder;
-use MembersSeeder;
-use PostsSeeder;
-use UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {

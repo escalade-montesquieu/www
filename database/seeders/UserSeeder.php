@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,17 +15,11 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        DB::table('users')->insert([
-            'uuid' => '91554725-10c9-4f8c-8879-80ed83920659',
-            'level' => 1,
-            'name' => 'Jean Bonnet',
-            'img' => '/assets/profiles/user.png',
+        User::factory()->makeOne([
             'email' => 'utilisateur@email.com',
-            'password' => Hash::make('password'),
-            'bio' => 'lorem ipsum dolor sit amet',
-            'max_bloc' => '6c',
+            'name' => 'Jean Bonnet',
         ]);
     }
 }
