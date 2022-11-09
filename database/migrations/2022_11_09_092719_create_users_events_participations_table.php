@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users_events_participations', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')
+            $table->foreignUuid('user_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
