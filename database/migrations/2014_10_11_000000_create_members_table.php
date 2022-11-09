@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('galery', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
-
             $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->text('text')->nullable();
-
-            $table->timestamps();
+            $table->unsignedSmallInteger('get_degree_at_year')->nullable();
+            $table->tinyInteger('role')->default(0); // niveau de perm
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galery');
+        Schema::dropIfExists('members');
     }
 };

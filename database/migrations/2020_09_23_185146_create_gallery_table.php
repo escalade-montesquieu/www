@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('gallery', function (Blueprint $table) {
             $table->id();
+
             $table->string('name')->unique();
-            $table->unsignedSmallInteger('get_degree_at_year');
+            $table->string('slug')->unique();
+            $table->text('text')->nullable();
+
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('gallery');
     }
 };

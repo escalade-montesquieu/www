@@ -16,15 +16,15 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('event_category_id')
+            $table->foreignId('gallery_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('name')->nullable();
-            $table->boolean('exposed')->default(false);
+            $table->boolean('pinned_homepage')->default(false);
             $table->text('src');
 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
