@@ -13,20 +13,21 @@ class CreateBlogPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_posts', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('event_category_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->string('title');
-            $table->string('blog')->index(); // slug du blog 
-            $table->datetime('datetime')->nullable(); // datetime 
+            $table->datetime('datetime')->nullable(); // datetime
             $table->string('location')->nullable(); // Lieu
             $table->text('content')->nullable();
-
-            // matos et grimpeurs
             $table->integer('maxplaces')->default('-1');
-            $table->mediumText('availables')->nullable(); // nom des grimpeurs venant et le matériel demandé
-            $table->mediumText('unavailables')->nullable(); // ceux étant indisponibles
 
             $table->timestamp('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 
@@ -37,6 +38,6 @@ class CreateBlogPostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog');
+        Schema::dropIfExists('events');
     }
 }

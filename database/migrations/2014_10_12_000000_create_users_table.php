@@ -16,13 +16,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+
+            $table->foreignId('student_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->tinyInteger('level')->default(0); // niveau de perm
-            $table->string('name')->unique(); // nom et prénom
             $table->string('img'); // lien de la photo de profil
             $table->string('email')->unique();
-            $table->string('email_preferences')->default(' ');
+            $table->string('email_preferences')->default('');
             $table->string('password');
-            $table->string('api_token', 60)->unique()->nullable();
             $table->mediumText('bio')->nullable(true);
             $table->string('max_voie')->default('Non renseigné');
             $table->string('max_bloc')->default('Non renseigné');

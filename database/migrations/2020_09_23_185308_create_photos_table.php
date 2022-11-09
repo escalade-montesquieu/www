@@ -15,15 +15,15 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->boolean('exposed')->default(false);
-            $table->string('gallery');
-            $table->string('gallery_name');
-            $table->string('background');
-            $table->text('src');
+
+            $table->foreignId('event_category_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->string('name')->nullable();
-            $table->string('date')->nullable();
-            $table->text('text')->nullable();
+            $table->boolean('exposed')->default(false);
+            $table->text('src');
+
             $table->timestamps();
         });
     }

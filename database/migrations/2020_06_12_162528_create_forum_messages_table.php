@@ -15,11 +15,15 @@ class CreateForumMessagesTable extends Migration
     {
         Schema::create('forum_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('forum')->index();
-            $table->string('author');
-            $table->uuid('author_uuid');
+
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->text('content');
+
             $table->timestamp('created_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 
