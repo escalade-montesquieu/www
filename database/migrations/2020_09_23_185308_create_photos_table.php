@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->boolean('pinned_homepage')->default(false);
+            $table->boolean('pinned_homepage');
             $table->text('src');
 
             $table->timestamp('created_at')->useCurrent();

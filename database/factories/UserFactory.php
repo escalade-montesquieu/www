@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,12 +19,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'uuid' => Str::orderedUuid(),
-            'level' => 1,
-            'img' => '/assets/profiles/user.png',
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'bio' => 'lorem ipsum dolor sit amet',
             'max_bloc' => '6c',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -31,15 +28,22 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return static
-     */
-    public function unverified()
+
+    public function moderator(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => UserRole::MODERATOR,
+            ];
+        });
+    }
+
+    public function admin(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => UserRole::ADMIN,
+            ];
+        });
     }
 }

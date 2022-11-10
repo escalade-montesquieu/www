@@ -13,18 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users_events_participations', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignUuid('user_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->foreignId('event_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->timestamps();
+            $table->string('name')->unique();
+            $table->unsignedSmallInteger('get_degree_at_year')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_events_participations');
+        Schema::dropIfExists('students');
     }
 };

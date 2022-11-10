@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Info;
-use App\Models\Member;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -54,7 +54,7 @@ class AdminController extends Controller
 
     public function getMembers(Request $request)
     {
-        $members = Member::select('name', 'class')->get();
+        $members = Student::select('name', 'class')->get();
         return view('admin.members', compact('members'));
     }
 
@@ -67,10 +67,10 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->messages());
         }
-        if(Member::where('name', request('name'))->count() > 0) {
+        if(Student::where('name', request('name'))->count() > 0) {
             return response('already exist')->status(400);
         } else {
-            Member::create([
+            Student::create([
                 'name' => request('name'),
                 'class' => request('classroom'),
             ]);
@@ -80,7 +80,7 @@ class AdminController extends Controller
 
     public function destroyMember(Request $request, $name)
     {
-        if(!$member = Member::where('name', $name)->first()) {
+        if(!$member = Student::where('name', $name)->first()) {
             return response('not found')->status(404);
         }
         if($member->name !== Auth::User()->name) {

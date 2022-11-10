@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Forum;
 use App\Models\Info;
 use App\Models\Photo;
-use App\Models\Post;
+use App\Models\UserEventParticipartion;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +25,7 @@ class HomeController extends Controller
         //     return (0 <= $diff);
         // })->values()->take(5);
 
-        $comingPosts = Post::orderBy('datetime')->get()->filter(function ($post) use ($current_datetime) {
+        $comingPosts = UserEventParticipartion::orderBy('datetime')->get()->filter(function ($post) use ($current_datetime) {
             $diff = (strtotime(explode(" ", $post->datetime)[0])-$current_datetime); // évènement pas encore passé
             return (0 <= $diff);
         })->values()->take(5);

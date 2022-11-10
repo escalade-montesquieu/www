@@ -3,33 +3,50 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRole;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     use HasUuids;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'uuid', 'level', 'name', 'img', 'email', 'password', 'bio', 'max_voie', 'max_block', 'warn', 'updated_at', 'email_preferences'
+        'role',
+        'password',
+        'email',
+        'email_preferences',
+
+        'name',
+        'avatar_url',
+        'bio',
+        'max_voie',
+        'max_block',
+        'display_max',
+        'rent_shoes',
+        'rent_harness'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    protected $attributes = [
+        'role' => UserRole::STUDENT,
+        'email_preferences' => '',
+        'max_voie' => 'Non renseignée',
+        'max_bloc' => 'Non renseignée',
+        'display_max' => true,
+        'rent_harness' => false,
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -54,46 +71,34 @@ class User extends Authenticatable
         // ]
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function rollApiKey(){
-        do{
-            $this->api_token = Str::random(60);
-        }while($this->where('api_token', $this->api_token)->exists());
-        $this->save();
-    }
-
-    public function getEmailPrefsAttribute()
+    public function student(): BelongsTo
     {
-        if($this->email_preferences == null) return [];
-        $rules = array_keys($this->emailRules);
-        $prefs = [];
-        foreach ($rules as $rule) {
-            if(str_contains($this->email_preferences, $rule)) {
-                // array_push($prefs, $this->emailRules[$rule]);
-                $prefs[$this->emailRules[$rule]['name']] = $this->emailRules[$rule]['desc'];
-            }
-        }
-        return $prefs;
+        return $this->belongsTo(Student::class);
     }
 
-    public function prefLetterFromName($prefname)
+    public function canAccessFilament(): bool
     {
-        foreach ($this->emailRules as $letter => $rule) {
-            if($rule['name'] == $prefname) {
-                return $letter;
-            }
-        }
-        return NULL;
+        return $this->role === UserRole::ADMIN->value;
     }
 
+    public function getFilamentName(): string
+    {
+        return $this->name;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url;
+    }
+
+
+
+
+    // todo
     public function isMailableFor($prefname)
     {
         return str_contains($this->email_preferences, $prefname);
@@ -105,4 +110,6 @@ class User extends Authenticatable
         $pref = $this->prefLetterFromName($prefname);
         return $query->where('email_preferences', 'LIKE', "%$pref%");
     }
+
+
 }

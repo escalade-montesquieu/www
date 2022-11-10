@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Post;
+use App\Models\EventCategory;
+use App\Models\UserEventParticipartion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Validator;
 class BlogController extends Controller
 {
     public function index() {
-        $blogs = Blog::all();
-        $regulars = Blog::where('is_regular', 1)->get();
-        $non_regulars = Blog::where('is_regular', 0)->get();
+        $blogs = EventCategory::all();
+        $regulars = EventCategory::where('is_regular', 1)->get();
+        $non_regulars = EventCategory::where('is_regular', 0)->get();
 
         return view('blog.index', compact('regulars', 'non_regulars'));
     }
@@ -33,7 +33,7 @@ class BlogController extends Controller
             return back()->withInput()->withErrors($validator);
         }
 
-        $blog = Blog::create([
+        $blog = EventCategory::create([
             'name' => request('name'),
             'slug' => request('slug'),
             'is_regular' => request('is_regular'),
@@ -45,20 +45,20 @@ class BlogController extends Controller
 
 
     public function show(Request $request, $blog_slug) {
-        $blog = Blog::where('slug', $blog_slug)->firstOrFail();
-        $posts = Post::where('blog', $blog_slug)->orderBy('datetime', 'asc')->get();
+        $blog = EventCategory::where('slug', $blog_slug)->firstOrFail();
+        $posts = UserEventParticipartion::where('blog', $blog_slug)->orderBy('datetime', 'asc')->get();
 
         return view('blog.show', compact('blog', 'posts'));
     }
 
     public function edit($blog_slug) {
-        $blog = Blog::where('slug', $blog_slug)->firstOrFail();
+        $blog = EventCategory::where('slug', $blog_slug)->firstOrFail();
 
         return view('blog.edit', compact('blog'));
     }
 
     public function update(Request $request, $blog_slug) {
-        $blog = Blog::where('slug', $blog_slug)->firstOrFail();
+        $blog = EventCategory::where('slug', $blog_slug)->firstOrFail();
 
 
         $validator = Validator::make($request->all(), [
@@ -74,7 +74,7 @@ class BlogController extends Controller
 
         if($blog->slug !== request('slug')) {
             $blog->slug = request('slug');
-            $posts = Post::where('blog', $blog_slug)->update(['blog' => request('slug')]);
+            $posts = UserEventParticipartion::where('blog', $blog_slug)->update(['blog' => request('slug')]);
         }
 
         $blog->name = request('name');
@@ -82,13 +82,13 @@ class BlogController extends Controller
         $blog->description = request('description');
         $blog->save();
 
-        $posts = Post::where('blog', request('slug'))->get();
+        $posts = UserEventParticipartion::where('blog', request('slug'))->get();
         // return view('blog.show', compact('blog', 'posts'))->with('status', 'success')->with('content', 'Blog mis à jour');
         return redirect()->route('showBlog', $blog->slug)->with('status', 'success')->with('content', 'Blog mis à jour');
     }
 
     public function destroy($blog_slug) {
-        $blog = Blog::where('slug', $blog_slug)->firstOrFail();
+        $blog = EventCategory::where('slug', $blog_slug)->firstOrFail();
 
         $blog->delete();
         return redirect()->route('blogs');

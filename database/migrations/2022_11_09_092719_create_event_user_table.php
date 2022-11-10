@@ -13,14 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->unsignedSmallInteger('get_degree_at_year')->nullable();
-            $table->tinyInteger('role')->default(0); // niveau de perm
+        Schema::create('event_user', function (Blueprint $table) {
+            $table->foreignUuid('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('event_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->boolean('participate');
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('event_user');
     }
 };

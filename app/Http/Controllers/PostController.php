@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Post;
+use App\Models\EventCategory;
+use App\Models\UserEventParticipartion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 // use App\Notifications\EventNotification;
@@ -27,7 +27,7 @@ class PostController extends Controller
             $blog = '';
         }
 
-        $blogs = Blog::all();
+        $blogs = EventCategory::all();
         $blog_slug = request('blog');
         return view('post.create', compact('blogs', 'blog_slug'));
     }
@@ -45,7 +45,7 @@ class PostController extends Controller
             return back()->withInput()->withErrors($validator);
         }
 
-        $post = Post::create([
+        $post = UserEventParticipartion::create([
             'title' => request('title'),
             'blog' => request('blog'),
             'datetime' => request('datetime'),
@@ -83,7 +83,7 @@ class PostController extends Controller
     }
 
     public function show($post_id) {
-        if(! $post = Post::where('id', $post_id)->first()) {
+        if(! $post = UserEventParticipartion::where('id', $post_id)->first()) {
             return abort('404');
         }
 
@@ -91,15 +91,15 @@ class PostController extends Controller
     }
 
     public function edit($post_id) {
-        if(! $post = Post::where('id', $post_id)->first()) {
+        if(! $post = UserEventParticipartion::where('id', $post_id)->first()) {
             return redirect('404');
         }
-        $blogs = Blog::all();
+        $blogs = EventCategory::all();
         return view('post.edit', compact('post', 'blogs'));
     }
 
     public function update(Request $request, $post_id) {
-        if(! $post = Post::where('id', $post_id)->first()) {
+        if(! $post = UserEventParticipartion::where('id', $post_id)->first()) {
             return redirect('404');
         }
 
@@ -128,7 +128,7 @@ class PostController extends Controller
     }
 
     public function available(Request $request, $post_id) {
-        if(! $post = Post::where('id', $post_id)->first()) {
+        if(! $post = UserEventParticipartion::where('id', $post_id)->first()) {
             return response()->json('Not found', 404);
         }
 
@@ -158,7 +158,7 @@ class PostController extends Controller
     }
 
     public function unavailable(Request $request, $post_id) {
-        if(! $post = Post::where('id', $post_id)->first()) {
+        if(! $post = UserEventParticipartion::where('id', $post_id)->first()) {
             return response()->json('Not found', 404);
         }
 
@@ -184,7 +184,7 @@ class PostController extends Controller
     }
 
     public function destroy($post_id) {
-        if(! $post = Post::where('id', $post_id)->first()) {
+        if(! $post = UserEventParticipartion::where('id', $post_id)->first()) {
             return response()->json('Not found', 404);
         }
         $blog = $post->blog;

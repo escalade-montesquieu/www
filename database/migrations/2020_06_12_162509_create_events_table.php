@@ -21,10 +21,10 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('title');
+            $table->integer('max_places');
             $table->datetime('datetime')->nullable(); // datetime
             $table->string('location')->nullable(); // Lieu
             $table->text('content')->nullable();
-            $table->integer('maxplaces')->default('-1');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
