@@ -26,7 +26,11 @@ class StudentResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('get_degree_at_year'),
+                Forms\Components\TextInput::make('get_degree_at_year')
+                    ->numeric()
+                    ->required()
+                    ->minValue(2000)
+                    ->maxValue(9999),
             ]);
     }
 
@@ -58,14 +62,14 @@ class StudentResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageStudents::route('/'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
