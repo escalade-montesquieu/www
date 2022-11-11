@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forum;
-use App\Models\Info;
+use App\Models\Article;
 use App\Models\Photo;
 use App\Models\UserEventParticipartion;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         $current_datetime = strtotime(Carbon::now()->toDateString());
 
-        $infos = Info::all();
+        $infos = Article::all();
         // $comingPosts = Post::orderBy('datetime')->get()->filter(function ($post) use ($current_datetime) {
         //     $diff = (strtotime(explode(" ", $post->datetime)[0])-$current_datetime)/172800; // 2semaines
         //     return (0 <= $diff);
