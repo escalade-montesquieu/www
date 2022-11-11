@@ -2,38 +2,36 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Image;
-use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Gallery extends Model
 {
-    protected $table = 'gallery';
+    use HasSlug, HasFactory;
 
 	protected $fillable = [
 		'name',
 		'slug',
-		'preview',
-		'text'
+		'description'
 	];
 
-	public $preview_resize = 300;
+    public function photos(): HasMany
+    {
+        return $this->hasMany(Photo::class);
+    }
 
-	public function deletePreview() {
-		$imageName = explode('?v=', $this->preview)[0];
-		File::delete(public_path().$imageName);
-	}
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
-	public function saveOptimizedPreview($imgFromRequest) {
-		$imageName = $this->slug.'.'.$imgFromRequest->getClientOriginalExtension();
-		$destinationPath = public_path('preview');
-
-		$img = Image::make($imgFromRequest->getRealPath());
-		$img->resize($this->preview_resize, $this->preview_resize, function ($constraint) {
-			$constraint->aspectRatio();
-			$constraint->upsize();
-		})->save($destinationPath.'/'.$imageName);
-
-		$this->preview = '/preview/'.$imageName.'?v='.time();
-	}
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
