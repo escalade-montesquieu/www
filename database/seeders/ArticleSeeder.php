@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Event;
-use App\Models\EventCategory;
+use App\Models\Article;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class EventCategorySeeder extends Seeder
+class ArticleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +15,8 @@ class EventCategorySeeder extends Seeder
      */
     public function run()
     {
-        EventCategory::factory()
-            ->count(4)
-            ->hasEvents(10)
-            ->create();
+        Article::factory()->published()->count(10)->create();
+
+        Article::factory()->archived()->count(10)->create();
     }
 }
