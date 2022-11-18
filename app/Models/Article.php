@@ -13,6 +13,6 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
-        'archived'
+        'display_homepage'
     ];
 }

@@ -39,7 +39,6 @@ class ArticleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\IconColumn::make('archived')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')

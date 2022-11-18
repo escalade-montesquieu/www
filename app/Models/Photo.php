@@ -12,7 +12,7 @@ class Photo extends Model
 
 	protected $fillable = [
 		'gallery',
-		'pinned_homepage',
+		'display_homepage',
 		'src',
 	];
 
