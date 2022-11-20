@@ -1,33 +1,47 @@
+@import "buttons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-    .h1 {
+    .text-h1 {
         @apply text-5xl font-bold;
     }
 
-    .h2 {
+    .text-h2 {
         @apply text-3xl font-light;
     }
 
-    .h3 {
+    .text-h3 {
         @apply text-2xl font-bold;
     }
 
-    .h4 {
+    .text-h4 {
         @apply text-xl font-semibold;
     }
 
-    .body {
+    .text-body {
         @apply text-lg font-light;
     }
 
-    .cta {
+    .text-cta {
         @apply text-lg font-bold;
     }
 
-    .label {
+    .text-label {
         @apply text-base font-normal;
+    }
+
+    .link {
+        @apply text-blue-medium;
+    }
+
+    .link-offcanvas {
+        @apply text-h4;
+    }
+
+    .icon {
+        @apply h-6 w-6;
     }
 }

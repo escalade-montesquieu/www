@@ -35,18 +35,15 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255', 'exists:members,name','unique:users,name'],
+            'name' => ['required', 'string', 'max:255', 'exists:students,name','unique:users,name'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string'],
-            'password-confirmation' => ['required', 'string', 'same:password'],
+            'password_confirmation' => ['required', 'string', 'same:password'],
         ], [
             'name.exists' => 'Essayez avec votre nom complet. Vous n\'êtes peut-être pas sur la liste des licenciés. Merci de contacter M.Granier au lycée si vous êtes licenciés.'
         ]);
 
         $user = User::create([
-            'uuid' => Str::orderedUuid(),
-            'img' => '/assets/profiles/user.png',
-            'level' => 1,
             'name' => ucwords(strtolower($request->name)),
             'email' => $request->email,
             'password' => Hash::make($request->password),

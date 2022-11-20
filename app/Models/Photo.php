@@ -17,7 +17,7 @@ class Photo extends Model
 	];
 
     protected $attributes = [
-        'pinned_homepage' => false,
+        'display_homepage' => false,
     ];
 
     public function gallery(): BelongsTo
@@ -25,7 +25,7 @@ class Photo extends Model
         return $this->belongsTo(Gallery::class);
     }
 
-	public function scopePinnedHomepage($query) {
-		return $query->where('pinned_homepage', 1);
+	public function scopeOnHomepage($query) {
+		return $query->where('display_homepage', true);
 	}
 }

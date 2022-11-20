@@ -15,4 +15,8 @@ class Article extends Model
         'content',
         'display_homepage'
     ];
+
+    public function scopeOnHomepage($query) {
+        return $query->where('display_homepage', true);
+    }
 }

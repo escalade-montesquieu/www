@@ -80,6 +80,34 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         return $this->belongsTo(Student::class);
     }
 
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class)
+            ->withTimestamps();
+    }
+
+    public function getClimbingStuffSentenceAttribute(): string
+    {
+        if(!$this->rent_harness && !$this->rent_shoes) {
+            return "Vous n'empruntez aucun matériel";
+        }
+
+        if(!$this->rent_harness && $this->rent_shoes) {
+            return "Vous avez votre baudrier, des chaussons taille $this->rent_shoes vous sont réservés";
+        }
+
+        if($this->rent_harness && !$this->rent_shoes) {
+            return "Vous avez vos chaussons, un baudrier vous est réservé";
+        }
+
+        return "Un baudrier et des chaussons taille $this->rent_shoes vous sont réservés";
+    }
+
+    public function getAvatarAttribute(): string
+    {
+        return "https://ui-avatars.com/api/?name=$this->name&rounded=true";
+    }
+
     public function canAccessFilament(): bool
     {
         return $this->role === UserRole::ADMIN->value;

@@ -19,9 +19,18 @@ class EventFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'max_places' => fake()->numberBetween(0, 10)*10,
-            'datetime' => fake()->date(),
+            'datetime' => fake()->dateTimeBetween('-1 year', '+2 year'),
             'location' => fake()->city(),
             'content' => fake()->paragraph()
         ];
+    }
+
+    public function incoming(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'datetime' => fake()->dateTimeBetween('+1 week', '+2 year'),
+            ];
+        });
     }
 }

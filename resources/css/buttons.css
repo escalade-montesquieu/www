@@ -1,0 +1,46 @@
+@layer components {
+
+    .btn {
+        @apply rounded-lg text-cta px-4 py-2 gap-2 flex flex-row items-center justify-center;
+    }
+
+    .btn-cta-primary {
+        @apply btn bg-blue-medium text-white-light;
+    }
+
+    .btn-cta-secondary {
+        @apply btn bg-blue-light text-blue-dark;
+    }
+
+    .btn-cta-tertiary {
+        @apply btn text-blue-medium;
+    }
+
+    .btn-danger-primary {
+        @apply btn bg-red-medium text-white-light;
+    }
+
+    .btn-danger-secondary {
+        @apply btn bg-red-light text-red-dark;
+    }
+
+    .btn-danger-tertiary {
+        @apply btn text-red-medium;
+    }
+
+    .btn-success-primary {
+        @apply btn bg-green-medium text-white-light;
+    }
+
+    .btn-success-secondary {
+        @apply btn bg-green-light text-green-dark;
+    }
+
+    .btn-success-tertiary {
+        @apply btn text-green-medium;
+    }
+
+    .btn-disabled {
+        @apply btn bg-white-dark text-black-medium;
+    }
+}

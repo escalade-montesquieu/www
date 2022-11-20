@@ -19,24 +19,15 @@ class ArticleFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
-            'archived' => fake()->boolean(),
+            'display_homepage' => false,
         ];
     }
 
-    public function published(): static
+    public function onHomepage(): static
     {
         return $this->state(function (array $attributes) {
             return [
-                'archived' => false,
-            ];
-        });
-    }
-
-    public function archived(): static
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'archived' => true,
+                'display_homepage' => true,
             ];
         });
     }

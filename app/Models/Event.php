@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
 {
@@ -31,24 +31,21 @@ class Event extends Model
         return $this->belongsTo(EventCategory::class);
     }
 
-    public function users(): BelongsToMany
+    public function participants(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
-            ->withPivot('participate')
             ->withTimestamps();
     }
 
-    public function participants(): BelongsToMany
+    public function getIsUserParticipatingAttribute(): bool
     {
-        return $this->users()->wherePivot('participate', 1);
+        if(!Auth::check()) {
+            return false;
+        }
+        return $this->participants()->where('id', Auth::user()->id)->count();
     }
 
-    public function unavailables(): BelongsToMany
-    {
-        return $this->users()->wherePivot('participate', 0);
-    }
-
-    public function getHarnessesNeededAttributes(): int
+    public function getHarnessesNeededAttribute(): int
     {
         // todo
         return 0;
@@ -58,5 +55,11 @@ class Event extends Model
     {
         // todo
         return 0;
+    }
+
+    public function scopeIncoming(Builder $query): Builder
+    {
+        return $query->where('datetime', '>', now())
+            ->orderBy('datetime');
     }
 }

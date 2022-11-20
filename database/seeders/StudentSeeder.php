@@ -15,6 +15,10 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
+        Student::factory()->create([
+            'name' => 'Test User'
+        ]);
+
         Student::factory()->count(10)->create();
 
         Student::factory()->count(40)->hasUser()->create();

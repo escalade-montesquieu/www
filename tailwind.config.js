@@ -9,10 +9,19 @@ module.exports = {
     ],
 
     theme: {
+        container: {
+            center: true,
+            padding: '1rem',
+        },
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
+            scale: {
+                '200': '2',
+                '300': '3',
+                '400': '4',
+            }
         },
         colors: {
             red: {
