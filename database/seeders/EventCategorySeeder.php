@@ -18,7 +18,6 @@ class EventCategorySeeder extends Seeder
     {
         EventCategory::factory()
             ->count(4)
-            ->hasEvents(10)
             ->create();
     }
 }

@@ -26,6 +26,10 @@ class Event extends Model
         'max_places' => -1,
     ];
 
+    protected $casts = [
+        'datetime' => 'date'
+    ];
+
     public function eventCategory(): BelongsTo
     {
         return $this->belongsTo(EventCategory::class);
@@ -45,6 +49,11 @@ class Event extends Model
         return $this->participants()->where('id', Auth::user()->id)->count();
     }
 
+    public function getIsPastAttribute(): bool
+    {
+        return $this->datetime->isPast();
+    }
+
     public function getHarnessesNeededAttribute(): int
     {
         // todo
@@ -60,6 +69,12 @@ class Event extends Model
     public function scopeIncoming(Builder $query): Builder
     {
         return $query->where('datetime', '>', now())
+            ->orderBy('datetime');
+    }
+
+    public function scopePast(Builder $query): Builder
+    {
+        return $query->where('datetime', '<', now())
             ->orderBy('datetime');
     }
 }

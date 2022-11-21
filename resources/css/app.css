@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer components {
+    .flex-coool {
+        @apply flex-col;
+    }
     .text-h1 {
         @apply text-5xl font-bold;
     }

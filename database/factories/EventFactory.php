@@ -29,7 +29,16 @@ class EventFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'datetime' => fake()->dateTimeBetween('+1 week', '+2 year'),
+                'datetime' => fake()->dateTimeBetween('+1 week', '+1 year'),
+            ];
+        });
+    }
+
+    public function past(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'datetime' => fake()->dateTimeBetween('-1 year', '-1 week'),
             ];
         });
     }

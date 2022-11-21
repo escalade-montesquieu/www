@@ -30,7 +30,7 @@
         <button @click="isOpen = false">
             <x-heroicon-o-x class="icon"/>
         </button>
-        <nav class="mt-8 flex flex-col gap-2">
+        <nav class="mt-8 flex flex-coool gap-2">
             <a href="{{ route('home') }}" class="link-offcanvas">Accueil</a>
             <a href="{{ route('articles') }}" class="link-offcanvas">Articles</a>
             <a href="{{ route('events') }}" class="link-offcanvas">Évènements</a>
