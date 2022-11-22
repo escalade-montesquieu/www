@@ -1,0 +1,34 @@
+name: Build on staging
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          composer install
+          npm install
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git config push.default current
+          git checkout -b release/staging
+          npm run build
+          git add .
+          git commit -m "build"
+          git push origin release/staging --force
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Workflow Webhook Action
+        uses: distributhor/workflow-webhook@v2.0.4
+        env:
+          webhook_url: ${{ secrets.STAGING_DEPLOY_URL }}
+          webhook_secret: ${{ secrets.STAGING_DEPLOY_SECRET }}
