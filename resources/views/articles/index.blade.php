@@ -4,10 +4,6 @@
             <h1 class="text-h1 mb-2">Articles</h1>
             <p>Retrouvez des ressources, vidéos, évènements à suivre.</p>
         </header>
-        <section class="flex flex-coool gap-10">
-            @foreach($articles as $article)
-                <x-article-card :article="$article"/>
-            @endforeach
-        </section>
+        <livewire:articles.display-list/>
     </article>
 </x-app-layout>

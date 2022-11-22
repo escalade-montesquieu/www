@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Event;
 use App\Models\EventCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class EventCategorySeeder extends Seeder
@@ -16,8 +17,18 @@ class EventCategorySeeder extends Seeder
      */
     public function run()
     {
-        EventCategory::factory()
-            ->count(4)
-            ->create();
+        $names = [
+            'Sortie falaise',
+            'Arkose',
+            'Lycée',
+            'Compétition'
+        ];
+
+        foreach ($names as $name) {
+            EventCategory::factory()
+                ->create([
+                    'name' => $name
+                ]);
+        }
     }
 }

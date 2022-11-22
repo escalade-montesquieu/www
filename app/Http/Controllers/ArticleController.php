@@ -15,4 +15,11 @@ class ArticleController extends Controller
             'articles' => Article::all()
         ]);
     }
+
+    public function show(Article $article): Factory|View|Application
+    {
+        return view('articles.show', [
+            'article' => $article
+        ]);
+    }
 }

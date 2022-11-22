@@ -10,7 +10,6 @@ use Livewire\Component;
 
 class DisplayList extends Component
 {
-    public bool $hideActions = false;
     public bool $onlyIncoming = false;
 
     public array $eventCategories;

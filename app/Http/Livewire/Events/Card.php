@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Events;
 
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class Card extends Component
@@ -15,23 +16,14 @@ class Card extends Component
         return view('livewire.events.card');
     }
 
-    public function participationGate(): bool
+    public function addParticipation(): void
     {
         if(!Auth::check()) {
             $this->redirect('login');
-            return false;
+            return;
         }
 
-        if($this->event->isPast) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function addParticipation(): void
-    {
-        if(!$this->participationGate()) {
+        if(Gate::inspect('participate', $this->event)->denied()) {
             return;
         }
 
@@ -41,7 +33,12 @@ class Card extends Component
 
     public function removeParticipation(): void
     {
-        if(!$this->participationGate()) {
+        if(!Auth::check()) {
+            $this->redirect('login');
+            return;
+        }
+
+        if(Gate::inspect('unparticipate', $this->event)->denied()) {
             return;
         }
 
