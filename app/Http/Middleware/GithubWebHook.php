@@ -14,10 +14,7 @@ class GithubWebHook
         $localToken = config('app.deploy_secret');
         $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
 
-        $jsonPayload = json_decode($githubPayload, false);
-        $externalToken = $jsonPayload['data']['secret'];
-
-        if ($localToken !== $externalToken) {
+        if (!hash_equals($githubHash, $localHash)) {
             abort(403);
         }
 
