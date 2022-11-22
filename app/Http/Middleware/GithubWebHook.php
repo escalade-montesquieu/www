@@ -15,6 +15,11 @@ class GithubWebHook
         $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
 
         if (!hash_equals($githubHash, $localHash)) {
+            dd([
+                $localToken,
+                $githubHash,
+                $localHash
+            ]);
             abort(403);
         }
 
