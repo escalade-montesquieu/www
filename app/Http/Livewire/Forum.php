@@ -13,13 +13,10 @@ class Forum extends Component
 
     public string $writingMessage = "";
 
-    public function mount()
-    {
-        $this->messages = ForumMessage::all();
-    }
-
     public function render()
     {
+        $this->messages = ForumMessage::all();
+
         return view('livewire.forum')
             ->layout('layouts.forum');
     }
@@ -32,6 +29,6 @@ class Forum extends Component
         ]);
 
         $this->writingMessage = "";
-        $this->dispatchBrowserEvent('message-sent');
+        $this->dispatchBrowserEvent('forum-message-sent');
     }
 }
