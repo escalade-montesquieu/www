@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Forum;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,10 @@ Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 Route::get('/article/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
-
 Route::get('/events', [EventController::class, 'index'])->name('events');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/forum', Forum::class)->name('forum');
+});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

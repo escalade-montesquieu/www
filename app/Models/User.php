@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
@@ -66,7 +65,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         ],
         // 'm' => [
         //     'name' => 'message',
-        //     'title' => 'Message',
+        //     'title' => 'ForumMessage',
         //     'desc' => "Lorsqu'il y a des nouveaux messages sur le forum"
         // ]
     ];
@@ -88,15 +87,15 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     public function getClimbingStuffSentenceAttribute(): string
     {
-        if(!$this->rent_harness && !$this->rent_shoes) {
+        if (!$this->rent_harness && !$this->rent_shoes) {
             return "Vous n'empruntez aucun matériel";
         }
 
-        if(!$this->rent_harness && $this->rent_shoes) {
+        if (!$this->rent_harness && $this->rent_shoes) {
             return "Vous avez votre baudrier, des chaussons taille $this->rent_shoes vous sont réservés";
         }
 
-        if($this->rent_harness && !$this->rent_shoes) {
+        if ($this->rent_harness && !$this->rent_shoes) {
             return "Vous avez vos chaussons, un baudrier vous est réservé";
         }
 
@@ -122,8 +121,6 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     {
         return $this->avatar_url;
     }
-
-
 
 
     // todo

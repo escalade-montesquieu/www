@@ -8,7 +8,7 @@
                 <a href="{{ route('home') }}">Accueil</a>
                 <a href="{{ route('articles') }}">Articles</a>
                 <a href="{{ route('events') }}">Évènements</a>
-                <a href="{{ route('home') }}">Forum</a>
+                <a href="{{ route('forum') }}">Forum</a>
                 <a href="{{ route('home') }}">Galerie photo</a>
             </nav>
             <div class="md:hidden">
@@ -34,7 +34,7 @@
             <a href="{{ route('home') }}" class="link-offcanvas">Accueil</a>
             <a href="{{ route('articles') }}" class="link-offcanvas">Articles</a>
             <a href="{{ route('events') }}" class="link-offcanvas">Évènements</a>
-            <a href="{{ route('home') }}" class="link-offcanvas">Forum</a>
+            <a href="{{ route('forum') }}" class="link-offcanvas">Forum</a>
             <a href="{{ route('home') }}" class="link-offcanvas">Galerie photo</a>
         </nav>
     </section>
