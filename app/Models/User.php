@@ -108,6 +108,11 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         return "https://ui-avatars.com/api/?name=$this->name&rounded=true";
     }
 
+    public function getNameAttribute(): string
+    {
+        return $this->student ? $this->student->name : $this->name;
+    }
+
     public function canAccessFilament(): bool
     {
         return $this->role === UserRole::ADMIN->value;
