@@ -17,5 +17,9 @@ window.addEventListener('forum-message-sent', () => {
 
 function scrollForumMessagesListToBottom() {
     const el = document.getElementById('forumMessagesList');
+
+    if (!el) {
+        return;
+    }
     el.scrollTop = el.scrollHeight;
 }
