@@ -3,6 +3,10 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\Student;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Register extends Component
@@ -34,17 +38,27 @@ class Register extends Component
 
     public function updated($propertyName): void
     {
+        if ($propertyName === 'name') {
+            if ($this->isNameLongEnoughToShowSuggestions()) {
+                $this->fetchNameSuggestionsArray();
+            }
+            return;
+        }
         $this->validateOnly($propertyName);
     }
 
-    public function isNameValid(): bool
+    public function canNextStep(): bool
     {
-        return Student::where('name', $this->name)->count();
+        if ($student = Student::where('name', $this->name)->first()) {
+            return !$student->user;
+        }
+
+        return false;
     }
 
     public function nextStep(): void
     {
-        if ($this->isNameValid()) {
+        if ($this->canNextStep()) {
             $this->step = 2;
         }
     }
@@ -52,13 +66,6 @@ class Register extends Component
     public function isNameLongEnoughToShowSuggestions(): bool
     {
         return strlen($this->name) > 3;
-    }
-
-    public function updatedName(): void
-    {
-        if ($this->isNameLongEnoughToShowSuggestions()) {
-            $this->fetchNameSuggestionsArray();
-        }
     }
 
     public function fetchNameSuggestionsArray(): void
@@ -75,9 +82,21 @@ class Register extends Component
         $this->name = $newName;
     }
 
-    public function register(): void
+    public function register()
     {
         $validatedData = $this->validate();
 
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'student_id' => Student::where('name', $validatedData['name'])->first()->id,
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect()->route('home');
     }
 }

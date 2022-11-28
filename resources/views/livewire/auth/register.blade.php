@@ -19,15 +19,19 @@
                 <x-input-label for="name" value="Votre nom"/>
 
                 <x-text-input id="name" class="block mt-1 w-full"
-                              type="text" name="name" :value="old('name')"
+                              type="text"
+                              :value="old('name')"
                               wire:model="name"
                               required autofocus/>
-
 
                 @if($this->isNameLongEnoughToShowSuggestions())
                     <div class="mt-2">
                         @if(count($nameSuggestions) && $nameSuggestions[0] === $name)
-                            <span class="text-green-medium">Vous êtes dans la liste!</span>
+                            @if($this->canNextStep())
+                                <span class="text-green-medium">Vous êtes dans la liste!</span>
+                            @else
+                                <span class="text-red-medium">Un compte à votre nom existe déjà</span>
+                            @endif
                         @elseif(count($nameSuggestions))
                             <span>C'est vous?</span>
                             @foreach($nameSuggestions as $nameSuggestion)
@@ -45,7 +49,7 @@
 
             <div class="flex flex-coool gap-4">
                 <button
-                    @if($this->isNameValid())
+                    @if($this->canNextStep())
                         class="btn-cta-primary"
                     @else
                         class="btn-disabled" disabled
@@ -64,7 +68,9 @@
             <div>
                 <x-input-label for="email" :value="__('Email')"/>
 
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" wire:model="email"
+                <x-text-input id="email" class="block mt-1 w-full"
+                              type="email"
+                              wire:model="email"
                               :value="old('email')"
                               required/>
 
@@ -77,7 +83,6 @@
                 <x-text-input id="password" class="block mt-1 w-full"
                               wire:model="password"
                               type="password"
-                              name="password"
                               required autocomplete="new-password"/>
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2"/>
@@ -89,7 +94,7 @@
                 <x-text-input id="password_confirmation" class="block mt-1 w-full"
                               wire:model="password_confirmation"
                               type="password"
-                              name="password_confirmation" required/>
+                              required/>
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
             </div>
