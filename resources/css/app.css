@@ -8,6 +8,7 @@
     .flex-coool {
         @apply flex-col;
     }
+
     .text-h1 {
         @apply text-5xl font-bold;
     }
@@ -42,6 +43,10 @@
 
     .link-offcanvas {
         @apply text-h4;
+    }
+
+    .link-nav {
+        @apply flex flex-row items-center;
     }
 
     .icon {
