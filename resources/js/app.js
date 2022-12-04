@@ -1,6 +1,8 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 
 window.Alpine = Alpine;
 
@@ -23,3 +25,10 @@ function scrollForumMessagesListToBottom() {
     }
     el.scrollTop = el.scrollHeight;
 }
+
+const lightbox = new PhotoSwipeLightbox({
+    gallery: '#gallery',
+    children: 'a',
+    pswpModule: () => import('photoswipe')
+});
+lightbox.init();

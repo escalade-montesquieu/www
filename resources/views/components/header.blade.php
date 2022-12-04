@@ -9,7 +9,7 @@
                 <a class="link-nav" href="{{ route('articles') }}">Articles</a>
                 <a class="link-nav" href="{{ route('events') }}">Évènements</a>
                 <a class="link-nav" href="{{ route('forum') }}">Forum</a>
-                <a class="link-nav" href="{{ route('home') }}">Photos</a>
+                <a class="link-nav" href="{{ route('galleries') }}">Photos</a>
             </nav>
             <div>
                 @auth
@@ -33,7 +33,7 @@
             <a href="{{ route('articles') }}" class="link-offcanvas">Articles</a>
             <a href="{{ route('events') }}" class="link-offcanvas">Évènements</a>
             <a href="{{ route('forum') }}" class="link-offcanvas">Forum</a>
-            <a href="{{ route('home') }}" class="link-offcanvas">Photos</a>
+            <a href="{{ route('galleries') }}" class="link-offcanvas">Photos</a>
         </nav>
     </section>
 </div>
