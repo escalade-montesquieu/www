@@ -5,7 +5,7 @@
             <h1 class="text-h1">Lycée Montesquieu</h1>
             <h2 class="text-h2">Section Escalade</h2>
         </article>
-        <article class="flex flex-coool gap-4">
+        <article>
             <div class="swiper w-full">
                 <div class="swiper-wrapper ">
                     <!-- Slides -->
@@ -17,8 +17,9 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-            <p>Bienvenue sur le site de la section escalade du lycée Montesquieu à Bordeaux.</p>
-            <p>Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant curiosité,
+            <p class="mt-8">Bienvenue sur le site de la section escalade du lycée Montesquieu à Bordeaux.</p>
+            <p class="mt-4">Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
+                curiosité,
                 responsabilité et bonne humeur.</p>
         </article>
         <article

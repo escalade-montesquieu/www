@@ -6,7 +6,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 
 // core version + navigation, pagination modules:
-import Swiper, {Pagination} from 'swiper';
+import Swiper, {Autoplay, Pagination} from 'swiper';
 // import Swiper and modules styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -29,12 +29,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // init Swiper:
     const swiper = new Swiper('.swiper', {
-        modules: [Pagination],
+        modules: [Pagination, Autoplay],
 
         pagination: {
             el: '.swiper-pagination',
         },
+        loop: true,
         spaceBetween: 16,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: true,
+        }
     });
 
 })
