@@ -73,6 +73,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role' => UserRole::class,
     ];
 
     public function student(): BelongsTo

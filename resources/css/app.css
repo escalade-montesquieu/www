@@ -42,7 +42,7 @@
     }
 
     .link-offcanvas {
-        @apply text-h4;
+        @apply text-h3 py-2;
     }
 
     .link-nav {
