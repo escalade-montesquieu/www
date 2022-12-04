@@ -32,7 +32,7 @@ class PhotoFactory extends Factory
         ];
     }
 
-    public function pinnedHomepage(): static
+    public function onHomepage(): static
     {
         return $this->state(function (array $attributes) {
             return [

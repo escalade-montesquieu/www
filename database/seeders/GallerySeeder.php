@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Gallery;
+use App\Models\Photo;
 use Illuminate\Database\Seeder;
 
 class GallerySeeder extends Seeder
@@ -23,6 +24,11 @@ class GallerySeeder extends Seeder
             $gallery->update([
                 'photo_id' => $gallery->photos()->first()->id
             ]);
+
+            Photo::factory()
+                ->onHomepage()
+                ->for($gallery)
+                ->create();
         }
     }
 }
