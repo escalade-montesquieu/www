@@ -1,6 +1,8 @@
-<article class="flex flex-row gap-4 @if($message->isSentBySelf) justify-end @endif">
+<article class="flex flex-row gap-4 items-start @if($message->isSentBySelf) justify-end @endif">
     @unless($message->isSentBySelf)
-        <img class="h-8 w-8" src="{{ $message->user->avatar }}">
+        <a class="mt-2" href="{{ route('profile.show', $message->user) }}">
+            <img class="h-8 w-8 rounded-full object-cover" src="{{ asset($message->user->avatar) }}">
+        </a>
     @endif
 
     <article class="w-4/5">

@@ -1,17 +1,33 @@
-<article class="container flex flex-coool">
+<article class="container flex flex-coool gap-10">
     <x-back-link class="mr-auto"/>
 
-    <section class="mt-10 flex flex-row gap-4 w-full items-center">
-        <img class="rounded-full w-1/3" src="{{ asset($user->avatar) }}">
+    <label class="w-full flex flex-row gap-4 w-full items-center"
+           x-data="{ isUploading: false, isUploaded: false, progress: 0 }"
+           x-on:livewire-upload-start="isUploading = true"
+           x-on:livewire-upload-finish="isUploading = false; isUploaded = true"
+           x-on:livewire-upload-error="isUploading = false"
+           x-on:livewire-upload-progress="progress = $event.detail.progress"
+    >
+        <input type="file" wire:model="avatar" class="hidden">
+        <img class="rounded-full w-1/4 aspect-square object-cover flex-shrink-0"
+             src="{{ $avatar?->temporaryUrl() ?? asset($user->avatar) }}">
         <div>
             <h4 class="text-cta">Modifier votre photo</h4>
-            <p class="text-label">Maximum 10Mo</p>
+            <p x-show="!isUploading && !isUploaded" class="text-label">Maximum 10Mo</p>
+
+            <p x-show="isUploading" class="text-label">Envoi en cours</p>
+
+            <div x-show="isUploading" class="relative h-1 w-full bg-blue-light rounded-full overflow-hidden">
+                <div class="h-full bg-blue-medium" :style="'width:'+progress+'%'"></div>
+            </div>
+
+            <p x-show="!isUploading && isUploaded" class="text-label">Modification enregistrée !</p>
+
+            <x-input-error :messages="$errors->get('avatar')" class="mt-2"/>
         </div>
-    </section>
+    </label>
 
-    <section class="flex flex-coool mt-6 gap-6">
-        @csrf
-
+    <section class="flex flex-coool gap-6">
         <div>
             <x-input-label for="email" value="Email"/>
 
@@ -27,7 +43,7 @@
 
             <x-text-area id="bio" class="block mt-1 w-full" type="text" name="bio"
                          wire:model="bio"
-                         rows="3"
+                         rows="4"
                          required/>
 
             <x-input-error :messages="$errors->get('bio')" class="mt-2"/>
@@ -65,8 +81,10 @@
                 @if($rent_shoes)
                     <div class="ml-8 p-2 flex flex-coool">
                         <p>Taille :</p>
-                        <select class="btn">
-                            <option>qsdqsd</option>
+                        <select class="btn" wire:model="rent_shoes">
+                            @for($i=36;$i<=50;$i++)
+                                <option value="{{ $i }}">Taille {{$i}}</option>
+                            @endfor
                         </select>
                     </div>
                 @endif

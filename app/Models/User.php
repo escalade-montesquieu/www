@@ -106,7 +106,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     public function getAvatarAttribute(): string
     {
-        return "https://ui-avatars.com/api/?name=$this->name&rounded=true";
+        return $this->avatar_url ?? "https://ui-avatars.com/api/?name=$this->name&rounded=true";
     }
 
     public function getUsernameAttribute(): string

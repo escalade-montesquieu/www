@@ -3,7 +3,7 @@
         <x-back-link class="mr-auto"/>
 
         <div class="mt-10 flex flex-coool gap-2 w-full items-center">
-            <img class="rounded-full w-1/3" src="{{ asset($user->avatar) }}">
+            <img class="rounded-full w-1/3 aspect-square object-cover" src="{{ asset($user->avatar) }}">
             <h4 class="text-h4">{{ $user->name }}</h4>
             <p class="text-label">{{ $user->role->toLabel() }}</p>
         </div>
