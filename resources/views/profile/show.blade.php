@@ -9,7 +9,7 @@
         </div>
 
         @if($user->id === auth()->user()->id)
-            <a href="#" class="mt-10 btn-cta-secondary">Modifier mon profil</a>
+            <a href="{{ route('profile.edit') }}" class="mt-10 btn-cta-secondary">Modifier mon profil</a>
         @endif
 
         @if($user->rent_harness || $user->rent_shoes)

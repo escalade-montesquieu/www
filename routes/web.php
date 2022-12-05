@@ -7,6 +7,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Index\Messages;
+use App\Http\Livewire\ProfileEdition;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,7 @@ Route::get('/galeries/{gallery}', [GalleryController::class, 'show'])->name('gal
 Route::middleware('auth')->group(function () {
     Route::get('/forum', [ForumController::class, 'show'])->name('forum');
 
+    Route::get('/profil/edit', ProfileEdition::class)->name('profile.edit');
     Route::get('/profil/{user?}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
