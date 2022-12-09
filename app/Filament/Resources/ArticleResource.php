@@ -23,14 +23,21 @@ class ArticleResource extends Resource
     {
         return $form
             ->schema([
+
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan('full'),
                 Forms\Components\Textarea::make('content')
                     ->required()
-                    ->maxLength(16777215),
+                    ->maxLength(16777215)
+                    ->columnSpan('full'),
+                Forms\Components\KeyValue::make('ressources_links')
+                    ->columnSpan('full'),
                 Forms\Components\Toggle::make('archived')
-                    ->required(),
+                    ->required()
+                    ->inline(false)
+                    ->columnSpan('full'),
             ]);
     }
 

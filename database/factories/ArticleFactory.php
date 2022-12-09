@@ -16,9 +16,16 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
+        $links = [];
+
+        for ($i = 0; $i < fake()->numberBetween(0, 4); $i++) {
+            $links[fake()->word()] = fake()->url();
+        }
+
         return [
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
+            'ressources_links' => $links,
             'display_homepage' => false,
         ];
     }

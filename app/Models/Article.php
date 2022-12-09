@@ -13,10 +13,20 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
+        'ressources_links',
         'display_homepage'
     ];
 
-    public function scopeOnHomepage($query) {
+    protected $attributes = [
+        'ressources_links' => '{}',
+    ];
+
+    protected $casts = [
+        'ressources_links' => 'array',
+    ];
+
+    public function scopeOnHomepage($query)
+    {
         return $query->where('display_homepage', true);
     }
 }
