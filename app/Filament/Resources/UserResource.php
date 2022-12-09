@@ -6,7 +6,9 @@ use App\Enums\UserRole;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Tables\Columns\RentShoesColumn;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -24,26 +26,32 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
+
                 Forms\Components\Select::make('role')
                     ->required()
                     ->options(UserRole::labelArray()),
                 Forms\Components\Select::make('student_id')
                     ->searchable()
                     ->relationship('student', 'name'),
-                Forms\Components\Textarea::make('bio')
-                    ->maxLength(16777215),
-                Forms\Components\TextInput::make('rent_shoes')
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('rent_harness')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Section::make('Profil')
+                    ->description('Données visibles sur le profil')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255)
+                            ->helperText("Ne s'affiche que si l'utilisateur n'est pas lié à un élève"),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('bio')
+                            ->maxLength(16777215),
+                        Forms\Components\TextInput::make('rent_shoes')
+                            ->maxLength(255),
+                        Forms\Components\Toggle::make('rent_harness')
+                            ->required()
+                            ->inline(false),
+                    ]),
             ]);
     }
 
@@ -55,12 +63,9 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('role'),
                 Tables\Columns\TextColumn::make('student.name'),
-                Tables\Columns\TextColumn::make('rent_shoes'),
+                RentShoesColumn::make('rent_shoes'),
                 Tables\Columns\IconColumn::make('rent_harness')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('bio'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
