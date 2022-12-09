@@ -7,8 +7,8 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use App\Tables\Columns\RentShoesColumn;
+use Closure;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -33,21 +33,34 @@ class UserResource extends Resource
                 Forms\Components\Select::make('student_id')
                     ->searchable()
                     ->relationship('student', 'name'),
-                Section::make('Profil')
+                Forms\Components\Section::make('Profil')
                     ->description('Données visibles sur le profil')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255)
-                            ->helperText("Ne s'affiche que si l'utilisateur n'est pas lié à un élève"),
+                            ->helperText(static function(Closure $get) {
+                                return $get('student_id') ? "Pour modifier le nom visible de cet utilisateur, modifiez le nom de l'élève associé" : null;
+                            })
+                            ->hint(static function(Closure $get) {
+                                return $get('student_id') ? "Le nom de l'élève est affiché à la place" : null;
+                            })
+                            ->hintIcon(static function(Closure $get) {
+                                return $get('student_id') ? 'heroicon-o-information-circle' : null;
+                            })
+                            ->hintColor("warning")
+                            ->disabled(static function(Closure $get) {
+                                return (bool)$get('student_id');
+                            }),
                         Forms\Components\TextInput::make('email')
                             ->email()
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Textarea::make('bio')
                             ->maxLength(16777215),
-                        Forms\Components\TextInput::make('rent_shoes')
-                            ->maxLength(255),
+                        Forms\Components\Select::make('rent_shoes')
+                            ->options(User::getShoesSizesAvailable())
+                            ->searchable(),
                         Forms\Components\Toggle::make('rent_harness')
                             ->required()
                             ->inline(false),

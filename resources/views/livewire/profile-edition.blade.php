@@ -80,11 +80,11 @@
                 </div>
                 @if($rent_shoes)
                     <div class="ml-8 p-2 flex flex-coool">
-                        <p>Taille :</p>
-                        <select class="btn" wire:model="rent_shoes">
-                            @for($i=36;$i<=50;$i++)
-                                <option value="{{ $i }}">Taille {{$i}}</option>
-                            @endfor
+                        <label for="rent_shoes">Taille :</label>
+                        <select class="btn" wire:model="rent_shoes" id="rent_shoes">
+                            @foreach(App\Models\User::getShoesSizesAvailable() as $size)
+                                <option value="{{ $size }}">Taille {{ $size }}</option>
+                            @endforeach
                         </select>
                     </div>
                 @endif

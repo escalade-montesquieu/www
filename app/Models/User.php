@@ -76,6 +76,16 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         'role' => UserRole::class,
     ];
 
+    public static function getShoesSizesAvailable(): array
+    {
+        $opt = [];
+        for($i=36;$i<=50;$i++) {
+            $opt[$i] = 'T'.$i;
+        }
+
+        return $opt;
+    }
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
