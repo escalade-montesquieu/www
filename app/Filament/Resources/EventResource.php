@@ -37,9 +37,10 @@ class EventResource extends Resource
                 Forms\Components\TextInput::make('max_places')
                     ->translateLabel()
                     ->numeric()
-                    ->minValue(-1)
-                    ->maxValue(100)
-                    ->required(),
+                    ->placeholder("Illimité")
+                    ->helperText("Laissez vide pour un nombre de places illimité")
+                    ->minValue(0)
+                    ->maxValue(200),
                 Forms\Components\DateTimePicker::make('datetime')
                     ->translateLabel(),
                 Forms\Components\TextInput::make('location')
@@ -60,7 +61,8 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->translateLabel(),
                 Tables\Columns\TextColumn::make('max_places')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->default('Illimité'),
                 Tables\Columns\TextColumn::make('datetime')
                     ->translateLabel()
                     ->dateTime(),
