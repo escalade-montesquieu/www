@@ -17,6 +17,9 @@ class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
 
+    protected static ?string $modelLabel = "Évènement";
+    protected static ?string $pluralModelLabel = "Évènements";
+    protected static ?string $navigationLabel = "Évènement";
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Form $form): Form
@@ -24,20 +27,26 @@ class EventResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('event_category_id')
+                    ->label(__('Event category'))
                     ->relationship('eventCategory', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('title')
+                    ->translateLabel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('max_places')
+                    ->translateLabel()
                     ->numeric()
                     ->minValue(-1)
                     ->maxValue(100)
                     ->required(),
-                Forms\Components\DateTimePicker::make('datetime'),
+                Forms\Components\DateTimePicker::make('datetime')
+                    ->translateLabel(),
                 Forms\Components\TextInput::make('location')
+                    ->translateLabel()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('content')
+                    ->translateLabel()
                     ->maxLength(65535),
             ]);
     }
@@ -46,17 +55,25 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('eventCategory.name'),
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('max_places'),
+                Tables\Columns\TextColumn::make('eventCategory.name')
+                    ->translateLabel(),
+                Tables\Columns\TextColumn::make('title')
+                    ->translateLabel(),
+                Tables\Columns\TextColumn::make('max_places')
+                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('datetime')
+                    ->translateLabel()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('location'),
+                Tables\Columns\TextColumn::make('location')
+                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->translateLabel()
                     ->dateTime(),
             ])
             ->filters([

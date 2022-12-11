@@ -80,5 +80,9 @@
     "Updated at": "Modifié le",
     "Deleted at": "Supprimé le",
     "Is regular": "Récurrent",
-    "Slug": "Adresse"
+    "Slug": "Adresse",
+    "Event category": "Catégorie d'évènements",
+    "Max places": "Nb de places",
+    "Datetime": "Date",
+    "Location": "Lieu"
 }
