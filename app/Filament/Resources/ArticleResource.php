@@ -10,13 +10,14 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
-
+    
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
     public static function form(Form $form): Form
@@ -42,7 +43,7 @@ class ArticleResource extends Resource
                     ->valuePlaceholder('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
                     ->reorderable()
                     ->columnSpan('full'),
-                Forms\Components\Toggle::make('archived')
+                Forms\Components\Toggle::make('display_homepage')
                     ->translateLabel()
                     ->required()
                     ->inline(false)
@@ -55,8 +56,19 @@ class ArticleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->translateLabel(),
-                Tables\Columns\IconColumn::make('archived')
+                    ->translateLabel()
+                    ->limit(40)
+                    ->tooltip(function (TextColumn $column): ?string {
+                        $state = $column->getState();
+
+                        if (strlen($state) <= $column->getLimit()) {
+                            return null;
+                        }
+
+                        // Only render the tooltip if the column contents exceeds the length limit.
+                        return $state;
+                    }),
+                Tables\Columns\IconColumn::make('display_homepage')
                     ->translateLabel()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
