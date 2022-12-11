@@ -25,16 +25,25 @@ class ArticleResource extends Resource
             ->schema([
 
                 Forms\Components\TextInput::make('title')
+                    ->translateLabel()
                     ->required()
                     ->maxLength(255)
                     ->columnSpan('full'),
                 Forms\Components\Textarea::make('content')
+                    ->translateLabel()
                     ->required()
                     ->maxLength(16777215)
                     ->columnSpan('full'),
                 Forms\Components\KeyValue::make('ressources_links')
+                    ->translateLabel()
+                    ->keyLabel('Texte')
+                    ->keyPlaceholder('Vidéo')
+                    ->valueLabel('Lien')
+                    ->valuePlaceholder('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+                    ->reorderable()
                     ->columnSpan('full'),
                 Forms\Components\Toggle::make('archived')
+                    ->translateLabel()
                     ->required()
                     ->inline(false)
                     ->columnSpan('full'),
@@ -45,14 +54,19 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('title')
+                    ->translateLabel(),
                 Tables\Columns\IconColumn::make('archived')
+                    ->translateLabel()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->translateLabel()
                     ->dateTime(),
             ])
             ->filters([
