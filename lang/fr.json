@@ -75,7 +75,10 @@
     "Content": "Contenu",
     "Ressources links": "Liens vers des ressources",
     "Archived": "Archivé",
+    "Display homepage": "Affiché sur l'accueil",
     "Created at": "Créé le",
     "Updated at": "Modifié le",
-    "Deleted at": "Supprimé le"
+    "Deleted at": "Supprimé le",
+    "Is regular": "Récurrent",
+    "Slug": "Adresse"
 }
