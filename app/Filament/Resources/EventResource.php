@@ -19,7 +19,7 @@ class EventResource extends Resource
 
     protected static ?string $modelLabel = "Évènement";
     protected static ?string $pluralModelLabel = "Évènements";
-    protected static ?string $navigationLabel = "Évènement";
+    protected static ?string $navigationLabel = "Évènements";
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Form $form): Form

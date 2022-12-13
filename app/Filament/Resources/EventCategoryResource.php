@@ -18,7 +18,7 @@ class EventCategoryResource extends Resource
 
     protected static ?string $modelLabel = "Catégorie d'évènements";
     protected static ?string $pluralModelLabel = "Catégories d'évènements";
-    protected static ?string $navigationLabel = "Catégorie d'évènements";
+    protected static ?string $navigationLabel = "Catégories d'évènements";
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
