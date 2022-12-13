@@ -15,7 +15,7 @@ enum UserRole: string
     public function toLabel(): string
     {
         return match ($this) {
-            self::STUDENT => 'Étudiant',
+            self::STUDENT => 'Licencié',
             self::MODERATOR => 'Modérateur',
             self::ADMIN => 'Administrateur',
         };
