@@ -17,6 +17,9 @@ class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
 
+    protected static ?string $modelLabel = "Lycéen licencié";
+    protected static ?string $pluralModelLabel = "Lycéens licenciés";
+    protected static ?string $navigationLabel = "Lycéens licenciés";
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     public static function form(Form $form): Form
@@ -24,13 +27,17 @@ class StudentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->translateLabel()
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan('full'),
                 Forms\Components\TextInput::make('get_degree_at_year')
+                    ->translateLabel()
                     ->numeric()
                     ->required()
                     ->minValue(2000)
-                    ->maxValue(9999),
+                    ->maxValue(9999)
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -38,13 +45,18 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('get_degree_at_year'),
+                Tables\Columns\TextColumn::make('name')
+                    ->translateLabel(),
+                Tables\Columns\TextColumn::make('get_degree_at_year')
+                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->translateLabel()
                     ->dateTime(),
             ])
             ->filters([
