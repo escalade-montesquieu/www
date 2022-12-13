@@ -31,7 +31,7 @@ class UserResource extends Resource
                     ->options(UserRole::labelArray())
                     ->reactive(),
                 Forms\Components\Select::make('student_id')
-                    ->label(__('Student'))
+                    ->label("Nom du licencié")
                     ->hidden(static function (Closure $get) {
                         return $get('role') !== UserRole::STUDENT->value;
                     })
@@ -41,44 +41,30 @@ class UserResource extends Resource
                     ->reactive()
                     ->searchable()
                     ->relationship('student', 'name'),
-                Forms\Components\Section::make('Profil')
+
+                Forms\Components\TextInput::make('name')
                     ->translateLabel()
-                    ->description('Données visibles sur le profil')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->translateLabel()
-                            ->required()
-                            ->maxLength(255)
-                            ->helperText(static function (Closure $get) {
-                                return $get('student_id') ? "Pour modifier le nom visible de cet utilisateur, modifiez le nom de l'élève associé" : null;
-                            })
-                            ->hint(static function (Closure $get) {
-                                return $get('student_id') ? "Le nom de l'élève est affiché à la place" : null;
-                            })
-                            ->hintIcon(static function (Closure $get) {
-                                return $get('student_id') ? 'heroicon-o-information-circle' : null;
-                            })
-                            ->hintColor("warning")
-                            ->disabled(static function (Closure $get) {
-                                return (bool)$get('student_id');
-                            }),
-                        Forms\Components\TextInput::make('email')
-                            ->translateLabel()
-                            ->email()
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\Textarea::make('bio')
-                            ->translateLabel()
-                            ->maxLength(16777215),
-                        Forms\Components\Select::make('rent_shoes')
-                            ->translateLabel()
-                            ->options(User::getShoesSizesAvailable())
-                            ->searchable(),
-                        Forms\Components\Toggle::make('rent_harness')
-                            ->translateLabel()
-                            ->required()
-                            ->inline(false),
-                    ]),
+                    ->required()
+                    ->maxLength(255)
+                    ->hidden(static function (Closure $get) {
+                        return $get('role') === UserRole::STUDENT->value;
+                    }),
+                Forms\Components\TextInput::make('email')
+                    ->translateLabel()
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('bio')
+                    ->translateLabel()
+                    ->maxLength(16777215),
+                Forms\Components\Select::make('rent_shoes')
+                    ->translateLabel()
+                    ->options(User::getShoesSizesAvailable())
+                    ->searchable(),
+                Forms\Components\Toggle::make('rent_harness')
+                    ->translateLabel()
+                    ->required()
+                    ->inline(false),
             ]);
     }
 
