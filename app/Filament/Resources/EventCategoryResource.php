@@ -48,8 +48,6 @@ class EventCategoryResource extends Resource
                 Tables\Columns\IconColumn::make('is_regular')
                     ->translateLabel()
                     ->boolean(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('description')
                     ->translateLabel()
                     ->limit(50)
