@@ -35,6 +35,9 @@ class UserResource extends Resource
                     ->hidden(static function (Closure $get) {
                         return $get('role') !== UserRole::STUDENT->value;
                     })
+                    ->required(static function (Closure $get) {
+                        return $get('role') === UserRole::STUDENT->value;
+                    })
                     ->reactive()
                     ->searchable()
                     ->relationship('student', 'name'),
