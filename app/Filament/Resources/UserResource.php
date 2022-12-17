@@ -80,7 +80,8 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->translateLabel(),
                 Tables\Columns\TextColumn::make('role')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->enum(UserRole::toArray()),
                 Tables\Columns\TextColumn::make('student.name')
                     ->translateLabel(),
                 RentShoesColumn::make('rent_shoes')

@@ -20,4 +20,19 @@ enum UserRole: string
             self::ADMIN => 'Administrateur',
         };
     }
+
+    public static function toArray(): array
+    {
+        $list = [];
+        foreach (self::cases() as $case) {
+            $list[$case->value] = $case->toLabel();
+        }
+
+        return $list;
+    }
+
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }
