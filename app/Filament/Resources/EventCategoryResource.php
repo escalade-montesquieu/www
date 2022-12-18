@@ -74,10 +74,19 @@ class EventCategoryResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\EventsRelationManager::class
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageEventCategories::route('/'),
+            'index' => Pages\ListEventCategories::route('/'),
+            'create' => Pages\CreateEventCategory::route('/create'),
+            'edit' => Pages\EditEventCategory::route('/{record}/edit'),
         ];
     }
 }

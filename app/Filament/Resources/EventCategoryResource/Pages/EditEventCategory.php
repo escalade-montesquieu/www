@@ -4,16 +4,16 @@ namespace App\Filament\Resources\EventCategoryResource\Pages;
 
 use App\Filament\Resources\EventCategoryResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\EditRecord;
 
-class ManageEventCategories extends ManageRecords
+class EditEventCategory extends EditRecord
 {
     protected static string $resource = EventCategoryResource::class;
 
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 }
