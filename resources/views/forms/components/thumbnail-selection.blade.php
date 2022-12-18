@@ -15,12 +15,12 @@
         state: $wire.entangle('{{ $getStatePath() }}').defer,
         images: @js($getOptions()),
     }">
-        <img :src="images[state]">
-        <div class="grid grid-cols-8">
+        <img :src="images[state]" class="mb-2">
+        <div class="flex gap-2 pb-4" style="overflow: auto;">
             @foreach($getOptions() as $id => $assetSrc)
                 <img
                     @click="state = {{ $id }}"
-                    class="cursor-pointer block"
+                    class="cursor-pointer block h-12"
                     src="{{ $assetSrc }}"
                 >
             @endforeach
