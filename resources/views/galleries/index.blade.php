@@ -10,7 +10,7 @@
         @foreach($galleries as $gallery)
             <article class="rounded-xl flex flex-coool overflow-hidden">
                 <img class="aspect-5/4 border-0 object-cover"
-                     src="{{ asset('storage/photos/' . $gallery->photo->src) }}">
+                     src="{{ $gallery->photo->assetSrc }}">
                 <h3 class="text-h3 bg-white-medium p-4">
                     <a href="{{ route('galleries.show', $gallery) }}">
                         {{ $gallery->name }}

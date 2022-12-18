@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryResource\Pages;
 use App\Filament\Resources\GalleryResource\RelationManagers;
+use App\Forms\Components\ThumbnailSelection;
 use App\Models\Gallery;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -25,6 +26,11 @@ class GalleryResource extends Resource
     {
         return $form
             ->schema([
+                ThumbnailSelection::make('photo_id')
+                    ->label('Image')
+                    ->options(static function (Gallery $record) {
+                        return $record->photos->pluck('assetSrc', 'id');
+                    }),
                 Forms\Components\TextInput::make('name')
                     ->translateLabel()
                     ->required()

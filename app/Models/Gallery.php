@@ -16,7 +16,8 @@ class Gallery extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description'
+        'description',
+        'photo_id'
     ];
 
     public function photo(): BelongsTo

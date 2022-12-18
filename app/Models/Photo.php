@@ -37,6 +37,11 @@ class Photo extends Model
         return $query->where('display_homepage', true);
     }
 
+    public function getAssetSrcAttribute(): string
+    {
+        return asset($this->publicSrc);
+    }
+
     public function getPublicSrcAttribute(): string
     {
         return 'storage/' . self::$STORAGE_FOLDER . '/' . $this->src;
