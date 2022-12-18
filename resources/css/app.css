@@ -10,31 +10,31 @@
     }
 
     .text-h1 {
-        @apply text-5xl font-bold;
+        @apply text-5xl lg:text-6xl font-bold lg:font-extrabold;
     }
 
     .text-h2 {
-        @apply text-3xl font-light;
+        @apply text-3xl lg:text-5xl font-light;
     }
 
     .text-h3 {
-        @apply text-2xl font-bold;
+        @apply text-2xl lg:text-3xl font-bold lg:font-semibold;
     }
 
     .text-h4 {
-        @apply text-xl font-semibold;
+        @apply text-xl lg:text-2xl font-semibold;
     }
 
     .text-body {
-        @apply text-lg font-light;
+        @apply text-lg lg:text-xl font-normal;
     }
 
     .text-cta {
-        @apply text-lg font-bold;
+        @apply text-lg lg:text-xl font-bold;
     }
 
     .text-label {
-        @apply text-base font-normal;
+        @apply text-base lg:text-lg font-normal;
     }
 
     .link {
@@ -46,7 +46,7 @@
     }
 
     .link-nav {
-        @apply flex flex-row items-center;
+        @apply flex flex-row items-center text-cta;
     }
 
     .icon {

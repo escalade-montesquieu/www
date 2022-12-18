@@ -8,7 +8,7 @@
             </select>
         </section>
     @endif
-    <section class="flex flex-coool gap-8">
+    <section class="grid grid-cols-12 gap-8 lg:gap-16">
         @foreach($this->articles as $article)
             <x-articles.card :article="$article"/>
         @endforeach

@@ -3,7 +3,7 @@
 
         <x-header/>
 
-        <main class="pt-12 overflow-x-hidden">
+        <main class="overflow-x-hidden">
             {{ $slot }}
         </main>
     </div>

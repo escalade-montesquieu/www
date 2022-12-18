@@ -1,6 +1,6 @@
 <div x-data="{ isOpen: false }" class="z-40 sticky top-0">
     <header class="flex w-full bg-white-medium">
-        <div class="container flex flex-row justify-between p-4">
+        <div class="container flex flex-row justify-between p-4 lg:py-5">
             <button class="md:hidden" @click="isOpen = true">
                 <x-heroicon-o-menu class="icon"/>
             </button>
