@@ -5,13 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PhotoResource\Pages;
 use App\Filament\Resources\PhotoResource\RelationManagers;
 use App\Models\Photo;
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PhotoResource extends Resource
 {
@@ -28,9 +29,16 @@ class PhotoResource extends Resource
                     ->required(),
                 Forms\Components\Toggle::make('pinned_homepage')
                     ->required(),
-                Forms\Components\Textarea::make('src')
-                    ->required()
-                    ->maxLength(65535),
+                Forms\Components\Hidden::make('src'),
+                Forms\Components\FileUpload::make('image')
+                    ->directory('photos')
+                    ->afterStateUpdated(static function (\Livewire\TemporaryUploadedFile $state, Closure $get, Closure $set) {
+                        Storage::delete('photos/' . $get('src'));
+
+                        $img = Image::make($state);
+                        $img->orientate()->save();
+                        $set('src', $state->getFilename());
+                    }),
             ]);
     }
 
@@ -38,10 +46,10 @@ class PhotoResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('storageSrc'),
                 Tables\Columns\TextColumn::make('gallery.name'),
-                Tables\Columns\IconColumn::make('pinned_homepage')
+                Tables\Columns\IconColumn::make('display_homepage')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('src'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

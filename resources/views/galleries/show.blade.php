@@ -6,13 +6,12 @@
         </header>
         <section class="grid grid-cols-2 gap-4 mt-8" id="gallery">
             @foreach($gallery->photos as $photo)
-                <a href="{{ asset($photo->src) }}"
+                <a href="{{ asset( $photo->publicSrc) }}"
                    target="_blank"
-                   @php($size=getimagesize($photo->src))
-                   data-pswp-width="{{ $size[0] }}"
-                   data-pswp-height="{{ $size[1] }}"
+                   data-pswp-width="{{ $photo->image_data[0] }}"
+                   data-pswp-height="{{ $photo->image_data[1] }}"
                 >
-                    <img class="rounded-lg" src="{{ asset($photo->src) }}" alt=""/>
+                    <img class="rounded-lg" src="{{ asset( $photo->publicSrc)  }}" alt=""/>
                 </a>
             @endforeach
         </section>

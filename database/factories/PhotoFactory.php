@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 use Smknstd\FakerPicsumImages\FakerPicsumImagesProvider;
 
 /**
@@ -20,15 +21,22 @@ class PhotoFactory extends Factory
         $faker = \Faker\Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
-        $fakerFileName = $faker->image(
-            storage_path("app/public"),
+        $path = storage_path("app/public/photos");
+
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path);
+        }
+
+        $fakerFilePath = $faker->image(
+            $path,
             800,
             600
         );
 
+
         return [
             'display_homepage' => false,
-            'src' => "storage/" . basename($fakerFileName)
+            'src' => basename($fakerFilePath)
         ];
     }
 

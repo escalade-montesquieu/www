@@ -8,16 +8,23 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Photo extends Model
 {
+    public static string $STORAGE_FOLDER = 'photos';
+
     use HasFactory;
 
-	protected $fillable = [
-		'gallery',
-		'display_homepage',
-		'src',
-	];
+    protected $fillable = [
+        'gallery',
+        'display_homepage',
+        'src',
+        'image_data'
+    ];
 
     protected $attributes = [
         'display_homepage' => false,
+    ];
+
+    protected $casts = [
+        'image_data' => 'array',
     ];
 
     public function gallery(): BelongsTo
@@ -25,7 +32,18 @@ class Photo extends Model
         return $this->belongsTo(Gallery::class);
     }
 
-	public function scopeOnHomepage($query) {
-		return $query->where('display_homepage', true);
-	}
+    public function scopeOnHomepage($query)
+    {
+        return $query->where('display_homepage', true);
+    }
+
+    public function getPublicSrcAttribute(): string
+    {
+        return 'storage/' . self::$STORAGE_FOLDER . '/' . $this->src;
+    }
+
+    public function getStorageSrcAttribute(): string
+    {
+        return self::$STORAGE_FOLDER . '/' . $this->src;
+    }
 }
