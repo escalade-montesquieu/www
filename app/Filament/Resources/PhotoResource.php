@@ -46,13 +46,18 @@ class PhotoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('storageSrc'),
-                Tables\Columns\TextColumn::make('gallery.name'),
+                Tables\Columns\ImageColumn::make('storageSrc')
+                    ->label('Image'),
+                Tables\Columns\TextColumn::make('gallery.name')
+                    ->label('Galerie'),
                 Tables\Columns\IconColumn::make('display_homepage')
+                    ->translateLabel()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->translateLabel()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->translateLabel()
                     ->dateTime(),
             ])
             ->filters([

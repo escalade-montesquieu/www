@@ -41,6 +41,8 @@ class GalleryResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('photo.storageSrc')
+                    ->label('Image'),
                 Tables\Columns\TextColumn::make('name')
                     ->translateLabel(),
                 Tables\Columns\TextColumn::make('description')
