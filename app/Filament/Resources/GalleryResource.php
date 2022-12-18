@@ -75,10 +75,19 @@ class GalleryResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\PhotosRelationManager::class
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageGalleries::route('/'),
+            'index' => Pages\ListGalleries::route('/'),
+            'create' => Pages\CreateGallery::route('/create'),
+            'edit' => Pages\EditGallery::route('/{record}/edit'),
         ];
     }
 }
