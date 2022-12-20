@@ -5,10 +5,10 @@
         </a>
     @endif
 
-    <article class="w-4/5">
+    <article class="w-4/5 lg:w-3/5">
         @unless($message->isSentBySelf)
             <label class="text-label">{{ $message->user->username }}</label>
         @endif
-        <p class="bg-white-medium p-4 rounded-lg">{{ $message->content }}</p>
+        <p class="bg-white-medium p-4 rounded-lg lg:rounded-xl">{{ $message->content }}</p>
     </article>
 </article>
