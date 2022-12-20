@@ -1,5 +1,5 @@
-<footer class="bg-white-medium ">
-    <div class="container flex flex-coool mt-20 px-4 py-12 gap-y-12 lg:py-20 lg:gap-20 lg:mt-40">
+<footer class="bg-white-medium mt-20 lg:mt-40">
+    <div class="container flex flex-coool px-4 py-12 gap-y-12 lg:py-20 lg:gap-20">
 
         <section class="grid grid-cols-12 gap-y-8">
             <article class="col-span-full lg:col-span-4 flex flex-coool gap-1 lg:gap-2">

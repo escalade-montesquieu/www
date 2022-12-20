@@ -28,6 +28,9 @@ module.exports = {
                 '4/5': '4 / 5',
                 '5/4': '5 / 4',
             },
+            strokeWidth: {
+                '1.5': '1.5',
+            }
         },
         colors: {
             red: {

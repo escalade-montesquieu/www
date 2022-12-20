@@ -50,6 +50,6 @@
     }
 
     .icon {
-        @apply h-6 w-6;
+        @apply h-6 w-6 stroke-2;
     }
 }
