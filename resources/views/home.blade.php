@@ -62,7 +62,7 @@
         </article>
 
         <div class="col-span-full lg:col-start-8 lg:col-end-13 lg:row-start-1 max-lg:mt-20">
-            <article class="lg:sticky lg:top-40 space-y-4 lg:space-y-8">
+            <article class="lg:sticky lg:top-36 space-y-4 lg:space-y-8">
                 <h2 class="text-h2">Forum</h2>
                 <p>
                     Posez vos questions, organisez des sessions entre lycéens, partagez vos expériences !

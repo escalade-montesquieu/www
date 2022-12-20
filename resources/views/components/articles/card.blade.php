@@ -1,4 +1,4 @@
-<article class="col-span-full lg:col-span-4 flex flex-coool gap-2">
+<article class="col-span-full lg:col-span-6 xl:col-span-4 flex flex-coool gap-2">
     <header>
         <h3 class="text-h3">
             {{ $article->title }}
