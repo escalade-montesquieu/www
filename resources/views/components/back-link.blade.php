@@ -1,6 +1,6 @@
-@props(['link'])
+@props(['link', 'text'])
 <a
     href="{{ $link ?? url()->previous() }}"
     {{ $attributes->merge(['class' => 'text-cta text-blue-medium']) }}>
-    Retour
+    {{ $text ?? 'Retour' }}
 </a>
