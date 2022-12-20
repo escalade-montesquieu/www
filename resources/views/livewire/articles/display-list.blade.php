@@ -10,7 +10,7 @@
             </div>
         </section>
     @endif
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-16">
+    <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16 lg:gap-16">
         @foreach($this->articles as $article)
             <x-articles.card :article="$article"/>
         @endforeach

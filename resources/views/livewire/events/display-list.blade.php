@@ -31,7 +31,7 @@
                 <h3 class="text-h3">{{ \Carbon\Carbon::parse($date)->translatedFormat('j F Y') }}</h3>
 
                 <section
-                    class="@if($onlyIncoming) flex flex-col @else grid grid-cols-1 lg:grid-cols-12  @endif gap-8 lg:gap-16">
+                    class="grid grid-cols-1 @if(!$onlyIncoming) lg:grid-cols-2 xl:grid-cols-3 @endif gap-8 lg:gap-16">
                     @foreach($events as $event)
                         @livewire('events.card', ['event' => $event], key($event->id))
                     @endforeach
