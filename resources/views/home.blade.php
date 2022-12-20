@@ -38,8 +38,7 @@
         </div>
     </section>
 
-    <article class="overflow-hidden container relative flex flex-col gap-8 mt-40 max-lg:py-8 lg:mt-32">
-        <div class="lg:hidden -z-10 py-8 absolute inset-0 bg-white-medium scale-x-400 -rotate-3"></div>
+    <article class="container relative max-lg:bg-white-medium flex flex-col gap-8 mt-40 max-lg:py-8 lg:mt-32">
         <h2 class="text-h2 flex">
             <a href="{{ route('articles') }}" class="mr-auto group flex flex-row items-baseline gap-6">
                 <span class="duration-150 transition-colors lg:underline decoration-white-light
