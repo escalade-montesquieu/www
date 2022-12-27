@@ -1,4 +1,4 @@
-<div class="">
+<div class="flex flex-col gap-2 lg:gap-16">
     <div class="flex flex-coool items-center pb-8">
         <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
         <h2 class="text-h2">Créer un compte</h2>
@@ -9,7 +9,7 @@
         @endif
     </div>
 
-    <x-auth-session-status class="mb-4" :status="session('status')"/>
+    <x-auth-session-status :status="session('status')"/>
 
     <form wire:submit.prevent="register" class="flex flex-coool gap-8">
         @csrf

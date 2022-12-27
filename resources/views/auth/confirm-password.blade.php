@@ -1,35 +1,27 @@
-<x-app-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<x-auth-layout>
+    <div class="flex flex-coool items-center pb-8">
+        <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
+        <h4 class="text-h4">Confirmer votre mot de passe</h4>
+        <p class="text-center pt-4">Pour des raisons de sécurité merci d'entrer votre mot de passe</p>
+    </div>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+    <x-auth-session-status class="mb-4" :status="session('status')"/>
+
+    <form method="POST" action="{{ route('password.confirm') }}" class="flex flex-coool gap-8">
+        @csrf
+
+        <!-- Password -->
+        <div>
+            <x-input-label for="password" value="Mot de passe"/>
+
+            <x-text-input id="password" class="block mt-1 w-full"
+                          type="password"
+                          name="password"
+                          required autocomplete="current-password"/>
+
+            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
-        <form method="POST" action="{{ route('password.confirm') }}">
-            @csrf
-
-            <!-- Password -->
-            <div>
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <div class="flex justify-end mt-4">
-                <x-primary-button>
-                    {{ __('Confirm') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-app-layout>
+        <button class="btn-cta-primary">Continuer</button>
+    </form>
+</x-auth-layout>
