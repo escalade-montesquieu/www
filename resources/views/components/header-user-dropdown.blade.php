@@ -5,7 +5,7 @@
     </button>
 
     <div x-show="isOpen" @click.outside="isOpen = false"
-         class="absolute top-[120%] w-auto right-0 flex flex-col gap-2 px-4 py-3 whitespace-nowrap rounded-lg bg-white-light">
+         class="absolute top-[120%] w-auto right-0 flex flex-col gap-2 px-4 py-3 whitespace-nowrap rounded-lg bg-white-light shadow-md">
         <a href="{{ route('profile.show') }}">Mon profil</a>
         @if(auth()->user()->canAccessFilament())
             <a href="{{ route('filament.pages.dashboard') }}">Panel admin</a>
