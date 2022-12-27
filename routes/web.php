@@ -28,15 +28,14 @@ Route::get('/article/{article}', [ArticleController::class, 'show'])->name('arti
 
 Route::get('/evenements', [EventController::class, 'index'])->name('events');
 
-Route::get('/galeries', [GalleryController::class, 'index'])->name('galleries');
-Route::get('/galeries/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/forum', [ForumController::class, 'show'])->name('forum');
 
     Route::get('/profil/edit', ProfileEdition::class)->name('profile.edit');
     Route::get('/profil/{user?}', [ProfileController::class, 'show'])->name('profile.show');
+
+    Route::get('/galeries', [GalleryController::class, 'index'])->name('galleries');
+    Route::get('/galeries/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
 });
 
 require __DIR__ . '/auth.php';
