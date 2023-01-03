@@ -1,5 +1,5 @@
 <x-app-layout>
-    <article class="container flex flex-coool">
+    <article class="container flex flex-coool gap-4 mt-10 lg:mt-32">
         <x-back-link class="mr-auto"/>
 
         <div class="mt-10 flex flex-coool gap-2 w-full items-center">

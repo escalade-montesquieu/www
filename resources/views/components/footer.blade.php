@@ -3,6 +3,7 @@
 
         <section class="grid grid-cols-12 gap-y-8">
             <article class="col-span-full lg:col-span-4 flex flex-coool gap-1 lg:gap-2">
+                <x-application-logo class="!w-32 mb-8"/>
                 <h4 class="text-h4">Nous contacter</h4>
                 <p>
                     Envoyer un mail à <b class="whitespace-nowrap">contact@escalade-montesquieu.fr</b><br>
