@@ -28,7 +28,7 @@
     </label>
 
     <section class="flex flex-coool gap-6">
-        <div>
+        <section>
             <x-input-label for="email" value="Email"/>
 
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
@@ -36,9 +36,9 @@
                           required autofocus/>
 
             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
-        </div>
+        </section>
 
-        <div>
+        <section>
             <x-input-label for="bio" value="À propos de vous"/>
 
             <x-text-area id="bio" class="block mt-1 w-full" type="text" name="bio"
@@ -47,14 +47,14 @@
                          required/>
 
             <x-input-error :messages="$errors->get('bio')" class="mt-2"/>
-        </div>
+        </section>
 
-        <div class="flex flex-coool gap-2">
+        <section class="flex flex-coool gap-2">
             <h4 class="text-h4">Vous empruntez</h4>
 
-            <article class="bg-white-medium rounded-lg flex flex-coool overflow-hidden">
-                <div
-                    class="p-2 flex flex-row items-center gap-2 @if($rent_harness) bg-blue-light text-blue-medium @endif"
+            <article class="bg-white-medium rounded-lg flex flex-coool">
+                <button
+                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($rent_harness) bg-blue-light text-blue-medium @endif"
                     wire:click="toggleRentHarness">
                     @if($rent_harness)
                         <x-heroicon-o-check class="h-6 w-6"/>
@@ -63,12 +63,12 @@
                     @endif
 
                     <label>Un baudrier</label>
-                </div>
+                </button>
             </article>
 
-            <article class="bg-white-medium rounded-lg flex flex-coool overflow-hidden">
-                <div
-                    class="p-2 flex flex-row items-center gap-2 @if($rent_shoes) bg-blue-light text-blue-medium @endif"
+            <article class="bg-white-medium rounded-lg flex flex-coool">
+                <button
+                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($rent_shoes) bg-blue-light text-blue-medium @endif"
                     wire:click="toggleRentShoes">
                     @if($rent_shoes)
                         <x-heroicon-o-check class="h-6 w-6"/>
@@ -77,9 +77,9 @@
                     @endif
 
                     <label>Des chaussons</label>
-                </div>
+                </button>
                 @if($rent_shoes)
-                    <div class="ml-8 p-2 flex flex-coool">
+                    <div class="rounded-lg ml-8 p-2 flex flex-coool">
                         <label for="rent_shoes">Taille :</label>
                         <select class="btn" wire:model="rent_shoes" id="rent_shoes">
                             @foreach(App\Models\User::getShoesSizesAvailable() as $size)
@@ -89,7 +89,53 @@
                     </div>
                 @endif
             </article>
-        </div>
+        </section>
+
+        <section class="flex flex-coool gap-2">
+            <h4 class="text-h4">Préférences email</h4>
+
+            <article class="bg-white-medium rounded-lg flex flex-coool">
+                <button
+                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_CREATION)) bg-blue-light text-blue-medium @endif"
+                    wire:click="toggleEmailPreference('{{ App\Enums\UserEmailPreference::EVENT_CREATION->value }}')">
+                    @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_CREATION))
+                        <x-heroicon-o-check class="h-6 w-6"/>
+                    @else
+                        <div class="bg-white-dark h-6 w-6 rounded-md"></div>
+                    @endif
+
+                    <label>{{ App\Enums\UserEmailPreference::EVENT_CREATION->toLabel() }}</label>
+                </button>
+            </article>
+
+            <article class="bg-white-medium rounded-lg flex flex-coool">
+                <button
+                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_REMINDER)) bg-blue-light text-blue-medium @endif"
+                    wire:click="toggleEmailPreference('{{ App\Enums\UserEmailPreference::EVENT_REMINDER->value }}')">
+                    @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_REMINDER))
+                        <x-heroicon-o-check class="h-6 w-6"/>
+                    @else
+                        <div class="bg-white-dark h-6 w-6 rounded-md"></div>
+                    @endif
+
+                    <label>{{ App\Enums\UserEmailPreference::EVENT_REMINDER->toLabel() }}</label>
+                </button>
+            </article>
+
+            <article class="bg-white-medium rounded-lg flex flex-coool">
+                <button
+                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION)) bg-blue-light text-blue-medium @endif"
+                    wire:click="toggleEmailPreference('{{ App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION->value }}')">
+                    @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION))
+                        <x-heroicon-o-check class="h-6 w-6"/>
+                    @else
+                        <div class="bg-white-dark h-6 w-6 rounded-md"></div>
+                    @endif
+
+                    <label>{{ App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION->toLabel() }}</label>
+                </button>
+            </article>
+        </section>
 
         <button class="btn-cta-primary" wire:click="saveChanges">Enregistrer</button>
     </section>
