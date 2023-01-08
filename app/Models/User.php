@@ -121,7 +121,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     public function getUsernameAttribute(): string
     {
-        return $this->student ? $this->student->name : $this->name;
+        return $this->student->name ?? $this->name;
     }
 
     public function canAccessFilament(): bool
