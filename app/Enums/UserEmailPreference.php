@@ -4,20 +4,20 @@ namespace App\Enums;
 
 use App\Traits\CastableToArrayLabelEnum;
 
-enum UserRole: string
+enum UserEmailPreference: string
 {
     use CastableToArrayLabelEnum;
 
-    case STUDENT = 'student';
-    case MODERATOR = 'moderator';
-    case ADMIN = 'admin';
+    case EVENT_CREATION = 'event_creation';
+    case EVENT_REMINDER = 'event_reminder';
+    case FORUM_MESSAGE_MENTION = 'forum_message_mention';
 
     public function toLabel(): string
     {
         return match ($this) {
-            self::STUDENT => 'Licencié',
-            self::MODERATOR => 'Modérateur',
-            self::ADMIN => 'Administrateur',
+            self::EVENT_CREATION => "Création d'évènement",
+            self::EVENT_REMINDER => "Rappel d'évènement",
+            self::FORUM_MESSAGE_MENTION => "Mention dans un message",
         };
     }
 

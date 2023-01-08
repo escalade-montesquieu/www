@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserEmailPreference;
 use App\Enums\UserRole;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -40,7 +42,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     protected $attributes = [
         'role' => UserRole::STUDENT,
-        'email_preferences' => '',
+        'email_preferences' => '{}',
         'max_voie' => 'Non renseignée',
         'max_bloc' => 'Non renseignée',
         'display_max' => true,
@@ -52,26 +54,8 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         'remember_token',
     ];
 
-
-    public $emailRules = [
-        'e' => [
-            'name' => 'event',
-            'title' => 'Évènement',
-            'desc' => "Lorsqu'un nouvel évènement est ajouté"
-        ],
-        'r' => [
-            'name' => 'reminder',
-            'title' => 'Rappel',
-            'desc' => "Deux jours avant la date d'un évènement auquel je participe"
-        ],
-        // 'm' => [
-        //     'name' => 'message',
-        //     'title' => 'ForumMessage',
-        //     'desc' => "Lorsqu'il y a des nouveaux messages sur le forum"
-        // ]
-    ];
-
     protected $casts = [
+        'email_preferences' => 'array',
         'email_verified_at' => 'datetime',
         'role' => UserRole::class,
     ];
@@ -79,8 +63,8 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     public static function getShoesSizesAvailable(): array
     {
         $opt = [];
-        for($i=36;$i<=50;$i++) {
-            $opt[$i] = 'T'.$i;
+        for ($i = 36; $i <= 50; $i++) {
+            $opt[$i] = 'T' . $i;
         }
 
         return $opt;
@@ -139,19 +123,13 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         return $this->avatar_url;
     }
 
-
-    // todo
-    public function isMailableFor($prefname)
+    public function isMailableFor(UserEmailPreference $mailable): bool
     {
-        return str_contains($this->email_preferences, $prefname);
-
+        return in_array($mailable->value, $this->email_preferences, true);
     }
 
-    public function scopeMailableFor($query, $prefname)
+    public function scopeMailableFor(Builder $query, UserEmailPreference $mailable): Builder
     {
-        $pref = $this->prefLetterFromName($prefname);
-        return $query->where('email_preferences', 'LIKE', "%$pref%");
+        return $query->where('email_preferences', 'like', '%' . $mailable->value . '%');
     }
-
-
 }
