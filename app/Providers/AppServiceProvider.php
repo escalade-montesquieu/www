@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($defaultTarget = config('mail.to')) {
+            Mail::alwaysTo($defaultTarget);
+        }
+
         Filament::serving(function () {
             Filament::registerUserMenuItems([
                 'account' => UserMenuItem::make()
