@@ -16,4 +16,11 @@ class EventController extends Controller
             'eventDates' => EventRepository::allByDate()
         ]);
     }
+
+    public function show(Event $event): Factory|View|Application
+    {
+        return view('events.show', [
+            'event' => $event
+        ]);
+    }
 }
