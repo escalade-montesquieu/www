@@ -2,12 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -31,6 +27,11 @@ class UserSeeder extends Seeder
         User::factory()->admin()->create([
             'email' => 'admin@email.com',
             'name' => 'Adé Min',
+        ]);
+
+        User::factory()->create([
+            'email' => 'arthaudp33+dev-escalade-montesquieu@gmail.com',
+            'name' => 'Arthaud Proust',
         ]);
     }
 }
