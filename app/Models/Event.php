@@ -78,6 +78,12 @@ class Event extends Model
             ->orderBy('datetime');
     }
 
+    public function scopeSoon(Builder $query): Builder
+    {
+        return $query->whereDate('datetime', now()->addDays(3))
+            ->orderBy('datetime');
+    }
+
     public function scopePast(Builder $query): Builder
     {
         return $query->where('datetime', '<', now())

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Enums\UserEmailPreference;
-use App\Mail\EventCreated;
+use App\Mail\EventCreationMail;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
@@ -16,7 +16,7 @@ class EventObserver
             ->get()
             ->toArray();
 
-        Mail::bcc($users)->queue(new EventCreated($event));
+        Mail::bcc($users)->queue(new EventCreationMail($event));
     }
 
     public function updated(Event $event): void

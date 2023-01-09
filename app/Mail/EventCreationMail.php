@@ -2,25 +2,28 @@
 
 namespace App\Mail;
 
+use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ForumMessageMentionUser extends Mailable
+class EventCreationMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public Event $event;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Event $event)
     {
-        //
+        $this->event = $event;
     }
 
     /**
@@ -31,7 +34,7 @@ class ForumMessageMentionUser extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Forum Message Mention User',
+            subject: 'Nouvel évènement le ' . Carbon::parse($this->event->datetime)->translatedFormat('j F Y'),
         );
     }
 
@@ -43,7 +46,7 @@ class ForumMessageMentionUser extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'emails.events.created',
         );
     }
 
