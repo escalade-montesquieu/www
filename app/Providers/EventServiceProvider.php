@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Event;
 use App\Models\Photo;
+use App\Observers\EventObserver;
 use App\Observers\PhotoObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -29,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Photo::observe(PhotoObserver::class);
+        Event::observe(EventObserver::class);
     }
 
     /**

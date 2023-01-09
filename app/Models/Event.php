@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
@@ -20,6 +20,7 @@ class Event extends Model
         'location',
         'content',
         'max_places',
+        'event_category_id',
     ];
 
     protected $attributes = [
@@ -43,7 +44,7 @@ class Event extends Model
 
     public function getIsUserParticipatingAttribute(): bool
     {
-        if(!Auth::check()) {
+        if (!Auth::check()) {
             return false;
         }
         return $this->participants()->where('id', Auth::user()->id)->count();
@@ -64,6 +65,11 @@ class Event extends Model
     {
         // todo
         return 0;
+    }
+
+    public function getLocationMapsLinkAttribute(): string
+    {
+        return "https://www.google.fr/maps/search/$this->location+france";
     }
 
     public function scopeIncoming(Builder $query): Builder

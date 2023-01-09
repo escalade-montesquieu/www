@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Index\Messages;
 use App\Http\Livewire\ProfileEdition;
@@ -38,5 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/galeries', [GalleryController::class, 'index'])->name('galleries');
     Route::get('/galeries/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
 });
+
+Route::get('/mails/event-created', [MailController::class, 'eventCreated'])->name('mails.eventCreated');
+Route::get('/mails/event-incoming', [MailController::class, 'eventIncoming'])->name('mails.eventIncoming');
+
 
 require __DIR__ . '/auth.php';
