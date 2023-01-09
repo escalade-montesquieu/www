@@ -16,7 +16,7 @@ class EventObserver
             ->get()
             ->toArray();
 
-        Mail::to($users)->send(new EventCreated($event));
+        Mail::bcc($users)->queue(new EventCreated($event));
     }
 
     public function updated(Event $event): void
