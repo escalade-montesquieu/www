@@ -2,12 +2,8 @@
 
 namespace App\Console;
 
-use App\Enums\UserEmailPreference;
-use App\Mail\EventReminderMail;
-use App\Models\Event;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,15 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            $soonEvents = Event::soon()->get();
-
-            foreach ($soonEvents as $event) {
-                $usersToInform = $event->participants()->mailableFor(UserEmailPreference::EVENT_REMINDER)->get();
-
-                Mail::bcc($usersToInform)->queue(new EventReminderMail($event));
-            }
-        })->dailyAt('9:00');
+        $schedule->command('send-event-reminders')
+            ->dailyAt('9:00');
     }
 
     /**
