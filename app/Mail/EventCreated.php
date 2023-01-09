@@ -34,7 +34,7 @@ class EventCreated extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Nouvel évènement le' . Carbon::parse($this->event->datetime)->translatedFormat('j F Y'),
+            subject: 'Nouvel évènement le ' . Carbon::parse($this->event->datetime)->translatedFormat('j F Y'),
         );
     }
 
