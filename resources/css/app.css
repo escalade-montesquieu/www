@@ -52,4 +52,12 @@
     .icon {
         @apply h-6 w-6 stroke-2;
     }
+
+    .breadcrumb {
+        @apply w-full flex flex-row flex-wrap text-label gap-3 whitespace-nowrap text-ellipsis overflow-hidden;
+    }
+
+    .breadcrumb-item {
+        @apply whitespace-nowrap overflow-hidden min-w-0 flex-1 text-left text-ellipsis;
+    }
 }

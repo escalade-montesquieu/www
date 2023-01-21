@@ -1,6 +1,6 @@
 <x-app-layout>
     <article class="container flex flex-coool gap-4 mt-10 lg:mt-32">
-        <x-back-link :link="route('articles')" text="Retour aux articles"/>
+        {{ Breadcrumbs::render('article', $article) }}
         <header>
             <h2 class="text-h2 mb-2">{{ $article->title }}</h2>
         </header>

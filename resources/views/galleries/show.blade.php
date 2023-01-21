@@ -1,6 +1,6 @@
 <x-app-layout>
     <article class="container flex flex-coool gap-4 mt-10 lg:mt-32">
-        <x-back-link :link="route('galleries')" text="Retour aux galeries"/>
+        {{ Breadcrumbs::render('gallery', $gallery) }}
         <header>
             <h1 class="text-h1 mb-2">{{ $gallery->name }}</h1>
         </header>

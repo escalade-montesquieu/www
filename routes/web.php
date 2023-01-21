@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'show'])->name('home');
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
-Route::get('/article/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/evenements', [EventController::class, 'index'])->name('events');
 Route::get('/evenements/{event}', [EventController::class, 'show'])->name('events.show');
