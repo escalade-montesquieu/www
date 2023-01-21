@@ -4,6 +4,7 @@ namespace App\Console\Commands\Import;
 
 use App\Enums\UserEmailPreference;
 use App\Enums\UserRole;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,8 @@ class ImportUsersFromCsv extends Command
         // Boucle sur chaque ligne du tableau (sauf la première qui contient les entêtes et la dernière qui est vide)
         for ($i = 1, $iMax = count($csv) - 1; $i < $iMax; $i++) {
             $data = array_combine($header, $csv[$i]);
-            dump($csv[$i][3]);
+
+            dump($data['name']);
 
             $userData['name'] = $data['name'];
 
@@ -48,6 +50,12 @@ class ImportUsersFromCsv extends Command
                 "2" => UserRole::MODERATOR,
                 "3" => UserRole::ADMIN
             };
+
+            if ($data['level'] !== "3") {
+                $userData['student_id'] = Student::create([
+                    'name' => $data['name']
+                ])->id;
+            }
 
             $userData['avatar_url'] = $data['img'];
 
