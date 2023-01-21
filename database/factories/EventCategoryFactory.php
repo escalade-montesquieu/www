@@ -18,7 +18,7 @@ class EventCategoryFactory extends Factory
     {
         return [
             'is_regular' => fake()->boolean(),
-            'name' => fake()->word(),
+            'title' => fake()->word(),
             'description' => fake()->paragraph()
         ];
     }

@@ -31,7 +31,7 @@ class GalleryResource extends Resource
                     ->options(static function (Gallery $record) {
                         return $record->photos->pluck('assetSrc', 'id');
                     }),
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('title')
                     ->translateLabel()
                     ->required()
                     ->maxLength(255)
@@ -49,7 +49,7 @@ class GalleryResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('photo.storageSrc')
                     ->label('Image'),
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('title')
                     ->translateLabel(),
                 Tables\Columns\TextColumn::make('description')
                     ->translateLabel()

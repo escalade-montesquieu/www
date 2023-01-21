@@ -25,7 +25,7 @@ class EventCategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('title')
                     ->translateLabel()
                     ->required()
                     ->maxLength(255),
@@ -43,7 +43,7 @@ class EventCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('title')
                     ->translateLabel(),
                 Tables\Columns\IconColumn::make('is_regular')
                     ->translateLabel()

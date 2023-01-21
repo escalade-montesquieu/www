@@ -15,7 +15,7 @@ class EventCategory extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
+        'title',
         'slug',
         'description',
         'is_regular'
@@ -26,10 +26,10 @@ class EventCategory extends Model
         return $this->hasMany(Event::class);
     }
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
 

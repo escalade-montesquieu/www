@@ -28,7 +28,7 @@ class EventResource extends Resource
             ->schema([
                 Forms\Components\Select::make('event_category_id')
                     ->label(__('Event category'))
-                    ->relationship('eventCategory', 'name')
+                    ->relationship('eventCategory', 'title')
                     ->required(),
                 Forms\Components\TextInput::make('title')
                     ->translateLabel()

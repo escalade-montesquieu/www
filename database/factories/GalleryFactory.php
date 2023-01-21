@@ -17,7 +17,7 @@ class GalleryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->sentence(),
+            'title' => fake()->sentence(),
             'description' => fake()->sentences(4, true)
         ];
     }

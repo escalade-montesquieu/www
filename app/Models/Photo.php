@@ -14,6 +14,7 @@ class Photo extends Model
 
     protected $fillable = [
         'gallery',
+        'title',
         'display_homepage',
         'src',
         'image_data'

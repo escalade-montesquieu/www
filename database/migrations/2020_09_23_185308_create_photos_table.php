@@ -19,6 +19,7 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnDelete();
 
+            $table->string('title')->nullable();
             $table->boolean('display_homepage');
             $table->text('src');
             $table->json('image_data')->nullable();

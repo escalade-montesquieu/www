@@ -25,8 +25,9 @@ class PhotoResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('gallery_id')
-                    ->relationship('gallery', 'name')
+                    ->relationship('gallery', 'title')
                     ->required(),
+                Forms\Components\TextInput::make('title'),
                 Forms\Components\Toggle::make('pinned_homepage')
                     ->required(),
                 Forms\Components\Hidden::make('src'),

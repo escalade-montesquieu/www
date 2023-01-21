@@ -14,7 +14,7 @@ class Gallery extends Model
     use HasSlug, HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'slug',
         'description',
         'photo_id'
@@ -33,7 +33,7 @@ class Gallery extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
 

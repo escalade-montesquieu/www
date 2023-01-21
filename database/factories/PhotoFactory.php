@@ -35,6 +35,7 @@ class PhotoFactory extends Factory
 
 
         return [
+            'title' => fake()->sentence(),
             'display_homepage' => false,
             'src' => basename($fakerFilePath)
         ];

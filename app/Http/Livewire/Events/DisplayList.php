@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Events;
 use App\Models\Event;
 use App\Models\EventCategory;
 use App\Repositories\EventRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 class DisplayList extends Component
@@ -18,17 +17,17 @@ class DisplayList extends Component
 
     public function mount()
     {
-        $this->eventCategories = EventCategory::all()->pluck('id', 'name')->toArray();
+        $this->eventCategories = EventCategory::all()->pluck('id', 'title')->toArray();
     }
 
     public function getEventDatesProperty(): array
     {
-        if($this->onlyIncoming) {
+        if ($this->onlyIncoming) {
             return EventRepository::incomingByDate()
                 ->toArray();
         }
 
-        if($this->eventCategoryId !== "") {
+        if ($this->eventCategoryId !== "") {
             $collection = Event::where('event_category_id', (int)$this->eventCategoryId)->get();
             return EventRepository::groupByDate($collection)
                 ->orderBy($this->orderBy)
