@@ -8,7 +8,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Console\Command;
 
-class ImportCommandUsers extends ImportCommand
+class ImportUsers extends ImportCommand
 {
     protected $signature = 'import:users';
 

@@ -5,7 +5,7 @@ namespace App\Console\Commands\Import;
 use App\Models\Article;
 use Illuminate\Console\Command;
 
-class ImportCommandArticles extends ImportCommand
+class ImportArticles extends ImportCommand
 {
     protected $signature = 'import:articles';
 
