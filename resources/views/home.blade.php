@@ -16,12 +16,13 @@
                 </p>
             </article>
             <article class="lg:col-start-7 lg:col-end-13">
-                <div class="swiper w-full overflow-hidden rounded-lg lg:rounded-2xl">
-                    <div class="swiper-wrapper ">
+                <div class="swiper  w-full overflow-hidden rounded-lg lg:rounded-2xl">
+                    <div class="swiper-wrapper">
                         <!-- Slides -->
                         @foreach($photos as $photo)
                             <div class="swiper-slide">
-                                <img class="rounded-lg lg:rounded-2xl" src="{{ $photo->assetSrc }}" alt=""/>
+                                <img class="rounded-lg lg:rounded-2xl aspect-4/3 object-cover"
+                                     src="{{ $photo->assetSrc }}" alt=""/>
                             </div>
                         @endforeach
                     </div>
