@@ -16,7 +16,7 @@
                     <h4 class="text-h4">Évènements et sorties</h4>
                     <nav class="flex flex-coool">
                         @foreach(\App\Models\EventCategory::all() as $eventCategory)
-                            <a class="link" href="{{ route('events') }}">{{ $eventCategory->name }}</a>
+                            <a class="link" href="{{ route('events') }}">{{ $eventCategory->title }}</a>
                         @endforeach
                     </nav>
                 </article>

@@ -4,7 +4,7 @@
 
 ## Vous participez à {{ $event->title }}
 <strong>
-{{ $event->eventCategory->name }} -
+{{ $event->eventCategory->title }} -
 @if($event->max_places)
 {{ $event->max_places }} places
 @else

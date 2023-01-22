@@ -48,7 +48,7 @@ Breadcrumbs::for('galleries', function (BreadcrumbTrail $trail) {
 // Home > Galleries > {Galerie}
 Breadcrumbs::for('gallery', function (BreadcrumbTrail $trail, Gallery $gallery) {
     $trail->parent('galleries');
-    $trail->push($gallery->name, route('galleries.show', $gallery));
+    $trail->push($gallery->title, route('galleries.show', $gallery));
 });
 
 // Home > Profile

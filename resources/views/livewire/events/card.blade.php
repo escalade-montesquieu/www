@@ -3,7 +3,7 @@
         <h3 class="text-h3">
             {{ $event->title }}
         </h3>
-        <p>{{ $event->eventCategory->name }}</p>
+        <p>{{ $event->eventCategory->title }}</p>
         <p>
             @if($event->max_places)
                 <span>{{ $event->max_places }} places</span>
