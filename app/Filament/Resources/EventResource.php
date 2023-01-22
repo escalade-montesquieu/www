@@ -46,7 +46,7 @@ class EventResource extends Resource
                 Forms\Components\TextInput::make('location')
                     ->translateLabel()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('content')
+                Forms\Components\Textarea::make('description')
                     ->translateLabel()
                     ->maxLength(65535),
             ]);

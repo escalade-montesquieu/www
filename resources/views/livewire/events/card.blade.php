@@ -18,7 +18,7 @@
         </p>
     </header>
 
-    <p>{{ $event->content }}</p>
+    <p>{{ $event->description }}</p>
 
     @if($event->isPast)
         <section class="flex flex-row gap-4 p-4 rounded-lg bg-white-dark text-black-dark text-label">

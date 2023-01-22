@@ -21,7 +21,7 @@ class EventFactory extends Factory
             'max_places' => fake()->boolean() ? null : fake()->numberBetween(0, 10) * 10,
             'datetime' => fake()->boolean() ? null : fake()->dateTimeBetween('-1 year', '+2 year'),
             'location' => fake()->boolean() ? null : fake()->city(),
-            'content' => fake()->paragraph()
+            'description' => fake()->paragraph()
         ];
     }
 
