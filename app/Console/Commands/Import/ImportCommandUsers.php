@@ -7,21 +7,14 @@ use App\Enums\UserRole;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
-class ImportUsers extends Command
+class ImportCommandUsers extends ImportCommand
 {
     protected $signature = 'import:users';
 
     public function handle(): int
     {
-        $jsonFile = Storage::get('users.json');
-
-        $json = json_decode($jsonFile, true, 512, JSON_THROW_ON_ERROR);
-
-        $table = current(array_filter($json, static fn($row) => $row['type'] === 'table'));
-
-        $rows = $table['data'];
+        $rows = $this->loadJson('users.json');
 
         foreach ($rows as $row) {
 
