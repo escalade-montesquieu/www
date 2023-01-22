@@ -18,7 +18,7 @@ class Event extends Model
         'title',
         'datetime',
         'location',
-        'content',
+        'description',
         'max_places',
         'event_category_id',
     ];
@@ -36,18 +36,18 @@ class Event extends Model
         return $this->belongsTo(EventCategory::class);
     }
 
-    public function participants(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class)
-            ->withTimestamps();
-    }
-
     public function getIsUserParticipatingAttribute(): bool
     {
         if (!Auth::check()) {
             return false;
         }
         return $this->participants()->where('id', Auth::user()->id)->count();
+    }
+
+    public function participants(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)
+            ->withTimestamps();
     }
 
     public function getIsPastAttribute(): bool

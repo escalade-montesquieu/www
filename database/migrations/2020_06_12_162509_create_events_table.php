@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->integer('max_places')->nullable();
             $table->datetime('datetime')->nullable(); // datetime
             $table->string('location')->nullable(); // Lieu
-            $table->text('content')->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
