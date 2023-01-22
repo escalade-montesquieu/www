@@ -3,6 +3,9 @@
         {{ Breadcrumbs::render('gallery', $gallery) }}
         <header>
             <h1 class="text-h1 mb-2">{{ $gallery->title }}</h1>
+            @if($gallery->description)
+                <p>{{ $gallery->description }}</p>
+            @endif
         </header>
         <section class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-16" id="gallery">
             @foreach($gallery->photos as $photo)
