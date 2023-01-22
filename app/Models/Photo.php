@@ -13,7 +13,7 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'gallery',
+        'gallery_id',
         'title',
         'display_homepage',
         'src',
