@@ -20,7 +20,7 @@ class ImportEventCategories extends ImportCommand
             EventCategory::create([
                 'is_regular' => $row['is_regular'],
                 'title' => $row['name'],
-                'description' => $row['description'] === 'NULL' ? NULL : $row['description']
+                'description' => $row['description']
             ]);
         }
 

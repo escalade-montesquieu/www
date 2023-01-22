@@ -51,7 +51,7 @@ class ImportUsers extends ImportCommand
                     'name' => $row['name']
                 ])->id,
                 'avatar_url' => $avatarUrl,
-                'bio' => $row['bio'] === 'NULL' ? NULL : $row['bio'],
+                'bio' => $row['bio'],
                 'rent_shoes' => $row['shoes'] === "no-need" ? NULL : $row['shoes'],
                 'rent_harness' => $row['harness']
             ]);

@@ -16,7 +16,7 @@ class ImportArticles extends ImportCommand
         foreach ($rows as $row) {
             Article::create([
                 'title' => $row['title'],
-                'content' => $row['content'] === 'NULL' ? NULL : $row['content'],
+                'content' => $row['content'],
                 'display_homepage' => !$row['deleted_at']
             ]);
         }
