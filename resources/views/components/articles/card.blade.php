@@ -1,11 +1,15 @@
-<article class="flex flex-coool gap-2">
+<article class="flex flex-coool gap-2 items-start">
+    @if($article->firstResource)
+        <x-articles.resource :resource="$article->firstResource"/>
+    @endif
     <header>
         <h3 class="text-h3">
-            {{ $article->title }}
+            <a class="hover:underline" href="{{ route('articles.show', $article) }}">
+                {{ $article->title }}
+            </a>
         </h3>
     </header>
-    <p>{{ $article->content }}</p>
-    <a class="text-cta link" href="{{ route('articles.show', $article) }}">
-        Lire plus
-    </a>
+    <section class="markdown">
+        @markdown($article->content)
+    </section>
 </article>

@@ -38,7 +38,11 @@
     }
 
     .link {
-        @apply text-blue-medium;
+        @apply text-blue-medium hover:underline underline-offset-2;
+    }
+
+    .richtext a {
+        @apply link;
     }
 
     .link-offcanvas {
