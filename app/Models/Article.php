@@ -13,17 +13,22 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
-        'ressources_links',
+        'resources',
         'display_homepage'
     ];
 
     protected $attributes = [
-        'ressources_links' => '{}',
+        'resources' => '[]',
     ];
 
     protected $casts = [
-        'ressources_links' => 'array',
+        'resources' => 'array',
     ];
+
+    public function getFirstResourceAttribute(): array|bool
+    {
+        return current($this->resources);
+    }
 
     public function scopeOnHomepage($query)
     {

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +31,13 @@ class AppServiceProvider extends ServiceProvider
         if ($defaultTarget = config('mail.to')) {
             Mail::alwaysTo($defaultTarget);
         }
+
+        Blade::directive('urlify', static function ($expression) {
+            // The Regular Expression filter
+            $reg_pattern = "/(((http|https|ftp|ftps)\:\/\/)|(www\.))[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\:[0-9]+)?(\/\S*)?/";
+
+            return preg_replace($reg_pattern, '<a href="$0" target="_blank" rel="noopener noreferrer">$0</a>', $expression);
+        });
 
         Filament::serving(function () {
             Filament::registerUserMenuItems([

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->mediumText('content');
-            $table->json('ressources_links');
+            $table->json('resources');
             $table->boolean('display_homepage');
 
             $table->timestamp('created_at')->useCurrent();

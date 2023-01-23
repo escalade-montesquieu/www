@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\ArticleResourceType;
+use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,16 +18,31 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
-        $links = [];
+        $resources = [];
 
         for ($i = 0; $i < fake()->numberBetween(0, 4); $i++) {
-            $links[fake()->word()] = fake()->url();
+            $resourceType = fake()->randomElement(ArticleResourceType::toArray());
+
+            if ($resourceType === ArticleResourceType::EXTERNAL_VIDEO) {
+                $resources[] = [
+                    'type' => ArticleResourceType::EXTERNAL_VIDEO,
+                    'title' => fake()->word(),
+                    'url' => fake()->url(),
+                ];
+            } else {
+                $resources[] = [
+                    'type' => ArticleResourceType::INTERNAL_PHOTO,
+                    'title' => fake()->word(),
+                    'photo_id' => Photo::inRandomOrder()->first()->id,
+                ];
+            }
+
         }
 
         return [
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
-            'ressources_links' => $links,
+            'resources' => $resources,
             'display_homepage' => false,
         ];
     }
