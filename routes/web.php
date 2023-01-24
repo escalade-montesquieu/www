@@ -43,5 +43,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/mails/event-created', [MailController::class, 'eventCreated'])->name('mails.eventCreated');
 Route::get('/mails/event-incoming', [MailController::class, 'eventIncoming'])->name('mails.eventIncoming');
 
-
 require __DIR__ . '/auth.php';
