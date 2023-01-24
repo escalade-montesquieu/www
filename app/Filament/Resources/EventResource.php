@@ -56,7 +56,7 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('eventCategory.name')
+                Tables\Columns\TextColumn::make('eventCategory.title')
                     ->translateLabel(),
                 Tables\Columns\TextColumn::make('title')
                     ->translateLabel(),
