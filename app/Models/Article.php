@@ -14,7 +14,6 @@ class Article extends Model
         'title',
         'content',
         'resources',
-        'display_homepage'
     ];
 
     protected $attributes = [
@@ -30,8 +29,9 @@ class Article extends Model
         return current($this->resources);
     }
 
-    public function scopeOnHomepage($query)
+    public function scopeThreeLatest($query)
     {
-        return $query->where('display_homepage', true);
+        return $query->latest()
+            ->take(3);
     }
 }

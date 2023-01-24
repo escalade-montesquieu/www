@@ -85,11 +85,6 @@ class ArticleResource extends Resource
                     ])
                     ->columnSpan('full')
                     ->translateLabel(),
-                Forms\Components\Toggle::make('display_homepage')
-                    ->translateLabel()
-                    ->required()
-                    ->inline(false)
-                    ->columnSpan('full'),
             ]);
     }
 

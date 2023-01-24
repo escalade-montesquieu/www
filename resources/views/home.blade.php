@@ -39,19 +39,15 @@
         </div>
     </section>
 
-    <article class="container relative max-lg:bg-white-medium flex flex-col gap-8 mt-40 max-lg:py-8 lg:mt-32">
-        <h2 class="text-h2 flex">
-            <a href="{{ route('articles') }}" class="mr-auto group flex flex-row items-baseline gap-6">
-                <span class="duration-150 transition-colors lg:underline decoration-white-light
-                group-hover:decoration-black-dark underline-offset-8 decoration-2">
-                    Articles
-                </span>
-                <x-heroicon-o-arrow-right
-                    class="max-lg:hidden h-8 w-8 stroke-1.5 duration-150 transition-transform group-hover:translate-x-2"/>
-            </a>
-        </h2>
-        <livewire:articles.display-list :onlyOnHomepage="true"/>
-        <a href="{{ route('articles') }}" class="lg:hidden btn-cta-tertiary">Tout voir</a>
+    <article class="container relative max-md:bg-white-medium flex flex-col gap-8 mt-40 max-lg:py-8 lg:mt-32">
+        <section class="flex justify-between items-end gap-4 whitespace-nowrap">
+            <h2 class="text-h2 ">
+                Derniers articles
+            </h2>
+            <a href="{{ route('articles') }}" class="max-md:hidden btn-cta-secondary">Voir tous les articles</a>
+        </section>
+        <livewire:articles.display-list :onlyThreeLatest="true"/>
+        <a href="{{ route('articles') }}" class="md:hidden btn-cta-tertiary">Tout voir</a>
     </article>
 
     <section class="container grid grid-cols-1 lg:grid-cols-12 gap-x-16 lg:mt-40">

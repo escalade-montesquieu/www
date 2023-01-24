@@ -43,16 +43,6 @@ class ArticleFactory extends Factory
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
             'resources' => $resources,
-            'display_homepage' => false,
         ];
-    }
-
-    public function onHomepage(): static
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'display_homepage' => true,
-            ];
-        });
     }
 }

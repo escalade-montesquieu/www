@@ -17,7 +17,6 @@ class ImportArticles extends ImportCommand
             Article::create([
                 'title' => $row['title'],
                 'content' => $row['content'],
-                'display_homepage' => !$row['deleted_at']
             ]);
         }
 
