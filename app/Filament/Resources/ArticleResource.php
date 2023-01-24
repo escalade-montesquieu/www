@@ -56,8 +56,7 @@ class ArticleResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('title')
                                     ->translateLabel()
-                                    ->placeholder('Petit rick roll')
-                                    ->required(),
+                                    ->placeholder('Petit rick roll'),
                                 Forms\Components\TextInput::make('url')
                                     ->translateLabel()
                                     ->placeholder('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
@@ -67,8 +66,7 @@ class ArticleResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('title')
                                     ->placeholder('Photos')
-                                    ->translateLabel()
-                                    ->required(),
+                                    ->translateLabel(),
                                 Forms\Components\Select::make('gallery_id')
                                     ->label('Gallerie photo')
                                     ->options(Gallery::all()->pluck('title', 'id'))
@@ -82,14 +80,18 @@ class ArticleResource extends Resource
                                             : [];
                                     }),
                             ]),
+                        Forms\Components\Builder\Block::make(ArticleResourceType::EXTERNAL_PHOTO->value)
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->placeholder('Photos')
+                                    ->translateLabel(),
+                                Forms\Components\TextInput::make('url')
+                                    ->placeholder('https://picsum.photos/200/300')
+                                    ->required(),
+                            ]),
                     ])
                     ->columnSpan('full')
                     ->translateLabel(),
-                Forms\Components\Toggle::make('display_homepage')
-                    ->translateLabel()
-                    ->required()
-                    ->inline(false)
-                    ->columnSpan('full'),
             ]);
     }
 
@@ -99,6 +101,7 @@ class ArticleResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->translateLabel()
+                    ->sortable()
                     ->limit(40)
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
@@ -110,18 +113,18 @@ class ArticleResource extends Resource
                         // Only render the tooltip if the column contents exceeds the length limit.
                         return $state;
                     }),
-                Tables\Columns\IconColumn::make('display_homepage')
-                    ->translateLabel()
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -136,7 +139,8 @@ class ArticleResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getPages(): array

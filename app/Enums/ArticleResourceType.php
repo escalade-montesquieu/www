@@ -10,6 +10,7 @@ enum ArticleResourceType: string
 
     case YOUTUBE_VIDEO = 'youtube-video';
     case INTERNAL_PHOTO = 'internal-photo';
+    case EXTERNAL_PHOTO = 'external-photo';
 
     public static function toArray(): array
     {
@@ -25,7 +26,8 @@ enum ArticleResourceType: string
     {
         return match ($this) {
             self::YOUTUBE_VIDEO => 'Vidéo youtube',
-            self::INTERNAL_PHOTO => 'Photo',
+            self::INTERNAL_PHOTO => 'Photo interne',
+            self::EXTERNAL_PHOTO => 'Photo externe',
         };
     }
 }

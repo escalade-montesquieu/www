@@ -13,4 +13,8 @@
              src="{{ $photo->public_src }}"
              alt="{{ $resource['data']['title'] }}"/>
     @endif
+@elseif($resource['type'] === \App\Enums\ArticleResourceType::EXTERNAL_PHOTO->value)
+    <img class="mb-2 w-full aspect-video bg-white-medium object-cover"
+         src="{{ $resource['data']['url'] }}"
+         alt="{{ $resource['data']['title'] }}"/>
 @endif
