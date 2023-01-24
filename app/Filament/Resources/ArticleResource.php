@@ -56,14 +56,17 @@ class ArticleResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('title')
                                     ->translateLabel()
+                                    ->placeholder('Petit rick roll')
                                     ->required(),
                                 Forms\Components\TextInput::make('url')
                                     ->translateLabel()
+                                    ->placeholder('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
                                     ->required(),
                             ]),
                         Forms\Components\Builder\Block::make(ArticleResourceType::INTERNAL_PHOTO->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
+                                    ->placeholder('Photos')
                                     ->translateLabel()
                                     ->required(),
                                 Forms\Components\Select::make('gallery_id')
