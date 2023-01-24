@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Enums\ArticleResourceType;
 use App\Filament\Resources\ArticleResource\Pages;
 use App\Filament\Resources\ArticleResource\RelationManagers;
+use App\Forms\Components\ThumbnailSelection;
 use App\Models\Article;
+use App\Models\Gallery;
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -31,7 +34,7 @@ class ArticleResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpan('full'),
-                Forms\Components\RichEditor::make('content')
+                Forms\Components\MarkdownEditor::make('content')
                     ->toolbarButtons([
                         'italic',
                         'bold',
@@ -49,14 +52,35 @@ class ArticleResource extends Resource
 
                 Forms\Components\Builder::make('resources')
                     ->blocks([
-                        Forms\Components\Builder\Block::make(ArticleResourceType::EXTERNAL_VIDEO->value)
+                        Forms\Components\Builder\Block::make(ArticleResourceType::YOUTUBE_VIDEO->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
-                                    ->label('Titre')
+                                    ->translateLabel()
+                                    ->placeholder('Petit rick roll')
                                     ->required(),
                                 Forms\Components\TextInput::make('url')
-                                    ->label('Url')
+                                    ->translateLabel()
+                                    ->placeholder('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
                                     ->required(),
+                            ]),
+                        Forms\Components\Builder\Block::make(ArticleResourceType::INTERNAL_PHOTO->value)
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->placeholder('Photos')
+                                    ->translateLabel()
+                                    ->required(),
+                                Forms\Components\Select::make('gallery_id')
+                                    ->label('Gallerie photo')
+                                    ->options(Gallery::all()->pluck('title', 'id'))
+                                    ->searchable()
+                                    ->reactive(),
+                                ThumbnailSelection::make('photo_id')
+                                    ->label('Photo')
+                                    ->options(function (Closure $get) {
+                                        return $get('gallery_id') ?
+                                            Gallery::find($get('gallery_id'))->photos->pluck('assetSrc', 'id')
+                                            : [];
+                                    }),
                             ]),
                     ])
                     ->columnSpan('full')

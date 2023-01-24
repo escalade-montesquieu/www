@@ -8,7 +8,7 @@ enum ArticleResourceType: string
 {
     use CastableToArrayLabelEnum;
 
-    case EXTERNAL_VIDEO = 'external-video';
+    case YOUTUBE_VIDEO = 'youtube-video';
     case INTERNAL_PHOTO = 'internal-photo';
 
     public static function toArray(): array
@@ -24,7 +24,7 @@ enum ArticleResourceType: string
     public function toLabel(): string
     {
         return match ($this) {
-            self::EXTERNAL_VIDEO => 'Vidéo externe',
+            self::YOUTUBE_VIDEO => 'Vidéo youtube',
             self::INTERNAL_PHOTO => 'Photo',
         };
     }
