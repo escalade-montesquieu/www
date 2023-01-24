@@ -34,6 +34,20 @@ class ImportPhotos extends ImportCommand
             ]);
         }
 
+        foreach (Gallery::all() as $gallery) {
+            $photos = $gallery->photos;
+
+            if ($photos->isEmpty()) {
+                continue;
+            }
+
+            if ($photo = $gallery->photos->random()) {
+                $gallery->update([
+                    'photo_id' => $photo->id
+                ]);
+            }
+        }
+
         return Command::SUCCESS;
     }
 }
