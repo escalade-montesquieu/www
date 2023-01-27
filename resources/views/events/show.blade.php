@@ -28,7 +28,7 @@
             @endif
         </section>
         <section class="col-span-1">
-            <livewire:events.participation :event="$event"/>
+            <livewire:events.participations :event="$event"/>
         </section>
     </section>
 
