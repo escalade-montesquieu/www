@@ -3,6 +3,7 @@
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
 use App\Models\Article;
+use App\Models\Event;
 use App\Models\Gallery;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
@@ -37,6 +38,12 @@ Breadcrumbs::for('article', function (BreadcrumbTrail $trail, Article $article) 
 Breadcrumbs::for('events', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Évènements', route('events'));
+});
+
+// Home > Events > {Event}
+Breadcrumbs::for('event', function (BreadcrumbTrail $trail, Event $event) {
+    $trail->parent('events');
+    $trail->push($event->title, route('events.show', $event));
 });
 
 // Home > Galleries

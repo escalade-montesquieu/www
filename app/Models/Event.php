@@ -57,14 +57,12 @@ class Event extends Model
 
     public function getHarnessesNeededAttribute(): int
     {
-        // todo
-        return 0;
+        return $this->participants()->rentHarness()->count();
     }
 
     public function getShoesNeededAttribute(): int
     {
-        // todo
-        return 0;
+        return $this->participants()->rentShoes()->count();
     }
 
     public function getLocationMapsLinkAttribute(): string
