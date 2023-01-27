@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
-class Card extends Component
+class Participations extends Component
 {
     public Event $event;
 
     public function render()
     {
-        return view('livewire.events.card');
+        return view('livewire.events.participations');
     }
 
     public function addParticipation(): void

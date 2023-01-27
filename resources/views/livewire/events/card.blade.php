@@ -1,7 +1,9 @@
 <article class="flex flex-coool gap-4 p-4 bg-white-medium rounded-2xl">
     <header>
         <h3 class="text-h3">
-            {{ $event->title }}
+            <a href="{{ route('events.show', $event) }}">
+                {{ $event->title }}
+            </a>
         </h3>
         <p>{{ $event->eventCategory->title }}</p>
         <p>

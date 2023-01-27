@@ -132,4 +132,14 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     {
         return $query->where('email_preferences', 'like', '%' . $mailable->value . '%');
     }
+
+    public function scopeRentShoes(Builder $query): Builder
+    {
+        return $query->whereNotNull('rent_shoes');
+    }
+
+    public function scopeRentHarness(Builder $query): Builder
+    {
+        return $query->where('rent_harness', true);
+    }
 }
