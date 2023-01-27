@@ -57,6 +57,14 @@
         @apply h-6 w-6 stroke-2;
     }
 
+    .avatar {
+        @apply h-8 w-8 rounded-full object-cover;
+    }
+
+    .avatar-big {
+        @apply h-14 w-14 rounded-full object-cover;
+    }
+
     .breadcrumb {
         @apply w-full flex flex-row flex-wrap text-label gap-3 whitespace-nowrap text-ellipsis overflow-hidden;
     }
