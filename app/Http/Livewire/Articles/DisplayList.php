@@ -17,7 +17,7 @@ class DisplayList extends Component
             return Article::threeLatest()->get();
         }
 
-        return Article::orderBy('updated_at', $this->orderBy)->get();
+        return Article::orderBy('created_at', $this->orderBy)->get();
     }
 
     public function render()
