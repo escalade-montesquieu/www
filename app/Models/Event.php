@@ -56,6 +56,11 @@ class Event extends Model
         return $this->datetime->isPast();
     }
 
+    public function getIsFullAttribute(): bool
+    {
+        return $this->participants()->count() === $this->max_places;
+    }
+
     public function getHarnessesNeededAttribute(): int
     {
         return $this->participants()->rentHarness()->count();

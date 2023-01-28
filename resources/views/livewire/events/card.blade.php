@@ -23,28 +23,32 @@
     <p>{{ $event->description }}</p>
 
     @if($event->isPast)
-        <section class="flex flex-row gap-4 p-4 rounded-lg bg-white-dark text-black-dark text-label">
+        <section class="flex flex-row gap-4 p-4 rounded-lg bg-white-dark text-black-dark text-label items-center">
             <x-heroicon-o-exclamation class="inline icon"/>
             L'évènement est terminé
         </section>
-    @elseif(!$event->isUserParticipating)
-        <button wire:click="addParticipation" class="btn-success-primary mr-auto">
-            Participer
-            <x-heroicon-o-hand class="icon"/>
-        </button>
-    @else
+    @elseif($event->is_user_participating)
         <section class="flex flex-coool gap-2 p-4 rounded-lg bg-green-light text-green-dark">
             <h4 class="text-h4">
                 Vous participez
                 <x-heroicon-o-check class="inline icon"/>
             </h4>
             <p>
-                {{ auth()->user()->climbingStuffSentence }}
+                {{ auth()->user()->climbing_stuff_sentence }}
             </p>
             <button wire:click="removeParticipation" class="text-cta text-black-dark mr-auto">
                 Annuler ma participation
             </button>
         </section>
-
+    @elseif($event->is_full)
+        <section class="flex flex-row gap-4 p-4 rounded-lg bg-white-dark text-black-dark text-label items-center">
+            <x-heroicon-o-exclamation class="inline icon"/>
+            Toutes les places sont prises
+        </section>
+    @else
+        <button wire:click="addParticipation" class="btn-success-primary mr-auto">
+            Participer
+            <x-heroicon-o-hand class="icon"/>
+        </button>
     @endif
 </article>
