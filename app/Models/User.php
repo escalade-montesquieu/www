@@ -135,7 +135,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     public function scopeRentShoes(Builder $query): Builder
     {
-        return $query->whereNotNull('rent_shoes');
+        return $query->whereNotNull('rent_shoes')->orderBy('rent_shoes');
     }
 
     public function scopeRentHarness(Builder $query): Builder

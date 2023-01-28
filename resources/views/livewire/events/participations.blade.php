@@ -1,15 +1,27 @@
 <section class="flex flex-coool gap-16">
-    <article class="space-y-2 lg:space-y-4">
-        <header>
-            <h3 class="text-h3">Résumé</h3>
-        </header>
-        <section class="flex flex-coool gap-2 p-4 rounded-lg bg-white-medium">
-            <span>{{ $event->max_places }} places</span>
-            <span>{{ $event->participants->count() }} participants</span>
-            <span>{{ $event->shoes_needed }} chaussons</span>
-            <span>{{ $event->harnesses_needed }} baudriers</span>
-        </section>
-    </article>
+    @if(auth()->check() && auth()->user()->role === \App\Enums\UserRole::ADMIN)
+        <article class="space-y-2 lg:space-y-4">
+            <header>
+                <h3 class="text-h3">Matériel emprunté</h3>
+            </header>
+            <section class="flex flex-coool gap-2">
+                <article class="flex gap-4 items-center p-4 rounded-lg bg-white-medium">
+                    <header>
+                        <span class="text-h3">{{ $event->harnesses_needed }}</span>
+                    </header>
+                    <span class="font-bold">baudriers</span>
+                </article>
+                @foreach($event->shoes_needed as $shoesSize => $shoes)
+                    <article class="flex gap-4 items-center p-4 rounded-lg bg-white-medium">
+                        <header>
+                            <span class="text-h3">{{ $shoes->count() }}</span>
+                        </header>
+                        <span>paire de <b class="font-bold">T{{ $shoesSize }}</b></span>
+                    </article>
+                @endforeach
+            </section>
+        </article>
+    @endif
 
     <article class="space-y-2 lg:space-y-4">
         <header>
@@ -61,7 +73,7 @@
                             </span>
                         <span class="text-label">
                             @if($participant->rent_shoes)
-                                Emprunt des chaussons T{{ $participant->rent_shoes }}
+                                Emprunte des chaussons T{{ $participant->rent_shoes }}
                             @else
                                 Possède ses chaussures
                             @endif
