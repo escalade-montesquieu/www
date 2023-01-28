@@ -7,7 +7,6 @@
     </section>
     <section class="container mt-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
         <section class="col-span-1 lg:col-span-2 flex flex-coool gap-16">
-
             @if($event->description)
                 <article class="space-y-2 lg:space-y-4">
                     <h3 class="text-h3">Description</h3>

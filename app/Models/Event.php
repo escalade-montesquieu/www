@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -55,14 +56,24 @@ class Event extends Model
         return $this->datetime->isPast();
     }
 
+    public function getIsFullAttribute(): bool
+    {
+        return $this->participants()->count() === $this->max_places;
+    }
+
     public function getHarnessesNeededAttribute(): int
     {
         return $this->participants()->rentHarness()->count();
     }
 
-    public function getShoesNeededAttribute(): int
+    public function getShoesNeededCountAttribute(): int
     {
         return $this->participants()->rentShoes()->count();
+    }
+
+    public function getShoesNeededAttribute(): Collection
+    {
+        return $this->participants()->rentShoes()->get()->groupBy('rent_shoes');
     }
 
     public function getLocationMapsLinkAttribute(): string
