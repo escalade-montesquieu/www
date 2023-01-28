@@ -70,6 +70,11 @@ class Event extends Model
         return "https://www.google.fr/maps/search/$this->location+france";
     }
 
+    public function getIframeMapsLinkAttribute(): string
+    {
+        return "https://www.google.com/maps/embed/v1/place?q=$this->location+france&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8";
+    }
+
     public function scopeIncoming(Builder $query): Builder
     {
         return $query->where('datetime', '>', now())

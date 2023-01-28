@@ -5,11 +5,11 @@
         <h1 class="text-h1">{{ $event->title }}</h1>
         <h2 class="text-h2">Le {{ $event->datetime->translatedFormat('j F Y') }}</h2>
     </section>
-    <section class="container mt-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-16">
-        <section class="col-span-1 lg:col-span-2 flex flex-coool gap-8 lg:gap-16">
+    <section class="container mt-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16">
+        <section class="col-span-1 lg:col-span-2 flex flex-coool gap-16">
 
             @if($event->description)
-                <article class="space-y-4">
+                <article class="space-y-2 lg:space-y-4">
                     <h3 class="text-h3">Description</h3>
 
                     <p>
@@ -19,11 +19,11 @@
             @endif
 
             @if($event->location)
-                <article class="space-y-4">
+                <article class="space-y-2 lg:space-y-4">
                     <h3 class="text-h3">Emplacement</h3>
                     <p>{{ $event->location }}</p>
                     <iframe class="w-full aspect-video rounded-lg overflow-hidden" frameborder="0"
-                            src="https://www.google.com/maps/embed/v1/place?q={{ $event->location }}+france&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                            src="{{ $event->iframe_maps_link }}"></iframe>
                 </article>
             @endif
         </section>
