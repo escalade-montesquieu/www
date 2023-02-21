@@ -11,13 +11,12 @@ import Swiper, {Autoplay, Pagination} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-
 window.Alpine = Alpine;
 
 Alpine.start();
 
+
 window.addEventListener('DOMContentLoaded', () => {
-    scrollForumMessagesListToBottom();
 
     const lightbox = new PhotoSwipeLightbox({
         gallery: '#gallery',
@@ -27,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
     lightbox.init();
 
 
-// init Swiper:
+    // init Swiper:
     const swiper = new Swiper('.swiper', {
         modules: [Pagination, Autoplay],
 
@@ -43,17 +42,3 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
 })
-
-window.addEventListener('forum-message-sent', () => {
-    console.log('Message sent: scroll bottom');
-    scrollForumMessagesListToBottom();
-})
-
-function scrollForumMessagesListToBottom() {
-    const el = document.getElementById('forumMessagesList');
-
-    if (!el) {
-        return;
-    }
-    el.scrollTop = el.scrollHeight;
-}

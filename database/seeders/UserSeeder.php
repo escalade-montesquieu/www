@@ -28,10 +28,5 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'name' => 'Adé Min',
         ]);
-
-        User::factory()->create([
-            'email' => 'arthaudp33+dev-escalade-montesquieu@gmail.com',
-            'name' => 'Arthaud Proust',
-        ]);
     }
 }

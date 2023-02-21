@@ -25,7 +25,5 @@ class Input extends Component
         $this->emit('messageSent');
 
         $this->message = "";
-
-        $this->dispatchBrowserEvent('forum-message-sent');
     }
 }
