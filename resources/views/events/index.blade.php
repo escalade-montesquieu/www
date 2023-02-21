@@ -5,6 +5,8 @@
             <h1 class="text-h1 mb-2">Évènements</h1>
             <p>Retrouvez et participez aux sessions organisées.</p>
         </header>
-        <livewire:events.display-list/>
     </article>
+    <section class="container mt-16">
+        <livewire:events.week-calendar/>
+    </section>
 </x-app-layout>

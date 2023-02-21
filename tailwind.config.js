@@ -52,6 +52,7 @@ module.exports = {
                 dark: '#166534',
             },
             black: {
+                light: '#969696',
                 medium: '#686868',
                 dark: '#212529',
             },
