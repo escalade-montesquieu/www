@@ -20,7 +20,7 @@ class ForumMessageSeeder extends Seeder
             ->create();
 
         ForumMessage::factory()
-            ->for(User::firstWhere('email', 'admin@email.com'))
+            ->for(User::firstWhere('email', 'proust@arthaud.dev'))
             ->create();
     }
 }

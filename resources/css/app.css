@@ -5,6 +5,13 @@
 @tailwind utilities;
 
 @layer components {
+    .h-real-screen {
+        /*@formatter:off*/
+        height: 100svh;
+        height: 100vh;
+        /*@formatter:on*/
+    }
+
     .flex-coool {
         @apply flex-col;
     }
