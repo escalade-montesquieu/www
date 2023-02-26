@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Forum;
 
 use App\Models\ForumMessage;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -35,5 +36,26 @@ class Input extends Component
         preg_match_all(User::$MENTION_REGEX, $message, $mentions);
 
 //        dd($mentions);
+    }
+
+    public function getUserMentionsSuggestionsProperty(): ?Collection
+    {
+        preg_match('/@(\w*)$/', $this->message, $mention);
+
+        if (!$mention) {
+            return null;
+        }
+
+        $userNameMention = $mention[1];
+        return User::where('name', 'LIKE', $userNameMention . '%')->get();
+    }
+
+    public function mentionUser(string $username): void
+    {
+        $this->message = preg_replace(
+            '/@(\w*)$/',
+            '@' . $username,
+            $this->message
+        );
     }
 }
