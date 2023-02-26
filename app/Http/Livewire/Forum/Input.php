@@ -60,12 +60,14 @@ class Input extends Component
         return User::where('name', 'LIKE', $userNameMention . '%')->get();
     }
 
-    public function mentionUser(string $username): void
+    public function mentionUser(string $urlSafeUsername): void
     {
         $this->message = preg_replace(
             '/@([\w-]*)$/',
-            '@' . str_replace(' ', '-', strtolower($username)),
+            '@' . $urlSafeUsername . ' ',
             $this->message
         );
+
+        $this->dispatchBrowserEvent('forum.focus-input');
     }
 }

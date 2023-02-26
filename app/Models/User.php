@@ -110,6 +110,11 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         return $this->student->name ?? $this->name;
     }
 
+    public function getUrlSafeUsernameAttribute(): string
+    {
+        return str_replace(' ', '-', strtolower($this->username));
+    }
+
     public function canAccessFilament(): bool
     {
         return $this->role === UserRole::ADMIN;
