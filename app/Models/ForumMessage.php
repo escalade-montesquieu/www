@@ -31,6 +31,16 @@ class ForumMessage extends Model
     {
         $replacement = "<a class='link' href='" . route('profile.show') . "/$1'>$0</a>";
 
-        return preg_replace(User::$MENTION_REGEX, $replacement, $this->content);
+        return preg_replace_callback(
+            User::$MENTION_REGEX,
+            static function ($matches): string {
+                $userMentionedUUID = $matches[1];
+                if (!$user = User::find($userMentionedUUID)) {
+                    return "";
+                }
+                return "<a class='link' href='" . route('profile.show', $user) . "'>@" . $user->name . "</a>";
+            },
+            $this->content
+        );
     }
 }
