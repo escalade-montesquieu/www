@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forum;
 
 use App\Models\ForumMessage;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -31,7 +32,7 @@ class Input extends Component
 
     public function extractMentions(string $message): void
     {
-        preg_match_all("/@(\w+)/", $message, $mentions);
+        preg_match_all(User::$MENTION_REGEX, $message, $mentions);
 
 //        dd($mentions);
     }
