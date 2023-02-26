@@ -24,6 +24,7 @@ class Input extends Component
 
     public function sendMessage(): void
     {
+        $this->message = htmlspecialchars($this->message);
         $this->message = $this->extractMentions($this->message);
 
         $forumMessage = ForumMessage::create([
