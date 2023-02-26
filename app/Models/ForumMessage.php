@@ -29,6 +29,7 @@ class ForumMessage extends Model
 
     public function getHtmlWithMentionsAttribute(): string
     {
-        return preg_replace("/@(\w+)/", "<mark>$1</mark>", $this->content);
+        $replacement = "<a class='link' href='" . route('profile.show') . "/$1'>$0</a>";
+        return preg_replace("/@(\w+)/", $replacement, $this->content);
     }
 }
