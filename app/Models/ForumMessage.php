@@ -17,13 +17,18 @@ class ForumMessage extends Model
         'user_id', 'content'
     ];
 
+    public function getIsSentBySelfAttribute(): bool
+    {
+        return Auth::user()->id === $this->user->id;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function getIsSentBySelfAttribute(): bool
+    public function getHtmlWithMentionsAttribute(): string
     {
-        return Auth::user()->id === $this->user->id;
+        return preg_replace("/@(\w+)/", "<mark>$1</mark>", $this->content);
     }
 }

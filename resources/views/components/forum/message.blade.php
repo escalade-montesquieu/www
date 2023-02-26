@@ -9,6 +9,6 @@
         @unless($message->isSentBySelf)
             <label class="text-label">{{ $message->user->username }}</label>
         @endif
-        <p class="bg-white-medium p-4 rounded-lg lg:rounded-xl">{{ $message->content }}</p>
+        <p class="bg-white-medium p-4 rounded-lg lg:rounded-xl">{!! $message->htmlWithMentions !!}</p>
     </article>
 </article>
