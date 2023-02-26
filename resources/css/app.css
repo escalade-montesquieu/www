@@ -7,8 +7,8 @@
 @layer components {
     .h-real-screen {
         /*@formatter:off*/
-        height: 100svh;
         height: 100vh;
+        height: 100svh;
         /*@formatter:on*/
     }
 
