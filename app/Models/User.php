@@ -22,7 +22,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     use HasApiTokens, HasFactory, Notifiable;
 
     use HasUuids;
-
+    
     protected $fillable = [
         'role',
         'password',
@@ -106,6 +106,11 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     public function getUsernameAttribute(): string
     {
         return $this->student->name ?? $this->name;
+    }
+
+    public function getSluggedUsernameAttribute(): string
+    {
+        return str_replace(' ', '-', strtolower($this->username));
     }
 
     public function canAccessFilament(): bool

@@ -8,6 +8,7 @@ use Filament\Navigation\UserMenuItem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,11 +33,20 @@ class AppServiceProvider extends ServiceProvider
             Mail::alwaysTo($defaultTarget);
         }
 
-        Blade::directive('urlify', static function ($expression) {
-            // The Regular Expression filter
-            $reg_pattern = "/(((http|https|ftp|ftps)\:\/\/)|(www\.))[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\:[0-9]+)?(\/\S*)?/";
+        Str::macro('toSluggedUsername', static function (string $str) {
+            return str_replace(' ', '-', strtolower($str));
+        });
 
-            return preg_replace($reg_pattern, '<a href="$0" target="_blank" rel="noopener noreferrer">$0</a>', $expression);
+        Str::macro('toHumanUsername', static function (string $str) {
+            return ucfirst(str_replace('-', ' ', $str));
+        });
+
+        Blade::directive('urlify', static function ($expression) {
+            return preg_replace(
+                REGEX_URL,
+                '<a href="$0" target="_blank" rel="noopener noreferrer">$0</a>',
+                $expression
+            );
         });
 
         Filament::serving(function () {
