@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Forum;
 use App\Enums\Regex;
 use App\Models\ForumMessage;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -38,11 +37,20 @@ class Input extends Component
         return preg_replace_callback(
             REGEX_MENTIONS_IN_STRING,
             static function ($matches): string {
-                $userMentionedName = str_replace('-', ' ', $matches[1]);
+                $mention = $matches[1];
+
+                if ($mention === "tous") {
+                    return $matches[0];
+                    // TODO : mention everyone
+                }
+
+                $userMentionedName = Str::toHumanUsername($mention);
 
                 if (!$user = User::firstWhere('name', 'LIKE', $userMentionedName)) {
                     return $matches[0];
                 }
+
+                // TODO : if user mention user
 
                 return '@' . $user->id;
             },
@@ -50,7 +58,7 @@ class Input extends Component
         );
     }
 
-    public function getUserMentionsSuggestionsProperty(): ?Collection
+    public function getMentionSuggestionsProperty(): ?array
     {
         preg_match(
             REGEX_LAST_MENTION_IN_STRING,
@@ -63,9 +71,20 @@ class Input extends Component
         }
 
         $sluggedStartOfUsername = $mentionMatches[1];
-        $normalStartOfUsername = Str::toHumanUsername($sluggedStartOfUsername);
+        $humanStartOfUsername = Str::toHumanUsername($sluggedStartOfUsername);
 
-        return User::where('name', 'LIKE', $normalStartOfUsername . '%')->get();
+        $specialMatches = collect([
+            [
+                'id' => 'tous',
+                'name' => 'Tous'
+            ],
+        ]);
+        return [
+            'users' => User::where('name', 'LIKE', $humanStartOfUsername . '%')->get(),
+            'special' => $specialMatches->filter(static function ($item) use ($humanStartOfUsername) {
+                return str_starts_with($item['name'], $humanStartOfUsername);
+            })
+        ];
     }
 
     public function mentionUser(string $urlSluggedUsername): void

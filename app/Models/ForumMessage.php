@@ -30,7 +30,7 @@ class ForumMessage extends Model
 
     public function getHtmlWithMentionsAttribute(): string
     {
-        return preg_replace_callback(
+        $htmlWithUserMentions = preg_replace_callback(
             REGEX_MENTION_UUID_FORMAT,
             static function ($matches): string {
                 $userMentionedUUID = $matches[1];
@@ -40,10 +40,18 @@ class ForumMessage extends Model
                 }
 
                 $sluggedUsernameMention = '@' . Str::toSluggedUsername($user->username);
-                
+
                 return "<a class='link' href='" . route('profile.show', $user) . "'>" . $sluggedUsernameMention . "</a>";
             },
             $this->content
         );
+
+        $htmlWithSpecialMentions = preg_replace(
+            REGEX_MENTION_SPECIAL,
+            "<span class='link'>$0</span>",
+            $htmlWithUserMentions
+        );
+        
+        return $htmlWithSpecialMentions;
     }
 }
