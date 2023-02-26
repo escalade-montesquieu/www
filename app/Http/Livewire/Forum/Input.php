@@ -2,16 +2,20 @@
 
 namespace App\Http\Livewire\Forum;
 
-use App\Enums\Regex;
+use App\Mail\ForumMessageMentionMail;
 use App\Models\ForumMessage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Input extends Component
 {
     public string $message = "";
+
+    public bool $mentionAll = false;
+    public array $usersToMention = [];
 
     public function render()
     {
@@ -22,26 +26,28 @@ class Input extends Component
     {
         $this->message = $this->extractMentions($this->message);
 
-        ForumMessage::create([
+        $forumMessage = ForumMessage::create([
             'user_id' => Auth::user()->id,
             'content' => $this->message,
         ]);
 
+        $this->notifyMentionedUsers($forumMessage);
+
         $this->emit('messageSent');
 
-        $this->message = "";
+        $this->reset();
     }
 
     public function extractMentions(string $message): string
     {
         return preg_replace_callback(
             REGEX_MENTIONS_IN_STRING,
-            static function ($matches): string {
+            function ($matches): string {
                 $mention = $matches[1];
 
                 if ($mention === "tous") {
+                    $this->mentionAll = true;
                     return $matches[0];
-                    // TODO : mention everyone
                 }
 
                 $userMentionedName = Str::toHumanUsername($mention);
@@ -50,12 +56,25 @@ class Input extends Component
                     return $matches[0];
                 }
 
-                // TODO : if user mention user
+                if (!$this->mentionAll) {
+                    $this->usersToMention[] = $user;
+                }
 
                 return '@' . $user->id;
             },
             $message
         );
+    }
+
+    public function notifyMentionedUsers(ForumMessage $forumMessage): void
+    {
+        if ($this->mentionAll) {
+            $this->usersToMention = User::all()->toArray();
+        }
+
+        if (count($this->usersToMention)) {
+            Mail::bcc($this->usersToMention)->queue(new ForumMessageMentionMail($forumMessage));
+        }
     }
 
     public function getMentionSuggestionsProperty(): ?array
