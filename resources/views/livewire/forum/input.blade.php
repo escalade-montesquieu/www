@@ -5,7 +5,7 @@
             @foreach($this->userMentionsSuggestions as $user)
                 <button class="flex gap-2 items-center" wire:click="mentionUser('{{ $user->name }}')">
                     <img class="avatar" src="{{ $user->avatar }}" alt=" ">
-                    {{ $user->name }}
+                    {{ str_replace(' ', '-', strtolower($user->name)) }}
                 </button>
             @endforeach
         </section>

@@ -33,28 +33,38 @@ class Input extends Component
 
     public function extractMentions(string $message): void
     {
-        preg_match_all(User::$MENTION_REGEX, $message, $mentions);
+        preg_match_all('/@([\w-]*)/', $message, $mentions);
 
-//        dd($mentions);
+        $this->message = preg_replace_callback(
+            '/@([\w-]*)/',
+            static function ($matches): string {
+                $userMentionedName = str_replace('-', ' ', $matches[1]);
+                if (!$user = User::firstWhere('name', 'LIKE', $userMentionedName)) {
+                    return $matches[0];
+                }
+                return '@' . $user->id;
+            },
+            $this->message
+        );
     }
 
     public function getUserMentionsSuggestionsProperty(): ?Collection
     {
-        preg_match('/@(\w*)$/', $this->message, $mention);
+        preg_match('/@([\w-]*)$/', $this->message, $mention);
 
         if (!$mention) {
             return null;
         }
 
-        $userNameMention = $mention[1];
+        $userNameMention = str_replace('-', ' ', $mention[1]);
         return User::where('name', 'LIKE', $userNameMention . '%')->get();
     }
 
     public function mentionUser(string $username): void
     {
         $this->message = preg_replace(
-            '/@(\w*)$/',
-            '@' . $username,
+            '/@([\w-]*)$/',
+            '@' . str_replace(' ', '-', strtolower($username)),
             $this->message
         );
     }

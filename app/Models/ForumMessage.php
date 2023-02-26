@@ -38,7 +38,8 @@ class ForumMessage extends Model
                 if (!$user = User::find($userMentionedUUID)) {
                     return "";
                 }
-                return "<a class='link' href='" . route('profile.show', $user) . "'>@" . $user->name . "</a>";
+                $safeUserName = str_replace(' ', '-', strtolower($user->name));
+                return "<a class='link' href='" . route('profile.show', $user) . "'>@" . $safeUserName . "</a>";
             },
             $this->content
         );
