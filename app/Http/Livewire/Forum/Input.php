@@ -17,6 +17,8 @@ class Input extends Component
 
     public function sendMessage(): void
     {
+        $this->extractMentions($this->message);
+
         ForumMessage::create([
             'user_id' => Auth::user()->id,
             'content' => $this->message,
@@ -25,5 +27,12 @@ class Input extends Component
         $this->emit('messageSent');
 
         $this->message = "";
+    }
+
+    public function extractMentions(string $message): void
+    {
+        preg_match_all("/@(\w+)/", $message, $mentions);
+
+//        dd($mentions);
     }
 }
