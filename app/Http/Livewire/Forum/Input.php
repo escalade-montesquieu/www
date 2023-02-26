@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Forum;
 
+use App\Enums\Regex;
 use App\Models\ForumMessage;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Input extends Component
@@ -19,7 +21,7 @@ class Input extends Component
 
     public function sendMessage(): void
     {
-        $this->extractMentions($this->message);
+        $this->message = $this->extractMentions($this->message);
 
         ForumMessage::create([
             'user_id' => Auth::user()->id,
@@ -31,40 +33,46 @@ class Input extends Component
         $this->message = "";
     }
 
-    public function extractMentions(string $message): void
+    public function extractMentions(string $message): string
     {
-        preg_match_all('/@([\w-]*)/', $message, $mentions);
-
-        $this->message = preg_replace_callback(
-            '/@([\w-]*)/',
+        return preg_replace_callback(
+            REGEX_MENTIONS_IN_STRING,
             static function ($matches): string {
                 $userMentionedName = str_replace('-', ' ', $matches[1]);
+
                 if (!$user = User::firstWhere('name', 'LIKE', $userMentionedName)) {
                     return $matches[0];
                 }
+
                 return '@' . $user->id;
             },
-            $this->message
+            $message
         );
     }
 
     public function getUserMentionsSuggestionsProperty(): ?Collection
     {
-        preg_match('/@([\w-]*)$/', $this->message, $mention);
+        preg_match(
+            REGEX_LAST_MENTION_IN_STRING,
+            $this->message,
+            $mentionMatches
+        );
 
-        if (!$mention) {
+        if (!$mentionMatches) {
             return null;
         }
 
-        $userNameMention = str_replace('-', ' ', $mention[1]);
-        return User::where('name', 'LIKE', $userNameMention . '%')->get();
+        $sluggedStartOfUsername = $mentionMatches[1];
+        $normalStartOfUsername = Str::toHumanUsername($sluggedStartOfUsername);
+
+        return User::where('name', 'LIKE', $normalStartOfUsername . '%')->get();
     }
 
-    public function mentionUser(string $urlSafeUsername): void
+    public function mentionUser(string $urlSluggedUsername): void
     {
         $this->message = preg_replace(
-            '/@([\w-]*)$/',
-            '@' . $urlSafeUsername . ' ',
+            REGEX_LAST_MENTION_IN_STRING,
+            '@' . $urlSluggedUsername . ' ',
             $this->message
         );
 

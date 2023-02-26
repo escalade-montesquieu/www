@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ForumMessage extends Model
 {
@@ -29,17 +30,18 @@ class ForumMessage extends Model
 
     public function getHtmlWithMentionsAttribute(): string
     {
-        $replacement = "<a class='link' href='" . route('profile.show') . "/$1'>$0</a>";
-
         return preg_replace_callback(
-            User::$MENTION_REGEX,
+            REGEX_MENTION_UUID_FORMAT,
             static function ($matches): string {
                 $userMentionedUUID = $matches[1];
+
                 if (!$user = User::find($userMentionedUUID)) {
                     return "";
                 }
-                $safeUserName = str_replace(' ', '-', strtolower($user->name));
-                return "<a class='link' href='" . route('profile.show', $user) . "'>@" . $safeUserName . "</a>";
+
+                $sluggedUsernameMention = '@' . Str::toSluggedUsername($user->username);
+                
+                return "<a class='link' href='" . route('profile.show', $user) . "'>" . $sluggedUsernameMention . "</a>";
             },
             $this->content
         );

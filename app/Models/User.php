@@ -22,9 +22,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     use HasApiTokens, HasFactory, Notifiable;
 
     use HasUuids;
-
-    public static string $MENTION_REGEX = "/@([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})/";
-
+    
     protected $fillable = [
         'role',
         'password',
@@ -110,7 +108,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         return $this->student->name ?? $this->name;
     }
 
-    public function getUrlSafeUsernameAttribute(): string
+    public function getSluggedUsernameAttribute(): string
     {
         return str_replace(' ', '-', strtolower($this->username));
     }

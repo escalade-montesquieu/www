@@ -3,9 +3,9 @@
         <section
             class="absolute -top-2 -translate-y-full bg-white-light max-h-52 w-full overflow-auto z-50 flex flex-col gap-2 p-2">
             @foreach($this->userMentionsSuggestions as $user)
-                <button class="flex gap-2 items-center" wire:click="mentionUser('{{ $user->urlSafeUsername }}')">
+                <button class="flex gap-2 items-center" wire:click="mentionUser('{{ $user->sluggedUsername }}')">
                     <img class="avatar" src="{{ $user->avatar }}" alt=" ">
-                    {{ $user->urlSafeUsername }}
+                    {{ $user->sluggedUsername }}
                 </button>
             @endforeach
         </section>
