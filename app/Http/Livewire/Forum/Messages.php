@@ -10,11 +10,23 @@ class Messages extends Component
 {
     public Collection $messages;
 
-    public int $messagesCount = 0;
+    public int $lastMessageId = 0;
 
-    protected $listeners = ['messageSent' => 'onMessageSent'];
+    public int $messagesSliceLength = 20;
 
-    public function onMessageSent()
+    public int $messagesToTake;
+
+    protected $listeners = [
+        'messageSent' => 'onMessageSent',
+        'forum.message.load-older' => 'loadOlderMessages'
+    ];
+
+    public function boot(): void
+    {
+        $this->messagesToTake = $this->messagesSliceLength;
+    }
+
+    public function onMessageSent(): void
     {
         $this->dispatchBrowserEvent('forum.message.sent');
 
@@ -23,7 +35,10 @@ class Messages extends Component
 
     public function render()
     {
-        $this->messages = ForumMessage::all();
+        $this->messages = ForumMessage::latest('created_at')
+            ->take($this->messagesToTake)
+            ->get()
+            ->reverse();
 
         $this->dispatchEventIfMessageUpdated();
 
@@ -32,12 +47,19 @@ class Messages extends Component
 
     public function dispatchEventIfMessageUpdated(): void
     {
-        $newMessagesCount = $this->messages->count();
+        $newLastMessageId = $this->messages->last()->id;
 
-        if ($newMessagesCount !== $this->messagesCount) {
+        if ($newLastMessageId !== $this->lastMessageId) {
             $this->dispatchBrowserEvent('forum.message.new');
         }
 
-        $this->messagesCount = $newMessagesCount;
+        $this->lastMessageId = $newLastMessageId;
+    }
+
+    public function loadOlderMessages(): void
+    {
+        $this->messagesToTake += $this->messagesSliceLength;
+
+        $this->dispatchBrowserEvent('forum.message.older-loaded');
     }
 }
