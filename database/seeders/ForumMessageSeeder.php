@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ForumMessage;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ForumMessageSeeder extends Seeder
@@ -15,12 +14,21 @@ class ForumMessageSeeder extends Seeder
      */
     public function run()
     {
-        ForumMessage::factory()
-            ->count(50)
-            ->create();
+        $date = now()->subYear();
+        for ($i = 0; $i < 300; $i++) {
+            ForumMessage::factory()
+                ->create([
+                    'content' => $i,
+                    'created_at' => $date->copy()->addSeconds($i)
+                ]);
+        }
 
-        ForumMessage::factory()
-            ->for(User::firstWhere('email', 'proust@arthaud.dev'))
-            ->create();
+//        ForumMessage::factory()
+//            ->count(50)
+//            ->create();
+
+//        ForumMessage::factory()
+//            ->for(User::firstWhere('email', 'proust@arthaud.dev'))
+//            ->create();
     }
 }
