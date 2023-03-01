@@ -37,7 +37,9 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         'max_block',
         'display_max',
         'rent_shoes',
-        'rent_harness'
+        'rent_harness',
+
+        'forum_message_id'
     ];
 
     protected $attributes = [

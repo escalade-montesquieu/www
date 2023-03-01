@@ -40,9 +40,18 @@ class Messages extends Component
             ->get()
             ->reverse();
 
+        $this->updateUserLastMessageSeen();
+
         $this->dispatchEventIfMessageUpdated();
 
         return view('livewire.forum.messages');
+    }
+
+    public function updateUserLastMessageSeen(): void
+    {
+        auth()->user()->update([
+            'forum_message_id' => $this->messages->last()->id
+        ]);
     }
 
     public function dispatchEventIfMessageUpdated(): void
