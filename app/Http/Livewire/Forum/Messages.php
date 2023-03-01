@@ -16,6 +16,8 @@ class Messages extends Component
 
     public int $messagesToTake;
 
+    public bool $isSeenPopupVisible = false;
+
     protected $listeners = [
         'messageSent' => 'onMessageSent',
         'forum.message.load-older' => 'loadOlderMessages'
@@ -40,9 +42,18 @@ class Messages extends Component
             ->get()
             ->reverse();
 
+        $this->updateUserLastMessageSeen();
+
         $this->dispatchEventIfMessageUpdated();
 
         return view('livewire.forum.messages');
+    }
+
+    public function updateUserLastMessageSeen(): void
+    {
+        auth()->user()->update([
+            'forum_message_id' => $this->messages->last()->id
+        ]);
     }
 
     public function dispatchEventIfMessageUpdated(): void
@@ -61,5 +72,15 @@ class Messages extends Component
         $this->messagesToTake += $this->messagesSliceLength;
 
         $this->dispatchBrowserEvent('forum.message.older-loaded');
+    }
+
+    public function showSeenPopup(): void
+    {
+        $this->isSeenPopupVisible = true;
+    }
+
+    public function hideSeenPopup(): void
+    {
+        $this->isSeenPopupVisible = false;
     }
 }
