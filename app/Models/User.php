@@ -22,7 +22,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     use HasApiTokens, HasFactory, Notifiable;
 
     use HasUuids;
-    
+
     protected $fillable = [
         'role',
         'password',
@@ -79,6 +79,11 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     {
         return $this->belongsToMany(Event::class)
             ->withTimestamps();
+    }
+
+    public function lastMessageSeen(): BelongsTo
+    {
+        return $this->belongsTo(ForumMessage::class, 'forum_message_id');
     }
 
     public function getClimbingStuffSentenceAttribute(): string
