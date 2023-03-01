@@ -16,6 +16,8 @@ class Messages extends Component
 
     public int $messagesToTake;
 
+    public bool $isSeenPopupVisible = false;
+
     protected $listeners = [
         'messageSent' => 'onMessageSent',
         'forum.message.load-older' => 'loadOlderMessages'
@@ -70,5 +72,15 @@ class Messages extends Component
         $this->messagesToTake += $this->messagesSliceLength;
 
         $this->dispatchBrowserEvent('forum.message.older-loaded');
+    }
+
+    public function showSeenPopup(): void
+    {
+        $this->isSeenPopupVisible = true;
+    }
+
+    public function hideSeenPopup(): void
+    {
+        $this->isSeenPopupVisible = false;
     }
 }
