@@ -26,9 +26,9 @@
 
     @if($isSeenPopupVisible)
         <section class="fixed z-50 top-0 left-0 h-screen w-full flex flex-col justify-center items-center">
-            <div class="container h-full py-20 flex">
+            <div class="container h-full py-20 flex flex-col justify-center">
                 <div wire:click="hideSeenPopup" class="absolute top-0 left-0 h-screen w-full bg-black-dark/30"></div>
-                <article class="z-10 bg-white-light p-8 rounded-lg flex flex-col gap-8 mx-auto w-10/12">
+                <article class="max-h-full z-10 bg-white-light p-8 rounded-lg flex flex-col gap-8 mx-auto w-10/12">
                     <div class="flex justify-between items-center">
                         <h2 class="text-h2">Message vu par </h2>
                         <button wire:click="hideSeenPopup">
