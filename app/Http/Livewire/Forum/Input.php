@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Forum;
 
+use App\Enums\UserEmailPreference;
 use App\Mail\ForumMessageMentionMail;
 use App\Models\ForumMessage;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -15,7 +17,12 @@ class Input extends Component
     public string $message = "";
 
     public bool $mentionAll = false;
-    public array $usersToMention = [];
+    public Collection $usersToMention;
+
+    public function mount(): void
+    {
+        $this->usersToMention = new Collection();
+    }
 
     public function render()
     {
@@ -58,7 +65,7 @@ class Input extends Component
                 }
 
                 if (!$this->mentionAll) {
-                    $this->usersToMention[] = $user;
+                    $this->usersToMention->push($user);
                 }
 
                 return '@' . $user->id;
@@ -70,12 +77,21 @@ class Input extends Component
     public function notifyMentionedUsers(ForumMessage $forumMessage): void
     {
         if ($this->mentionAll) {
-            $this->usersToMention = User::all()->toArray();
+            $this->usersToMention = User::all();
         }
 
-        if (count($this->usersToMention)) {
-            Mail::bcc($this->usersToMention)->queue(new ForumMessageMentionMail($forumMessage));
+        $toMention = $this->getFilteredMailableMentionedUsers();
+
+        if ($toMention->count()) {
+            Mail::bcc($toMention)->queue(new ForumMessageMentionMail($forumMessage));
         }
+    }
+
+    public function getFilteredMailableMentionedUsers(): Collection
+    {
+        return $this->usersToMention->filter(function (User $user) {
+            return $user->isMailableFor(UserEmailPreference::FORUM_MESSAGE_MENTION);
+        });
     }
 
     public function getMentionSuggestionsProperty(): ?array
