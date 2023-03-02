@@ -63,7 +63,7 @@
                 <p>
                     Posez vos questions, organisez des sessions entre lycéens, partagez vos expériences !
                 </p>
-                <a href="{{ route('events') }}" class="btn-cta-secondary mr-auto">Aller au forum</a>
+                <a href="{{ route('forum') }}" class="btn-cta-secondary mr-auto">Aller au forum</a>
             </article>
         </div>
     </section>
