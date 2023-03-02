@@ -13,14 +13,14 @@
             class="ml-auto flex flex-row items-center justify-end pr-4 gap-2 text-label text-black-medium">
         <span>Vu par</span>
         <div class="flex flex-row pl-2">
-            @foreach($messages->last()->seenBy->take(5) as $user)
+            @foreach($messages->last()->seenByOtherThanLoggedUser->take(5) as $user)
                 <div class="-ml-2">
                     <img class="avatar " src="{{ asset($user->avatar) }}" alt="{{ $user->username }}">
                 </div>
             @endforeach
         </div>
-        @if($messages->last()->seenBy->count() > 5)
-            <span>+ {{ $messages->last()->seenBy->count() - 5 }}</span>
+        @if($messages->last()->seenByOtherThanLoggedUser->count() > 5)
+            <span>+ {{ $messages->last()->seenByOtherThanLoggedUser->count() - 5 }}</span>
         @endif
     </button>
 
@@ -36,7 +36,7 @@
                         </button>
                     </div>
                     <div class="flex flex-col items-start gap-4 overflow-auto">
-                        @foreach($messages->last()->seenBy as $user)
+                        @foreach($messages->last()->seenByOtherThanLoggedUser as $user)
                             <a href="{{ route('profile.show', $user) }}" class="flex gap-4 items-center">
                                 <img class="avatar" src="{{ asset($user->avatar) }}" alt=" ">
                                 <span>{{ $user->username }}</span>
