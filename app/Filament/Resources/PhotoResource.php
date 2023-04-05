@@ -32,9 +32,11 @@ class PhotoResource extends Resource
                     ->required(),
                 Forms\Components\Hidden::make('src'),
                 Forms\Components\FileUpload::make('image')
-                    ->directory('photos')
+                    ->directory(Photo::getStorageFolder())
                     ->afterStateUpdated(static function (\Livewire\TemporaryUploadedFile $state, Closure $get, Closure $set) {
-                        Storage::delete('photos/' . $get('src'));
+                        $folder = Photo::getStorageFolder();
+                        $oldImagePath = $folder . '/' . $get('src');
+                        Storage::delete($oldImagePath);
 
                         $img = Image::make($state);
                         $img->orientate()->save();
@@ -47,7 +49,7 @@ class PhotoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('storageSrc')
+                Tables\Columns\ImageColumn::make('tiny_image')
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('gallery.name')
                     ->label('Galerie'),

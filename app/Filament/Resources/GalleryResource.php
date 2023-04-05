@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Collection;
 
 class GalleryResource extends Resource
 {
@@ -28,8 +29,14 @@ class GalleryResource extends Resource
             ->schema([
                 ThumbnailSelection::make('photo_id')
                     ->label('Image')
-                    ->options(static function (Gallery $record) {
-                        return $record->photos->pluck('assetSrc', 'id');
+                    ->hidden(static function (?Gallery $record) {
+                        return !$record;
+                    })
+                    ->options(static function (?Gallery $record): Collection {
+                        if (!$record) {
+                            return collect([]);
+                        }
+                        return $record->photos->pluck('small_image', 'id')->map(fn($photo) => asset('storage/' . $photo));
                     }),
                 Forms\Components\TextInput::make('title')
                     ->translateLabel()
@@ -47,7 +54,7 @@ class GalleryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo.storageSrc')
+                Tables\Columns\ImageColumn::make('photo.tiny_image')
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('title')
                     ->translateLabel(),

@@ -11,7 +11,7 @@
         @php($photo = \App\Models\Photo::find($resource['data']['photo_id']))
         @if($photo)
             <img class="w-full h-full object-cover"
-                 src="{{ $photo->asset_src }}"
+                 src="{{ asset('storage/'.$photo->small_image) }}"
                  alt="{{ $resource['data']['title'] }}"/>
         @endif
     @elseif($resource['type'] === \App\Enums\ArticleResourceType::EXTERNAL_PHOTO->value)

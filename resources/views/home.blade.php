@@ -21,8 +21,8 @@
                         <!-- Slides -->
                         @foreach($photos as $photo)
                             <div class="swiper-slide">
-                                <img class="rounded-lg lg:rounded-2xl aspect-4/3 object-cover"
-                                     src="{{ $photo->assetSrc }}" alt=""/>
+                                <img class="rounded-lg lg:rounded-2xl aspect-4/3 object-cover w-full"
+                                     src="{{ asset('storage/'.$photo->large_image) }}" alt=""/>
                             </div>
                         @endforeach
                     </div>

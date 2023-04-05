@@ -75,9 +75,10 @@ class ArticleResource extends Resource
                                 ThumbnailSelection::make('photo_id')
                                     ->label('Photo')
                                     ->options(function (Closure $get) {
-                                        return $get('gallery_id') ?
-                                            Gallery::find($get('gallery_id'))->photos->pluck('assetSrc', 'id')
-                                            : [];
+                                        if (!$get('gallery_id')) {
+                                            return collect([]);
+                                        }
+                                        return Gallery::find($get('gallery_id'))->photos->pluck('tiny_image', 'id')->map(fn($photo) => asset('storage/' . $photo));
                                     }),
                             ]),
                         Forms\Components\Builder\Block::make(ArticleResourceType::EXTERNAL_PHOTO->value)
