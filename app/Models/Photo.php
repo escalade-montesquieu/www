@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Photo extends Model
 {
-    public static string $STORAGE_FOLDER = 'photos';
-
     use HasFactory;
+    use HasImage;
 
     protected $fillable = [
         'gallery_id',
@@ -27,6 +27,11 @@ class Photo extends Model
     protected $casts = [
         'image_data' => 'array',
     ];
+
+    public static function getSrcColumn(): string
+    {
+        return 'src';
+    }
 
     public function gallery(): BelongsTo
     {
@@ -45,11 +50,16 @@ class Photo extends Model
 
     public function getPublicSrcAttribute(): string
     {
-        return 'storage/' . self::$STORAGE_FOLDER . '/' . $this->src;
+        return 'storage/' . self::getStorageFolder() . '/' . $this->src;
+    }
+
+    public static function getStorageFolder(): string
+    {
+        return 'photos';
     }
 
     public function getStorageSrcAttribute(): string
     {
-        return self::$STORAGE_FOLDER . '/' . $this->src;
+        return self::getStorageFolder() . '/' . $this->src;
     }
 }

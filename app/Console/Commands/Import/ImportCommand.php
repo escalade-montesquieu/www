@@ -9,7 +9,7 @@ abstract class ImportCommand extends Command
 {
     public function loadJson(string $file): array
     {
-        $jsonFile = Storage::get($file);
+        $jsonFile = Storage::disk('local')->get($file);
 
         $json = json_decode($jsonFile, true, 512, JSON_THROW_ON_ERROR);
 

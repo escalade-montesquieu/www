@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ImageSize;
 use App\Filament\Resources\PhotoResource\Pages;
 use App\Filament\Resources\PhotoResource\RelationManagers;
 use App\Models\Photo;
@@ -32,9 +33,11 @@ class PhotoResource extends Resource
                     ->required(),
                 Forms\Components\Hidden::make('src'),
                 Forms\Components\FileUpload::make('image')
-                    ->directory('photos')
+                    ->directory(Photo::getStorageFolder())
                     ->afterStateUpdated(static function (\Livewire\TemporaryUploadedFile $state, Closure $get, Closure $set) {
-                        Storage::delete('photos/' . $get('src'));
+                        $folder = Photo::getStorageFolder();
+                        $oldImagePath = $folder . '/' . $get('src');
+                        Storage::delete($oldImagePath);
 
                         $img = Image::make($state);
                         $img->orientate()->save();

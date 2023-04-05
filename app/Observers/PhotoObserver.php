@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Enums\ImageSize;
 use App\Models\Photo;
 
 class PhotoObserver
@@ -9,7 +10,13 @@ class PhotoObserver
     public function saving(Photo $photo): void
     {
         Photo::withoutEvents(static function () use (&$photo) {
-            $photo->image_data = getimagesize(storage_path('app/public/photos/' . $photo->src));
+            $originalPath = storage_path('app/public/photos/' . $photo->src);
+
+            $photo->image_data = getimagesize($originalPath);
+
+            $photo->optimize(ImageSize::LARGE);
+            $photo->optimize(ImageSize::SMALL);
+            $photo->optimize(ImageSize::TINY);
 
             $photo->saveQuietly();
         });
