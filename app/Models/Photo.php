@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasImage;
+use App\Traits\HasImagePathAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ class Photo extends Model
 {
     use HasFactory;
     use HasImage;
+    use HasImagePathAttributes;
 
     protected $fillable = [
         'gallery_id',
@@ -56,10 +58,5 @@ class Photo extends Model
     public static function getStorageFolder(): string
     {
         return 'photos';
-    }
-
-    public function getStorageSrcAttribute(): string
-    {
-        return self::getStorageFolder() . '/' . $this->src;
     }
 }

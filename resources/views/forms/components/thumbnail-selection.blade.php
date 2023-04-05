@@ -17,12 +17,12 @@
     }">
         <img :src="images[state]" class="w-full aspect-video">
         <div class="flex gap-2 pt-2 pb-6 px-2" style="overflow: auto;">
-            @foreach($getOptions() as $id => $assetSrc)
+            @foreach($getOptions() as $id => $publicSrc)
                 <img
                     @click="state = {{ $id }}"
                     class="cursor-pointer block h-12"
                     :class="{'ring-2 ring-primary-500': state=== {{ $id }}}"
-                    src="{{ $assetSrc }}"
+                    src="{{ $publicSrc }}"
                 >
             @endforeach
         </div>

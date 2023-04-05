@@ -13,7 +13,7 @@
             <article class="rounded-xl flex flex-coool overflow-hidden">
                 @if($gallery->photo)
                     <img class="aspect-5/4 border-0 object-cover"
-                         src="{{ $gallery->photo->assetSrc }}">
+                         src="{{ asset('storage/'.$gallery->photo->small_image) }}">
                 @endif
                 <h3 class="text-h3 bg-white-medium p-4">
                     <a href="{{ route('galleries.show', $gallery) }}">

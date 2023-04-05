@@ -9,12 +9,12 @@
         </header>
         <section class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-16" id="gallery">
             @foreach($gallery->photos as $photo)
-                <a href="{{ $photo->assetSrc }}"
+                <a href="{{ asset('storage/'.$photo->large_image) }}"
                    target="_blank"
                    data-pswp-width="{{ $photo->image_data[0] }}"
                    data-pswp-height="{{ $photo->image_data[1] }}"
                 >
-                    <img class="rounded-lg" src="{{ $photo->assetSrc }}" alt=""/>
+                    <img class="rounded-lg" src="{{ asset('storage/'.$photo->small_image) }}" alt=""/>
                 </a>
             @endforeach
         </section>

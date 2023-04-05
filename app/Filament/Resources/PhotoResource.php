@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\ImageSize;
 use App\Filament\Resources\PhotoResource\Pages;
 use App\Filament\Resources\PhotoResource\RelationManagers;
 use App\Models\Photo;
@@ -50,10 +49,7 @@ class PhotoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('storageSrc')
-                    ->getStateUsing(function (Photo $record): string {
-                        return $record->getImagePathForSize(ImageSize::TINY);
-                    })
+                Tables\Columns\ImageColumn::make('tiny_image')
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('gallery.name')
                     ->label('Galerie'),
