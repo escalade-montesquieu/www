@@ -51,6 +51,9 @@ class PhotoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('storageSrc')
+                    ->getStateUsing(function (Photo $record): string {
+                        return $record->getImagePathForSize(ImageSize::TINY);
+                    })
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('gallery.name')
                     ->label('Galerie'),
