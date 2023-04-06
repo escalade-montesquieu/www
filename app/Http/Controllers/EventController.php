@@ -13,7 +13,7 @@ class EventController extends Controller
     public function index(): Factory|View|Application
     {
         return view('events.index', [
-            'eventDates' => EventRepository::allByDate()
+            'eventDates' => EventRepository::allByDate()->orderBy('asc')
         ]);
     }
 
