@@ -10,7 +10,7 @@
     >
         <input type="file" wire:model="avatar" class="hidden">
         <img class="rounded-full w-1/4 aspect-square object-cover flex-shrink-0"
-             src="{{ $avatar?->temporaryUrl() ?? $user->avatar) }}">
+             src="{{ $avatar?->temporaryUrl() ?? $user->avatar }}">
         <div>
             <h4 class="text-cta">Modifier votre photo</h4>
             <p x-show="!isUploading && !isUploaded" class="text-label">Maximum 10Mo</p>

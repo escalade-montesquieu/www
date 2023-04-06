@@ -84,9 +84,9 @@ class ProfileEdition extends Component
             'avatar' => ['nullable', 'image', 'max:10240'],
         ]);
 
-        $path = 'avatars/';
+        $path = 'profiles/';
         $filename = Str::uuid() . "." . $this->avatar->getClientOriginalExtension();
-        $this->avatar->storeAs('public/' . $path, $filename);
+        $this->avatar->storeAs($path, $filename);
 
         $this->user->update([
             'avatar_url' => $filename
