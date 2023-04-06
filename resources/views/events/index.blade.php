@@ -5,6 +5,6 @@
             <h1 class="text-h1 mb-2">Évènements</h1>
             <p>Retrouvez et participez aux sessions organisées.</p>
         </header>
-        <x-events.list :eventDates="$eventDates"/>
+        <livewire:events.horizontal-list/>
     </article>
 </x-app-layout>
