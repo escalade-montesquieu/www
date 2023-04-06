@@ -9,20 +9,22 @@
         <span>Pas de message pour l'instant</span>
     @endforelse
 
-    <button wire:click="showSeenPopup"
-            class="ml-auto flex flex-row items-center justify-end pr-4 gap-2 text-label text-black-medium">
-        <span>Vu par</span>
-        <div class="flex flex-row pl-2">
-            @foreach($messages->last()->seenByOtherThanLoggedUser->take(5) as $user)
-                <div class="-ml-2">
-                    <img class="avatar " src="{{ $user->avatar }}" alt="{{ $user->username }}">
-                </div>
-            @endforeach
-        </div>
-        @if($messages->last()->seenByOtherThanLoggedUser->count() > 5)
-            <span>+ {{ $messages->last()->seenByOtherThanLoggedUser->count() - 5 }}</span>
-        @endif
-    </button>
+    @if($messages->last()->seenByOtherThanLoggedUser->count())
+        <button wire:click="showSeenPopup"
+                class="ml-auto flex flex-row items-center justify-end pr-4 gap-2 text-label text-black-medium">
+            <span>Vu par</span>
+            <div class="flex flex-row pl-2">
+                @foreach($messages->last()->seenByOtherThanLoggedUser->take(5) as $user)
+                    <div class="-ml-2">
+                        <img class="avatar " src="{{ $user->avatar }}" alt="{{ $user->username }}">
+                    </div>
+                @endforeach
+            </div>
+            @if($messages->last()->seenByOtherThanLoggedUser->count() > 5)
+                <span>+ {{ $messages->last()->seenByOtherThanLoggedUser->count() - 5 }}</span>
+            @endif
+        </button>
+    @endif
 
     @if($isSeenPopupVisible)
         <section class="fixed z-50 top-0 left-0 h-screen w-full flex flex-col justify-center items-center">
