@@ -34,7 +34,7 @@ class ImportUsers extends ImportCommand
             if ($row['img'] === '/assets/profiles/user.png') {
                 $avatarUrl = NULL;
             } else {
-                $avatarUrl = str_replace('/assets', '/storage', $row['img']);
+                $avatarUrl = str_replace('/assets/profiles/', '', $row['img']);
             }
 
             User::create([

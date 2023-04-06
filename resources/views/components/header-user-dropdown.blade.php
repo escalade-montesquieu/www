@@ -1,7 +1,7 @@
 <div class="relative flex flex-col" x-data="{isOpen: false}">
     <button class="relative flex flex-row items-center justify-center gap-2" @click="isOpen=!isOpen">
         <span>{{ auth()->user()->username }}</span>
-        <img class="avatar" src="{{ asset(auth()->user()->avatar) }}" alt=" ">
+        <img class="avatar" src="{{ auth()->user()->avatar }}" alt=" ">
     </button>
 
     <div x-show="isOpen" @click.outside="isOpen = false"

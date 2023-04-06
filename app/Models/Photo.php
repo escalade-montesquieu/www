@@ -30,7 +30,7 @@ class Photo extends Model
         'image_data' => 'array',
     ];
 
-    public static function getSrcColumn(): string
+    public static function getImageColumn(): string
     {
         return 'src';
     }
@@ -44,7 +44,7 @@ class Photo extends Model
     {
         return $query->where('display_homepage', true);
     }
-
+    
     public function getAssetSrcAttribute(): string
     {
         return asset($this->publicSrc);
