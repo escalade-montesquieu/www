@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserEmailPreference;
 use App\Enums\UserRole;
+use App\Traits\HasImage;
+use App\Traits\HasImagePathAttributes;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
@@ -22,6 +24,8 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
     use HasApiTokens, HasFactory, Notifiable;
 
     use HasUuids;
+    use HasImage;
+    use HasImagePathAttributes;
 
     protected $fillable = [
         'role',
@@ -72,6 +76,16 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
         return $opt;
     }
 
+    public static function getStorageFolder(): string
+    {
+        return 'profiles';
+    }
+
+    public static function getImageColumn(): string
+    {
+        return 'avatar_url';
+    }
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
@@ -107,7 +121,11 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar
 
     public function getAvatarAttribute(): string
     {
-        return $this->avatar_url ?? "https://ui-avatars.com/api/?name=$this->name&rounded=true";
+        if ($this->getTinyImageAttribute()) {
+            return asset('storage/' . $this->getTinyImageAttribute());
+        }
+
+        return "https://ui-avatars.com/api/?name=$this->name&rounded=true";
     }
 
     public function getUsernameAttribute(): string

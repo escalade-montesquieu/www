@@ -10,6 +10,10 @@ trait HasImage
 {
     public function optimize(ImageSize $imageSize): static
     {
+        if (!$this->getImageBasename()) {
+            return $this;
+        }
+
         $uploadedImage = Storage::get($this->getImagePathFromUpload());
 
         $optimizedImage = Image::make($uploadedImage)
@@ -27,7 +31,13 @@ trait HasImage
         return $this;
     }
 
-    public function getImagePathFromUpload(): string
+    public function getImageBasename(): ?string
+    {
+        $column = self::getImageColumn();
+        return $this->{$column};
+    }
+
+    public function getImagePathFromUpload(): ?string
     {
         $folder = self::getStorageFolder();
         $file = $this->getImageBasename();
@@ -40,8 +50,12 @@ trait HasImage
         return pathinfo($this->getImageBasename(), PATHINFO_EXTENSION);
     }
 
-    public function getImagePathForSize(ImageSize $size): string
+    public function getImagePathForSize(ImageSize $size): ?string
     {
+        if (!$this->getImageBasename()) {
+            return null;
+        }
+
         $filename = pathinfo($this->getImageBasename(), PATHINFO_FILENAME);
         $folder = self::getStorageFolder();
         $extension = $this->getImageExtension();
@@ -49,10 +63,7 @@ trait HasImage
         return "$folder/$filename/$size->value.$extension";
     }
 
-    abstract public static function getStorageFolder(): string;
+    abstract public static function getImageColumn(): string;
 
-    public function getImageBasename(): string
-    {
-        return $this->src;
-    }
+    abstract public static function getStorageFolder(): string;
 }

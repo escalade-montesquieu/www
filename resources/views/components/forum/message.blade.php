@@ -2,7 +2,7 @@
     <article class="message flex flex-row gap-4 items-start @if($message->isSentBySelf) justify-end @endif">
         @unless($message->isSentBySelf)
             <a class="mt-2" href="{{ route('profile.show', $message->user) }}">
-                <img class="h-8 w-8 rounded-full object-cover" src="{{ asset($message->user->avatar) }}" alt=" ">
+                <img class="h-8 w-8 rounded-full object-cover" src="{{ $message->user->avatar }}" alt=" ">
             </a>
         @endif
 

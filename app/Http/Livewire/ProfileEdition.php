@@ -24,17 +24,6 @@ class ProfileEdition extends Component
 
     public User $user;
 
-    protected function rules()
-    {
-        return [
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore(Auth::user())],
-            'bio' => ['nullable'],
-            'rent_harness' => ['required', 'boolean'],
-            'rent_shoes' => ['nullable', 'numeric', 'between:36,50'],
-            'email_preferences' => ['required', 'array'],
-        ];
-    }
-
     public function render()
     {
         return view('livewire.profile-edition')
@@ -49,11 +38,6 @@ class ProfileEdition extends Component
         $this->rent_harness = $this->user->rent_harness;
         $this->rent_shoes = $this->user->rent_shoes;
         $this->email_preferences = $this->user->email_preferences;
-    }
-
-    public function isEmailPreferenceSelected(UserEmailPreference $preference): bool
-    {
-        return in_array($preference->value, $this->email_preferences, true);
     }
 
     public function toggleRentHarness(): void
@@ -89,18 +73,23 @@ class ProfileEdition extends Component
         }
     }
 
+    public function isEmailPreferenceSelected(UserEmailPreference $preference): bool
+    {
+        return in_array($preference->value, $this->email_preferences, true);
+    }
+
     public function updatedAvatar(): void
     {
         $this->validate([
             'avatar' => ['nullable', 'image', 'max:10240'],
         ]);
 
-        $path = 'avatars/';
+        $path = 'profiles/';
         $filename = Str::uuid() . "." . $this->avatar->getClientOriginalExtension();
-        $this->avatar->storeAs('public/' . $path, $filename);
+        $this->avatar->storeAs($path, $filename);
 
         $this->user->update([
-            'avatar_url' => 'storage/' . $path . $filename
+            'avatar_url' => $filename
         ]);
     }
 
@@ -117,5 +106,16 @@ class ProfileEdition extends Component
         ]);
 
         return redirect()->route('profile.show');
+    }
+
+    protected function rules()
+    {
+        return [
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore(Auth::user())],
+            'bio' => ['nullable'],
+            'rent_harness' => ['required', 'boolean'],
+            'rent_shoes' => ['nullable', 'numeric', 'between:36,50'],
+            'email_preferences' => ['required', 'array'],
+        ];
     }
 }

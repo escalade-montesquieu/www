@@ -15,7 +15,7 @@
         <div class="flex flex-row pl-2">
             @foreach($messages->last()->seenByOtherThanLoggedUser->take(5) as $user)
                 <div class="-ml-2">
-                    <img class="avatar " src="{{ asset($user->avatar) }}" alt="{{ $user->username }}">
+                    <img class="avatar " src="{{ $user->avatar }}" alt="{{ $user->username }}">
                 </div>
             @endforeach
         </div>
@@ -38,7 +38,7 @@
                     <div class="flex flex-col items-start gap-4 overflow-auto">
                         @foreach($messages->last()->seenByOtherThanLoggedUser as $user)
                             <a href="{{ route('profile.show', $user) }}" class="flex gap-4 items-center">
-                                <img class="avatar" src="{{ asset($user->avatar) }}" alt=" ">
+                                <img class="avatar" src="{{ $user->avatar }}" alt=" ">
                                 <span>{{ $user->username }}</span>
                             </a>
                         @endforeach
