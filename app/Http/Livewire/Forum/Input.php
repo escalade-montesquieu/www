@@ -21,7 +21,15 @@ class Input extends Component
 
     public function mount(): void
     {
+        $this->resetData();
+    }
+
+    public function resetData(): void
+    {
+        $this->message = "";
+        $this->mentionAll = false;
         $this->usersToMention = new Collection();
+
     }
 
     public function render()
@@ -43,7 +51,7 @@ class Input extends Component
 
         $this->emit('messageSent');
 
-        $this->reset();
+        $this->resetData();
     }
 
     public function extractMentions(string $message): string
