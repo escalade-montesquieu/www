@@ -5,8 +5,8 @@
             <header>
                 <h2 class="text-h2">{{ $article->title }}</h2>
             </header>
-            <section class="flex flex-coool gap-10">
-                {{ $article->content }}
+            <section class="flex flex-coool gap-10 markdown">
+                @markdown($article->content)
             </section>
         </article>
         <section
