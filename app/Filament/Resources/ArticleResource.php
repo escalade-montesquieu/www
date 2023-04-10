@@ -46,7 +46,6 @@ class ArticleResource extends Resource
                         'undo',
                     ])
                     ->translateLabel()
-                    ->required()
                     ->maxLength(16777215)
                     ->columnSpan('full'),
 
