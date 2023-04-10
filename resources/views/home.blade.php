@@ -58,10 +58,11 @@
         </article>
 
         <div class="col-span-full lg:col-start-8 lg:col-end-13 lg:row-start-1 max-lg:mt-20">
-            <article class="lg:sticky lg:top-36 space-y-4 lg:space-y-8">
+            <article class="lg:sticky lg:top-36 space-y-8">
                 <h2 class="text-h2">Forum</h2>
+                <img class="h-auto md:h-40 max-md:w-2/3 mt-4" src="{{ asset('assets/svg/sharing.svg') }}" alt=" "/>
                 <p>
-                    Posez vos questions, organisez des sessions entre lycéens, partagez vos expériences !
+                    Posez vos questions, organisez des sessions entre lycéens, partagez vos expériences !
                 </p>
                 <a href="{{ route('forum') }}" class="btn-cta-secondary mr-auto">Aller au forum</a>
             </article>
