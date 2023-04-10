@@ -90,6 +90,15 @@ class ArticleResource extends Resource
                                     ->placeholder('https://picsum.photos/200/300')
                                     ->required(),
                             ]),
+                        Forms\Components\Builder\Block::make(ArticleResourceType::EMBED->value)
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->placeholder('Photos')
+                                    ->translateLabel(),
+                                Forms\Components\TextInput::make('content')
+                                    ->placeholder('<iframe src=https://></iframe>')
+                                    ->required(),
+                            ]),
                     ])
                     ->columnSpan('full')
                     ->translateLabel(),

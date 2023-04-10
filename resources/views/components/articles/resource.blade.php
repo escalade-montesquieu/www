@@ -18,5 +18,9 @@
         <img class="w-full h-full object-cover"
              src="{{ $resource['data']['url'] }}"
              alt="{{ $resource['data']['title'] }}"/>
+    @elseif($resource['type'] === \App\Enums\ArticleResourceType::EMBED->value)
+        <div class="containing-iframe">
+            {!! $resource['data']['content'] !!}
+        </div>
     @endif
 </div>
