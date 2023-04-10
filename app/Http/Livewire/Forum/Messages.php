@@ -51,6 +51,10 @@ class Messages extends Component
 
     public function updateUserLastMessageSeen(): void
     {
+        if (!$this->messages->last()) {
+            return;
+        }
+
         auth()->user()->update([
             'forum_message_id' => $this->messages->last()->id
         ]);
@@ -58,7 +62,11 @@ class Messages extends Component
 
     public function dispatchEventIfMessageUpdated(): void
     {
-        $newLastMessageId = $this->messages->last()->id;
+        $newLastMessageId = $this->messages->last()?->id;
+
+        if (!$newLastMessageId) {
+            return;
+        }
 
         if ($newLastMessageId !== $this->lastMessageId) {
             $this->dispatchBrowserEvent('forum.message.new');

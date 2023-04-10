@@ -9,7 +9,7 @@
         <span>Pas de message pour l'instant</span>
     @endforelse
 
-    @if($messages->last()->seenByOtherThanLoggedUser->count())
+    @if($messages->last()?->seenByOtherThanLoggedUser->count())
         <button wire:click="showSeenPopup"
                 class="ml-auto flex flex-row items-center justify-end pr-4 gap-2 text-label text-black-medium">
             <span>Vu par</span>
