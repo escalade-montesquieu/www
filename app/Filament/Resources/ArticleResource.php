@@ -46,7 +46,6 @@ class ArticleResource extends Resource
                         'undo',
                     ])
                     ->translateLabel()
-                    ->required()
                     ->maxLength(16777215)
                     ->columnSpan('full'),
 
@@ -93,7 +92,7 @@ class ArticleResource extends Resource
                         Forms\Components\Builder\Block::make(ArticleResourceType::EMBED->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
-                                    ->placeholder('Photos')
+                                    ->placeholder('Vidéo')
                                     ->translateLabel(),
                                 Forms\Components\TextInput::make('content')
                                     ->placeholder('<iframe src=https://></iframe>')

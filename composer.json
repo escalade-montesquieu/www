@@ -11,6 +11,7 @@
         "php": "^8.1",
         "barryvdh/laravel-debugbar": "^3.7",
         "diglactic/laravel-breadcrumbs": "^8.0",
+        "doctrine/dbal": "^3.6",
         "filament/filament": "^2.0",
         "graham-campbell/markdown": "^14.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -22,7 +23,6 @@
         "spatie/laravel-sluggable": "^3.4"
     },
     "require-dev": {
-        "doctrine/dbal": "^3.5",
         "fakerphp/faker": "^1.9.1",
         "laravel-lang/attributes": "^2.0",
         "laravel-lang/lang": "^12.5",
