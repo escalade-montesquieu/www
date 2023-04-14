@@ -82,8 +82,8 @@
                     <div class="rounded-lg ml-8 p-2 flex flex-coool">
                         <label for="rent_shoes">Taille :</label>
                         <select class="btn" wire:model="rent_shoes" id="rent_shoes">
-                            @foreach(App\Models\User::getShoesSizesAvailable() as $size)
-                                <option value="{{ $size }}">Taille {{ $size }}</option>
+                            @foreach(App\Models\User::getShoesSizesAvailable() as $size=>$label)
+                                <option value="{{ $size }}">{{ $label }}</option>
                             @endforeach
                         </select>
                     </div>
