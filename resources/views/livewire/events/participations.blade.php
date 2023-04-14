@@ -11,14 +11,21 @@
                     </header>
                     <span class="font-bold">baudriers</span>
                 </article>
-                @foreach($event->shoes_needed as $shoesSize => $shoes)
+                @forelse($event->shoes_needed as $shoesSize => $shoes)
                     <article class="flex gap-4 items-center p-4 rounded-lg bg-white-medium">
                         <header>
                             <span class="text-h3">{{ $shoes->count() }}</span>
                         </header>
                         <span>paire de <b class="font-bold">T{{ $shoesSize }}</b></span>
                     </article>
-                @endforeach
+                @empty
+                    <article class="flex gap-4 items-center p-4 rounded-lg bg-white-medium">
+                        <header>
+                            <span class="text-h3">0</span>
+                        </header>
+                        <span><b>paire empruntée</b></span>
+                    </article>
+                @endforelse
             </section>
         </article>
     @endif
@@ -26,7 +33,22 @@
     <article class="space-y-2 lg:space-y-4">
         <header>
             <h3 class="text-h3">Participants</h3>
-            <p>{{ $event->max_places-$event->participants->count() }} places restantes sur {{ $event->max_places }}</p>
+            <p>
+                <span>
+                    {{ $event->participants->count() }}
+                    @if($event->participants->count()>1)
+                        participants
+                    @else
+                        participant
+                    @endif
+                    /
+                </span>
+                @if($event->max_places)
+                    <span>{{ $event->max_places }} places</span>
+                @else
+                    <span>Places illimitées</span>
+                @endif
+            </p>
         </header>
 
         @if($event->isPast)
