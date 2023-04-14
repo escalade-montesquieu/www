@@ -7,16 +7,20 @@
         </h3>
         <p>{{ $event->eventCategory->title }}</p>
         <p>
-            @if($event->max_places)
-                <span>{{ $event->max_places }} places</span>
-            @else
-                <span>Places illimités</span>
-            @endif
-            <span>- {{ $event->participants->count() }} @if($event->participants->count()>1)
+            <span>
+                {{ $event->participants->count() }}
+                @if($event->participants->count()>1)
                     participants
                 @else
                     participant
-                @endif </span>
+                @endif
+                /
+            </span>
+            @if($event->max_places)
+                <span>{{ $event->max_places }} places</span>
+            @else
+                <span>Places illimitées</span>
+            @endif
         </p>
     </header>
 

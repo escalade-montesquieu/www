@@ -33,12 +33,22 @@
     <article class="space-y-2 lg:space-y-4">
         <header>
             <h3 class="text-h3">Participants</h3>
-            @if($event->max_places > -1)
-                <p>{{ $event->max_places-$event->participants->count() }} places restantes
-                    sur {{ $event->max_places }}</p>
-            @else
-                <p>Places illimitées, {{ $event->participants->count() }} participants</p>
-            @endif
+            <p>
+                <span>
+                    {{ $event->participants->count() }}
+                    @if($event->participants->count()>1)
+                        participants
+                    @else
+                        participant
+                    @endif
+                    /
+                </span>
+                @if($event->max_places)
+                    <span>{{ $event->max_places }} places</span>
+                @else
+                    <span>Places illimitées</span>
+                @endif
+            </p>
         </header>
 
         @if($event->isPast)
