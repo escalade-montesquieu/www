@@ -1,7 +1,7 @@
 <footer class="bg-white-medium mt-20 lg:mt-40">
     <div class="container flex flex-coool px-4 py-12 gap-y-12 lg:py-20 lg:gap-20">
 
-        <section class="grid grid-cols-12 gap-y-8">
+        <section class="grid grid-cols-12 items-end gap-y-8">
             <article class="col-span-full lg:col-span-4 flex flex-coool gap-1 lg:gap-2">
                 <x-application-logo class="!w-32 mb-8"/>
                 <h4 class="text-h4">Nous contacter</h4>
@@ -13,20 +13,11 @@
 
             <section class="col-span-full lg:col-start-9 lg:col-end-13 flex flex-coool gap-y-8">
                 <article class="flex flex-coool gap-1 lg:gap-2">
-                    <h4 class="text-h4">Évènements et sorties</h4>
-                    <nav class="flex flex-coool">
-                        @foreach(\App\Models\EventCategory::all() as $eventCategory)
-                            <a class="link" href="{{ route('events') }}">{{ $eventCategory->title }}</a>
-                        @endforeach
-                    </nav>
-                </article>
-
-                <article class="flex flex-coool gap-1 lg:gap-2">
                     <h4 class="text-h4">À propos</h4>
                     <nav class="flex flex-coool">
-                        <a class="link" href="">Mentions légales</a>
-                        <a class="link" href="">Conditions d'utilisation</a>
-                        <a class="link" href="">Politique RGPD</a>
+                        <a class="link" href="{{ route('legal.notices') }}">Mentions légales</a>
+                        <a class="link" href="{{ route('legal.conditions-of-use') }}">Conditions d'utilisation</a>
+                        <a class="link" href="{{ route('legal.gdpr') }}">Politique RGPD</a>
                     </nav>
                 </article>
             </section>
