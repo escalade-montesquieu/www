@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('home');
 
+Route::get('/legal/notices', static fn() => view('legal.notices'))->name('legal.notices');
+Route::get('/legal/gdpr', static fn() => view('legal.gdpr'))->name('legal.gdpr');
+Route::get('/legal/conditions-of-use', static fn() => view('legal.conditions-of-use'))->name('legal.conditions-of-use');
+
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 

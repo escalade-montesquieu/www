@@ -8,7 +8,7 @@
                 <h2 class="text-h2 lg:mt-2">Section Escalade</h2>
 
                 <p class="max-lg:hidden mt-8">
-                    Bienvenue sur le site de la section escalade du lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de la section escalade du Lycée Montesquieu à Bordeaux.
                 </p>
                 <p class="max-lg:hidden mt-4">
                     Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
