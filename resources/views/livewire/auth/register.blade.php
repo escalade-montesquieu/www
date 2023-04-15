@@ -47,6 +47,11 @@
                 @endif
             </div>
 
+            <p>
+                En vous continuant vous acceptez les <a class="link" href="{{ route('legal.conditions-of-use') }}">Conditions
+                    d'utilisation</a>
+            </p>
+
             <div class="flex flex-coool gap-4">
                 <button
                     @if($this->canNextStep())
