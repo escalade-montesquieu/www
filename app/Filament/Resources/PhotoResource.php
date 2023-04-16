@@ -55,7 +55,7 @@ class PhotoResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('tiny_image')
                     ->label('Image'),
-                Tables\Columns\TextColumn::make('gallery.name')
+                Tables\Columns\TextColumn::make('gallery.title')
                     ->label('Galerie')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('display_homepage')
