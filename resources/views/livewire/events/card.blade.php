@@ -1,8 +1,9 @@
 <article class="flex flex-coool gap-4 p-4 bg-white-medium rounded-2xl">
     <header>
         <h3 class="text-h3">
-            <a href="{{ route('events.show', $event) }}">
+            <a class="link" href="{{ route('events.show', $event) }}">
                 {{ $event->title }}
+                <x-heroicon-o-arrow-right class="icon inline pl-1 align-middle"/>
             </a>
         </h3>
         <p>{{ $event->eventCategory->title }}</p>
