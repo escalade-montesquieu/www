@@ -76,25 +76,33 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('role')
                     ->translateLabel()
-                    ->enum(UserRole::toArray()),
+                    ->enum(UserRole::toArray())
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('student.name')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 RentShoesColumn::make('rent_shoes')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('rent_harness')
                     ->translateLabel()
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //

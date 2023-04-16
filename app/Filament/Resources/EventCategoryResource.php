@@ -44,10 +44,12 @@ class EventCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('is_regular')
                     ->translateLabel()
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->translateLabel()
                     ->limit(50)
@@ -60,7 +62,8 @@ class EventCategoryResource extends Resource
 
                         // Only render the tooltip if the column contents exceeds the length limit.
                         return $state;
-                    }),
+                    })
+                    ->sortable(),
             ])
             ->filters([
                 //

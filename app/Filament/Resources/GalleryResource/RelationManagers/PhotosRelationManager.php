@@ -6,6 +6,7 @@ use App\Filament\Resources\PhotoResource;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
+use Filament\Tables;
 
 class PhotosRelationManager extends RelationManager
 {
@@ -20,6 +21,9 @@ class PhotosRelationManager extends RelationManager
 
     public static function table(Table $table): Table
     {
-        return PhotoResource::table($table);
+        return PhotoResource::table($table)
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ]);
     }
 }

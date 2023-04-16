@@ -57,26 +57,34 @@ class EventResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('eventCategory.title')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('title')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('max_places')
                     ->translateLabel()
-                    ->default('Illimité'),
+                    ->default('Illimité')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('datetime')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('location')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
