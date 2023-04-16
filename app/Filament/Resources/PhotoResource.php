@@ -26,12 +26,16 @@ class PhotoResource extends Resource
             ->schema([
                 Forms\Components\Select::make('gallery_id')
                     ->relationship('gallery', 'title')
-                    ->required(),
-                Forms\Components\TextInput::make('title'),
-                Forms\Components\Toggle::make('pinned_homepage')
-                    ->required(),
+                    ->required()
+                    ->label('Galerie'),
+                Forms\Components\TextInput::make('title')
+                    ->translateLabel(),
+                Forms\Components\Toggle::make('display_homepage')
+                    ->required()
+                    ->translateLabel(),
                 Forms\Components\Hidden::make('src'),
                 Forms\Components\FileUpload::make('image')
+                    ->translateLabel()
                     ->directory(Photo::getStorageFolder())
                     ->afterStateUpdated(static function (\Livewire\TemporaryUploadedFile $state, Closure $get, Closure $set) {
                         $folder = Photo::getStorageFolder();
