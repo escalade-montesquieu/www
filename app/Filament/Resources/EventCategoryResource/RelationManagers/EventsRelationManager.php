@@ -6,6 +6,7 @@ use App\Filament\Resources\EventResource;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
+use Filament\Tables;
 
 class EventsRelationManager extends RelationManager
 {
@@ -25,6 +26,9 @@ class EventsRelationManager extends RelationManager
 
     public static function table(Table $table): Table
     {
-        return EventResource::table($table);
+        return EventResource::table($table)
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ]);
     }
 }
