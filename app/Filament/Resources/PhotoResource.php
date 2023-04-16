@@ -52,16 +52,20 @@ class PhotoResource extends Resource
                 Tables\Columns\ImageColumn::make('tiny_image')
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('gallery.name')
-                    ->label('Galerie'),
+                    ->label('Galerie')
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('display_homepage')
                     ->translateLabel()
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //

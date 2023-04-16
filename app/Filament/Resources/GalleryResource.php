@@ -57,7 +57,8 @@ class GalleryResource extends Resource
                 Tables\Columns\ImageColumn::make('photo.tiny_image')
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('title')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->translateLabel()
                     ->limit(50)
@@ -70,13 +71,16 @@ class GalleryResource extends Resource
 
                         // Only render the tooltip if the column contents exceeds the length limit.
                         return $state;
-                    }),
+                    })
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //

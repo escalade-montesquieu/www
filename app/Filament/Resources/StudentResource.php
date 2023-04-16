@@ -46,18 +46,23 @@ class StudentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('get_degree_at_year')
-                    ->translateLabel(),
+                    ->translateLabel()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->translateLabel()
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
