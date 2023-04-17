@@ -61,6 +61,15 @@
         @apply flex flex-row items-center text-cta;
     }
 
+    .link-stretch::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
     .icon {
         @apply h-6 w-6 stroke-2;
     }

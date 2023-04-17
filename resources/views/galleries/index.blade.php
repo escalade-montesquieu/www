@@ -10,17 +10,7 @@
 
     <section class="container mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
         @foreach($galleries as $gallery)
-            <article class="rounded-xl flex flex-coool overflow-hidden">
-                @if($gallery->photo)
-                    <img class="aspect-5/4 border-0 object-cover"
-                         src="{{ asset('storage/'.$gallery->photo->small_image) }}">
-                @endif
-                <h3 class="text-h3 bg-white-medium p-4">
-                    <a href="{{ route('galleries.show', $gallery) }}">
-                        {{ $gallery->title }}
-                    </a>
-                </h3>
-            </article>
+            <x-galleries.card :gallery="$gallery"/>
         @endforeach
     </section>
 </x-app-layout>
