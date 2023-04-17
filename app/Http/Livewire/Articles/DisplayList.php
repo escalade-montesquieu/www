@@ -7,14 +7,14 @@ use Livewire\Component;
 
 class DisplayList extends Component
 {
-    public bool $onlyThreeLatest = false;
+    public bool $onlyPinned = false;
 
     public string $orderBy = 'desc';
 
     public function getArticlesProperty()
     {
-        if ($this->onlyThreeLatest) {
-            return Article::threeLatest()->get();
+        if ($this->onlyPinned) {
+            return Article::ordered()->pinned()->get();
         }
 
         return Article::orderBy('created_at', $this->orderBy)->get();

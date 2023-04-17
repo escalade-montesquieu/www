@@ -85,10 +85,11 @@
     "Max places": "Nb de places",
     "Datetime": "Date",
     "Location": "Lieu",
-    "Get degree at year": "Diplomé en",
+    "Get degree at year": "Diplômé en",
     "Role": "Rôle",
     "Student": "Licencié",
     "Rent shoes": "Emprunte des chaussons",
     "Rent harness": "Emprunte un baudrier",
-    "Bio": "Biographie"
+    "Bio": "Biographie",
+    "Is pinned": "Sur l'accueil"
 }

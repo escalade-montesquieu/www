@@ -20,6 +20,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
+        "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-sluggable": "^3.4"
     },
     "require-dev": {

@@ -46,7 +46,7 @@
             </h2>
             <a href="{{ route('articles') }}" class="max-md:hidden btn-cta-secondary">Voir tous les articles</a>
         </section>
-        <livewire:articles.display-list :onlyThreeLatest="true"/>
+        <livewire:articles.display-list :onlyPinned="true"/>
         <a href="{{ route('articles') }}" class="md:hidden btn-cta-tertiary">Tout voir</a>
     </article>
 

@@ -28,7 +28,6 @@ class ArticleResource extends Resource
     {
         return $form
             ->schema([
-
                 Forms\Components\TextInput::make('title')
                     ->translateLabel()
                     ->required()
@@ -108,6 +107,11 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\IconColumn::make('is_pinned')
+                    ->options([
+                        'heroicon-s-star' => true,
+                    ])
+                    ->color('primary'),
                 Tables\Columns\TextColumn::make('title')
                     ->translateLabel()
                     ->sortable()
@@ -149,7 +153,8 @@ class ArticleResource extends Resource
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
             ])
-            ->defaultSort('created_at', 'desc');
+            ->reorderable('order_column')
+            ->defaultSort('order_column');
     }
 
     public static function getPages(): array

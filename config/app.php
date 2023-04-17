@@ -188,7 +188,8 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
-
+        Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
+        
         /*
          * Application Service Providers...
          */
