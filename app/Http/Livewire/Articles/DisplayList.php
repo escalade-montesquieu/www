@@ -17,7 +17,7 @@ class DisplayList extends Component
             return Article::ordered()->pinned()->get();
         }
 
-        return Article::orderBy('created_at', $this->orderBy)->get();
+        return Article::ordered()->get();
     }
 
     public function render()
