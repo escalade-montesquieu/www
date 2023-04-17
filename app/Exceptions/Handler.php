@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Cookie;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
@@ -46,6 +47,14 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (\Exception $e) {
+            if ($e->getPrevious() instanceof \Illuminate\Session\TokenMismatchException) {
+                Cookie::queue(Cookie::forget('escalade_montesquieu_session'));
+                Cookie::queue(Cookie::forget('XSRF-TOKEN'));
+
+            };
         });
 
         $this->renderable(function (AuthorizationException $e, $response) {
