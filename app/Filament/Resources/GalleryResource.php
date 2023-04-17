@@ -91,7 +91,9 @@ class GalleryResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-            ]);
+            ])
+            ->reorderable('order_column')
+            ->defaultSort('order_column');
     }
 
     public static function getRelations(): array

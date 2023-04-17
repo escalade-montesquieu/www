@@ -12,7 +12,7 @@ class GalleryController extends Controller
     public function index(): Factory|View|Application
     {
         return view('galleries.index', [
-            'galleries' => Gallery::all()
+            'galleries' => Gallery::ordered()->get()
         ]);
     }
 
