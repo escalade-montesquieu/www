@@ -14,12 +14,15 @@
             <section class="col-span-full lg:col-start-9 lg:col-end-13 flex flex-coool gap-y-8">
                 <article class="flex flex-coool gap-1 lg:gap-2">
                     <h4 class="text-h4">À propos</h4>
-                    <nav class="flex flex-coool">
-                        <a class="link" href="{{ route('legal.notices') }}">Mentions légales</a>
-                        <a class="link" href="{{ route('legal.conditions-of-use') }}">Conditions d'utilisation</a>
-                        <a class="link" href="{{ route('legal.gdpr') }}">Politique RGPD</a>
-                    </nav>
+                    <p>
+                        Site de la section escalade du <a class="link" href="https://www.lycee-montesquieu.fr/">Lycée Montesquieu</a>
+                    </p>
                 </article>
+                <nav class="flex flex-coool">
+                    <a class="link" href="{{ route('legal.notices') }}">Mentions légales</a>
+                    <a class="link" href="{{ route('legal.conditions-of-use') }}">Conditions d'utilisation</a>
+                    <a class="link" href="{{ route('legal.gdpr') }}">Politique RGPD</a>
+                </nav>
             </section>
 
         </section>
