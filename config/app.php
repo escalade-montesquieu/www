@@ -17,6 +17,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'description' => env('APP_DESCRIPTION'),
+
     'deploy_secret' => env('DEPLOY_SECRET'),
 
     /*
@@ -189,7 +191,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
-        
+
         /*
          * Application Service Providers...
          */
