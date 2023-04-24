@@ -27,26 +27,29 @@ class GalleryResource extends Resource
     {
         return $form
             ->schema([
-                ThumbnailSelection::make('photo_id')
-                    ->label('Image')
-                    ->hidden(static function (?Gallery $record) {
-                        return !$record;
-                    })
-                    ->options(static function (?Gallery $record): Collection {
-                        if (!$record) {
-                            return collect([]);
-                        }
-                        return $record->photos->pluck('small_image', 'id')->map(fn($photo) => asset('storage/' . $photo));
-                    }),
-                Forms\Components\TextInput::make('title')
-                    ->translateLabel()
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpan('full'),
-                Forms\Components\Textarea::make('description')
-                    ->translateLabel()
-                    ->maxLength(65535)
-                    ->columnSpan('full'),
+                Forms\Components\Card::make()
+                    ->schema([
+                        ThumbnailSelection::make('photo_id')
+                            ->label('Image')
+                            ->hidden(static function (?Gallery $record) {
+                                return !$record;
+                            })
+                            ->options(static function (?Gallery $record): Collection {
+                                if (!$record) {
+                                    return collect([]);
+                                }
+                                return $record->photos->pluck('small_image', 'id')->map(fn($photo) => asset('storage/' . $photo));
+                            }),
+                        Forms\Components\TextInput::make('title')
+                            ->translateLabel()
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpan('full'),
+                        Forms\Components\Textarea::make('description')
+                            ->translateLabel()
+                            ->maxLength(65535)
+                            ->columnSpan('full'),
+                    ])
             ]);
     }
 
