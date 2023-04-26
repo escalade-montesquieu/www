@@ -61,7 +61,8 @@ class PhotoResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('tiny_image')
                     ->label('Image')
-                    ->height(100),
+                    ->height(80)
+                    ->width('max-content'),
                 Tables\Columns\TextColumn::make('gallery.title')
                     ->label('Galerie')
                     ->sortable(),
