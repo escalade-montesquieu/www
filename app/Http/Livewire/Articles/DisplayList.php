@@ -9,15 +9,19 @@ class DisplayList extends Component
 {
     public bool $onlyPinned = false;
 
-    public string $orderBy = 'desc';
+    public string $orderBy = 'none';
 
     public function getArticlesProperty()
     {
         if ($this->onlyPinned) {
-            return Article::ordered()->pinned()->get();
+            return Article::pinned()->get();
         }
 
-        return Article::ordered()->get();
+        if ($this->orderBy === 'none') {
+            return Article::ordered()->get();
+        }
+
+        return Article::orderBy('created_at', $this->orderBy)->get();
     }
 
     public function render()

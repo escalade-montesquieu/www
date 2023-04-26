@@ -4,6 +4,7 @@
             <div class="col-span-full lg:col-span-4">
                 <label for="orderBy">Ordonner par</label>
                 <select wire:model="orderBy" id="orderBy" name="orderBy" class="input w-full">
+                    <option value="none">Par défaut</option>
                     <option value="desc">Récent d'abord</option>
                     <option value="asc">Ancien d'abord</option>
                 </select>

@@ -28,6 +28,7 @@ class PhotoResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('image')
                     ->translateLabel()
+                    ->required()
                     ->helperText('Format png ou jpg, max 100 Mo')
                     ->directory(Photo::getStorageFolder())
                     ->afterStateUpdated(static function (TemporaryUploadedFile $state, Closure $get, Closure $set) {
@@ -59,21 +60,14 @@ class PhotoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('tiny_image')
-                    ->label('Image'),
+                    ->label('Image')
+                    ->height(100),
                 Tables\Columns\TextColumn::make('gallery.title')
                     ->label('Galerie')
                     ->sortable(),
                 Tables\Columns\IconColumn::make('display_homepage')
                     ->translateLabel()
                     ->boolean()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->translateLabel()
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->translateLabel()
-                    ->dateTime()
                     ->sortable(),
             ])
             ->filters([
