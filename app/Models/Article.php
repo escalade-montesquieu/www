@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,12 +45,12 @@ class Article extends Model implements Sortable
 
     public function getIsPinnedAttribute(): bool
     {
-        return $this->order_column <= self::$countPinned;
+        return self::pinned()->pluck('id')->contains($this->id);
     }
 
-    public function scopePinned($query)
+    public function scopePinned(Builder $query): Builder
     {
-        return $query->latest()
+        return $query->ordered()
             ->take(self::$countPinned);
     }
 }
