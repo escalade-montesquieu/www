@@ -5,10 +5,10 @@
             <article class=" relative -mt-20 pt-20 pb-10 lg:col-start-1 lg:col-end-7">
                 <div class="lg:hidden -z-10 absolute inset-0 bg-white-medium scale-x-400 rotate-3"></div>
                 <h1 class="text-h1 lg:mt-4">Lycée Montesquieu</h1>
-                <h2 class="text-h2 lg:mt-2">Section Escalade</h2>
+                <h2 class="text-h2 lg:mt-2">A.S. Escalade</h2>
 
                 <p class="max-lg:hidden mt-8">
-                    Bienvenue sur le site de la section escalade du Lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de l'association sportive d'escalade du Lycée Montesquieu à Bordeaux.
                 </p>
                 <p class="max-lg:hidden mt-4">
                     Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
@@ -29,7 +29,7 @@
                     <div class="swiper-pagination"></div>
                 </div>
                 <p class="lg:hidden mt-8">
-                    Bienvenue sur le site de la section escalade du lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de l'association sportive d'escalade du lycée Montesquieu à Bordeaux.
                 </p>
                 <p class="lg:hidden mt-4">
                     Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant

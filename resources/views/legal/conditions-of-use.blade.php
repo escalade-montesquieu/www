@@ -41,7 +41,7 @@
             </p>
             <ul class="list-disc ml-5 space-y-2 mb-2">
                 <li>Agenda des évènements et sorties</li>
-                <li>Informations générales sur la section escalade</li>
+                <li>Informations générales sur l'A.S Escalade</li>
             </ul>
             <p class="mb-2">
                 Tout Utilisateur ayant accès a internet peut accéder gratuitement et depuis n’importe où au site. Les

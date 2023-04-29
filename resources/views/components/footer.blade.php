@@ -15,7 +15,7 @@
                 <article class="flex flex-coool gap-1 lg:gap-2">
                     <h4 class="text-h4">À propos</h4>
                     <p>
-                        Site de la section escalade du <a class="link" href="https://www.lycee-montesquieu.fr/">Lycée Montesquieu</a>
+                        Site de l'A.S Escalade du <a class="link" href="https://www.lycee-montesquieu.fr/">Lycée Montesquieu</a>
                     </p>
                 </article>
                 <nav class="flex flex-coool">
