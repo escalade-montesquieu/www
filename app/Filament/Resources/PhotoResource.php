@@ -28,7 +28,9 @@ class PhotoResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('image')
                     ->translateLabel()
-                    ->required()
+                    ->required(static function (?Photo $record) {
+                        return !$record || !$record->src;
+                    })
                     ->helperText('Format png ou jpg, max 100 Mo')
                     ->directory(Photo::getStorageFolder())
                     ->afterStateUpdated(static function (TemporaryUploadedFile $state, Closure $get, Closure $set) {
