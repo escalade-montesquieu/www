@@ -34,7 +34,6 @@ class StudentResource extends Resource
                 Forms\Components\TextInput::make('get_degree_at_year')
                     ->translateLabel()
                     ->numeric()
-                    ->required()
                     ->minValue(2000)
                     ->maxValue(9999)
                     ->columnSpan('full'),
