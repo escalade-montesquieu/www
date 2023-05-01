@@ -32,6 +32,7 @@ class PhotoResource extends Resource
                         return !$record || !$record->src;
                     })
                     ->helperText('Format png ou jpg, max 100 Mo')
+                    ->acceptedFileTypes(['image/png', 'image/jpeg'])
                     ->directory(Photo::getStorageFolder())
                     ->afterStateUpdated(static function (TemporaryUploadedFile $state, Closure $get, Closure $set) {
                         $folder = Photo::getStorageFolder();
