@@ -1,4 +1,7 @@
 <x-app-layout>
+    @section('title', 'Articles')
+    @section('description', 'Retrouvez les actus, les articles et les vidéos proposés à la lecture')
+
     <article class="container flex flex-coool gap-4 mt-10 lg:mt-32">
         {{ Breadcrumbs::render('articles') }}
         <header>

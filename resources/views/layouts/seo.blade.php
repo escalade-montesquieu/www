@@ -4,7 +4,7 @@
 
 <title>@if(View::hasSection('title'))
         @yield('title') -
-    @endif{{config('app.name')}}</title>
+    @endif {{config('app.name')}}</title>
 
 <script type="application/ld+json">
     {
@@ -23,10 +23,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 </script>
 
 
-<meta name="description" content="{{ config('app.description') }}"/>
+<meta name="description" content="@yield('description', config('app.description'))"/>
 <meta name="author" content="Arthaud Proust">
 <meta name="subject" content="Escalade">
 <meta name="language" content="FR">
@@ -37,9 +47,9 @@
 
 
 <!-- Open graph Meta -->
-<meta property="og:title" content="{{ config('app.name') }}"/>
+<meta property="og:title" content="@if(View::hasSection('title'))@yield('title') -@endif {{ config('app.name') }}"/>
 <meta property="og:type" content="website"/>
-<meta property="og:description" content="{{ config('app.description') }}"/>
+<meta property="og:description" content="@yield('description', config('app.description'))"/>
 <meta property="og:site_name" content="{{ config('app.name') }}"/>
 <meta property="og:url" content="{{ config('app.url') }}"/>
 <meta property="og:locale" content="fr_FR"/>
@@ -49,8 +59,8 @@
 <!-- Twitter Meta Card -->
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:site" content="{{ config('app.url') }}"/>
-<meta name="twitter:title" content="{{ config('app.name') }}"/>
-<meta name="twitter:description" content="{{ config('app.description') }}"/>
+<meta name="twitter:title" content="@if(View::hasSection('title'))@yield('title') -@endif {{ config('app.name') }}"/>
+<meta name="twitter:description" content="@yield('description', config('app.description'))"/>
 <meta name="twitter:image" content="{{ config('app.url') }}/assets/img/hero@0.5x.jpg?v={{ $v }}">
 
 <!-- Apple meta -->

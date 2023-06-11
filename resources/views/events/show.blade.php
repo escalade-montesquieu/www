@@ -1,4 +1,7 @@
 <x-app-layout>
+    @section('title', $event->title)
+    @section('description', $event->description)
+
     <section class="container mt-10 lg:mt-32 space-y-4">
         {{ Breadcrumbs::render('event', $event) }}
 
