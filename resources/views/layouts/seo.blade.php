@@ -23,19 +23,13 @@
 
 
 
-
-
 </script>
 
 
-<meta name="keywords"
-      content="montesquieu, lycée, bordeaux, escalade, section, grimpe, développeur, association, sportive, as, arthaud, proust">
 <meta name="description" content="{{ config('app.description') }}"/>
 <meta name="author" content="Arthaud Proust">
 <meta name="subject" content="Escalade">
 <meta name="language" content="FR">
-<meta name="url" content="https://escalade-montesquieu.fr"/>
-<meta name="identifier-URL" content="https://escalade-montesquieu.fr">
 <meta name="owner" content="Arthaud Proust">
 <meta name="target" content="all">
 <meta name="robots" content="all"/>
@@ -75,4 +69,3 @@
 
 <link rel="icon" href="/assets/img/favicon.ico?v={{ $v }}">
 <meta http-equiv="content-language" content="fr"/>
-<link rel="canonical" href="https://escalade-montesquieu.fr/"/>
