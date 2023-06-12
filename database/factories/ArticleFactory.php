@@ -23,18 +23,20 @@ class ArticleFactory extends Factory
         for ($i = 0; $i < fake()->numberBetween(0, 4); $i++) {
             $resourceType = fake()->randomElement(ArticleResourceType::toArray());
 
-            if ($resourceType === ArticleResourceType::EXTERNAL_VIDEO) {
+            if ($resourceType === ArticleResourceType::YOUTUBE_VIDEO) {
                 $resources[] = [
-                    'type' => ArticleResourceType::EXTERNAL_VIDEO,
+                    'type' => ArticleResourceType::YOUTUBE_VIDEO,
                     'title' => fake()->word(),
                     'url' => fake()->url(),
                 ];
             } else {
-                $resources[] = [
-                    'type' => ArticleResourceType::INTERNAL_PHOTO,
-                    'title' => fake()->word(),
-                    'photo_id' => Photo::inRandomOrder()->first()->id,
-                ];
+                if($photo=Photo::inRandomOrder()->first()) {
+                    $resources[] = [
+                        'type' => ArticleResourceType::INTERNAL_PHOTO,
+                        'title' => fake()->word(),
+                        'photo_id' => $photo->id,
+                    ];
+                }
             }
 
         }
