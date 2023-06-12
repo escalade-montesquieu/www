@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Enums\UserEmailPreference;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\Redirector;
 use Livewire\WithFileUploads;
 
 class ProfileEdition extends Component
@@ -102,7 +104,7 @@ class ProfileEdition extends Component
             'email' => $validatedData['email'],
             'rent_harness' => $validatedData['rent_harness'],
             'rent_shoes' => $validatedData['rent_shoes'],
-            'email_preferences' => $validatedData['email_preferences'],
+            'email_preferences' => $validatedData['email_preferences'] ?? [],
         ]);
 
         return redirect()->route('profile.show');
@@ -115,7 +117,7 @@ class ProfileEdition extends Component
             'bio' => ['nullable'],
             'rent_harness' => ['required', 'boolean'],
             'rent_shoes' => ['nullable', 'numeric', 'between:36,50'],
-            'email_preferences' => ['required', 'array'],
+            'email_preferences' => ['present', 'nullable', 'array'],
         ];
     }
 }
