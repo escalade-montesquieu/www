@@ -41,16 +41,16 @@
                                 </span>
                             @endforeach
                         @else
-                            <span>Nous n'avons trouvé personne dans la liste :(</span>
+                            <span>Nous n'avons trouvé personne dans la liste</span>
                         @endif
                     </div>
                 @endif
             </div>
 
-            <p>
-                En vous continuant vous acceptez les <a class="link" href="{{ route('legal.conditions-of-use') }}">Conditions
+            <small class="text-label">
+                En continuant vous acceptez les <a class="link" href="{{ route('legal.conditions-of-use') }}">Conditions
                     d'utilisation</a>
-            </p>
+            </small>
 
             <div class="flex flex-coool gap-4">
                 <button
