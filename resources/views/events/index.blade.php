@@ -1,4 +1,7 @@
 <x-app-layout>
+    @section('title', 'Évènements')
+    @section('description', 'Retrouvez et participez aux sorties grimpes du lycée. Falaise, Arkose, camping, etc.')
+
     <article class="container flex flex-coool gap-4 mt-10 lg:mt-32">
         {{ Breadcrumbs::render('events') }}
         <header>
