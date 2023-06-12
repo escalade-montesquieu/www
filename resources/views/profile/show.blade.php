@@ -1,5 +1,5 @@
 <x-app-layout>
-    <article class="container flex flex-coool gap-4 mt-10 lg:mt-32">
+    <article class="container max-w-2xl flex flex-coool gap-4 mt-10 lg:mt-32">
         {{ Breadcrumbs::render('profile') }}
 
         <div class="mt-10 flex flex-coool gap-2 w-full items-center">
