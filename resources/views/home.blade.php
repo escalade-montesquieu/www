@@ -8,11 +8,12 @@
                 <h2 class="text-h2 lg:mt-2">A.S. Escalade</h2>
 
                 <p class="max-lg:hidden mt-8">
-                    Bienvenue sur le site de l'association sportive d'escalade du Lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de l'association sportive d'escalade du <b>Lycée Montesquieu à Bordeaux</b>.
                 </p>
                 <p class="max-lg:hidden mt-4">
-                    Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
-                    curiosité, responsabilité et bonne humeur.
+                    Nous apprenons aux élèves l'esprit de l'escalade en alliant <b>curiosité</b>, <b>responsabilité</b>
+                    et <b>bonne humeur</b>. Nous participons à des compétitions, nous grimpons en falaise et nous nous
+                    entraînons dans les salles de Bordeaux et du Lycée.
                 </p>
             </article>
             <article class="lg:col-start-7 lg:col-end-13">
@@ -29,11 +30,12 @@
                     <div class="swiper-pagination"></div>
                 </div>
                 <p class="lg:hidden mt-8">
-                    Bienvenue sur le site de l'association sportive d'escalade du lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de l'association sportive d'escalade du <b>Lycée Montesquieu à Bordeaux</b>.
                 </p>
                 <p class="lg:hidden mt-4">
-                    Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
-                    curiosité, responsabilité et bonne humeur.
+                    Nous apprenons aux élèves l'esprit de l'escalade en alliant <b>curiosité</b>, <b>responsabilité</b>
+                    et <b>bonne humeur</b>. Nous participons à des compétitions, nous grimpons en falaise et nous nous
+                    entraînons dans les salles de Bordeaux et du Lycée.
                 </p>
             </article>
         </div>
