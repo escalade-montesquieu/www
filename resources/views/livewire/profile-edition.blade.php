@@ -1,5 +1,7 @@
-<article class="container flex flex-coool gap-10">
+<article class="container max-w-2xl pt-8 flex flex-coool gap-10">
     <x-back-link class="mr-auto"/>
+
+    {{ $errors }}
 
     <label class="w-full flex flex-row gap-4 w-full items-center"
            x-data="{ isUploading: false, isUploaded: false, progress: 0 }"
@@ -10,7 +12,7 @@
     >
         <input type="file" wire:model="avatar" class="hidden">
         <img class="rounded-full w-1/4 aspect-square object-cover flex-shrink-0"
-             src="{{ $avatar?->temporaryUrl() ?? $user->avatar }}">
+             src="{{ $avatar?->temporaryUrl() ?? $user->avatar }}" alt="">
         <div>
             <h4 class="text-cta">Modifier votre photo</h4>
             <p x-show="!isUploading && !isUploaded" class="text-label">Maximum 10Mo</p>
@@ -94,47 +96,21 @@
         <section class="flex flex-coool gap-2">
             <h4 class="text-h4">Préférences email</h4>
 
+            @foreach(App\Enums\UserEmailPreference::cases() as $case)
             <article class="bg-white-medium rounded-lg flex flex-coool">
                 <button
-                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_CREATION)) bg-blue-light text-blue-medium @endif"
-                    wire:click="toggleEmailPreference('{{ App\Enums\UserEmailPreference::EVENT_CREATION->value }}')">
-                    @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_CREATION))
+                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected($case)) bg-blue-light text-blue-medium @endif"
+                    wire:click="toggleEmailPreference('{{ $case->value }}')">
+                    @if($this->isEmailPreferenceSelected($case))
                         <x-heroicon-o-check class="h-6 w-6"/>
                     @else
                         <div class="bg-white-dark h-6 w-6 rounded-md"></div>
                     @endif
 
-                    <label>{{ App\Enums\UserEmailPreference::EVENT_CREATION->toLabel() }}</label>
+                    <label>{{ $case->toLabel() }}</label>
                 </button>
             </article>
-
-            <article class="bg-white-medium rounded-lg flex flex-coool">
-                <button
-                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_REMINDER)) bg-blue-light text-blue-medium @endif"
-                    wire:click="toggleEmailPreference('{{ App\Enums\UserEmailPreference::EVENT_REMINDER->value }}')">
-                    @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::EVENT_REMINDER))
-                        <x-heroicon-o-check class="h-6 w-6"/>
-                    @else
-                        <div class="bg-white-dark h-6 w-6 rounded-md"></div>
-                    @endif
-
-                    <label>{{ App\Enums\UserEmailPreference::EVENT_REMINDER->toLabel() }}</label>
-                </button>
-            </article>
-
-            <article class="bg-white-medium rounded-lg flex flex-coool">
-                <button
-                    class="rounded-lg p-2 flex flex-row items-center gap-2 @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION)) bg-blue-light text-blue-medium @endif"
-                    wire:click="toggleEmailPreference('{{ App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION->value }}')">
-                    @if($this->isEmailPreferenceSelected(App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION))
-                        <x-heroicon-o-check class="h-6 w-6"/>
-                    @else
-                        <div class="bg-white-dark h-6 w-6 rounded-md"></div>
-                    @endif
-
-                    <label>{{ App\Enums\UserEmailPreference::FORUM_MESSAGE_MENTION->toLabel() }}</label>
-                </button>
-            </article>
+            @endforeach
         </section>
 
         <button class="btn-cta-primary" wire:click="saveChanges">Enregistrer</button>

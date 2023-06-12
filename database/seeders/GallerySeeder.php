@@ -17,9 +17,10 @@ class GallerySeeder extends Seeder
     {
         Gallery::factory()
             ->count(3)
-            ->hasPhotos(10)
+//            ->hasPhotos(10)
             ->create();
 
+        return;
         foreach (Gallery::all() as $gallery) {
             $gallery->update([
                 'photo_id' => $gallery->photos()->first()->id
