@@ -8,11 +8,12 @@
                 <h2 class="text-h2 lg:mt-2">A.S. Escalade</h2>
 
                 <p class="max-lg:hidden mt-8">
-                    Bienvenue sur le site de l'association sportive d'escalade du Lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de l'association sportive d'escalade du <b>Lycée Montesquieu à Bordeaux</b>.
                 </p>
                 <p class="max-lg:hidden mt-4">
-                    Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
-                    curiosité, responsabilité et bonne humeur.
+                    Nous apprenons aux élèves l'esprit de l'escalade en alliant <b>curiosité</b>, <b>responsabilité</b>
+                    et <b>bonne humeur</b>. Nous participons à des compétitions, nous grimpons en falaise et nous nous
+                    entraînons dans les salles de Bordeaux et du Lycée.
                 </p>
             </article>
             <article class="lg:col-start-7 lg:col-end-13">
@@ -29,30 +30,33 @@
                     <div class="swiper-pagination"></div>
                 </div>
                 <p class="lg:hidden mt-8">
-                    Bienvenue sur le site de l'association sportive d'escalade du lycée Montesquieu à Bordeaux.
+                    Bienvenue sur le site de l'association sportive d'escalade du <b>Lycée Montesquieu à Bordeaux</b>.
                 </p>
                 <p class="lg:hidden mt-4">
-                    Nous préparons les élèves grimpeurs avec des entraînements sportifs, dans un cadre alliant
-                    curiosité, responsabilité et bonne humeur.
+                    Nous apprenons aux élèves l'esprit de l'escalade en alliant <b>curiosité</b>, <b>responsabilité</b>
+                    et <b>bonne humeur</b>. Nous participons à des compétitions, nous grimpons en falaise et nous nous
+                    entraînons dans les salles de Bordeaux et du Lycée.
                 </p>
             </article>
         </div>
     </section>
 
-    <article class="container relative max-md:bg-white-medium flex flex-col gap-8 mt-40 max-lg:py-8 lg:mt-32">
-        <section class="flex justify-between items-end gap-4 whitespace-nowrap">
-            <h2 class="text-h2 ">
-                Derniers articles
-            </h2>
-            <a href="{{ route('articles') }}" class="max-md:hidden btn-cta-secondary">Voir tous les articles</a>
-        </section>
-        <livewire:articles.display-list :onlyPinned="true"/>
-        <a href="{{ route('articles') }}" class="md:hidden btn-cta-tertiary">Tout voir</a>
-    </article>
+    <section class="max-md:bg-white-medium mt-20 lg:mt-40 max-lg:py-10 lg:mt-32">
+        <article class="container relative flex flex-col gap-8">
+            <section class="flex justify-between items-end gap-4 whitespace-nowrap">
+                <h2 class="text-h2 ">
+                    Derniers articles
+                </h2>
+                <a href="{{ route('articles') }}" class="max-md:hidden btn-cta-secondary">Voir tous les articles</a>
+            </section>
+            <livewire:articles.display-list :onlyPinned="true"/>
+            <a href="{{ route('articles') }}" class="md:hidden btn-cta-tertiary">Tout voir</a>
+        </article>
+    </section>
 
     <section class="container grid grid-cols-1 lg:grid-cols-12 gap-x-16 lg:mt-40">
         <article class="col-span-full lg:col-start-1 lg:col-end-7 space-y-8 max-lg:mt-20">
-            <h2 class="text-h2">Évènements à venir</h2>
+            <h2 class="text-h2">À venir</h2>
             <livewire:events.display-list :onlyIncoming="true"/>
             <a href="{{ route('events') }}" class="btn-cta-secondary">Tout voir</a>
         </article>

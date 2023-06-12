@@ -61,6 +61,10 @@
         @apply flex flex-row items-center text-cta;
     }
 
+    .link-nav:hover {
+        @apply underline underline-offset-4;
+    }
+
     .link-stretch::after {
         content: '';
         position: absolute;
