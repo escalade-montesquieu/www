@@ -15,7 +15,7 @@
                 @auth
                     <x-header-user-dropdown/>
                 @else
-                    <a href="{{ route('login') }}" class="text-cta">Se connecter</a>
+                    <a href="{{ route('login') }}" class="link-nav">Se connecter</a>
                 @endif
             </div>
         </div>
