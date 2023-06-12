@@ -7,42 +7,30 @@
     @endif {{config('app.name')}}</title>
 
 <script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": "Escalade Montesquieu",
-        "url": "https://escalade-montesquieu.fr",
-        "address": "5 Place Longchamps 4 et 33000 Bordeaux",
-        "sameAs": [
-        "https://www.facebook.com/escalademontesquieu/",
-        "https://www.instagram.com/escalade_montesquieu/",
-        "https://twitter.com/MontesEscalade",
-        "https://www.linkedin.com/in/arthaud-proust/"
-        ]
-    }
-
-
-
-
-
-
-
-
-
-
-
+{
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "Escalade Montesquieu",
+    "url": "https://escalade-montesquieu.fr",
+    "address": "5 Place Longchamps 4 et 33000 Bordeaux",
+    "sameAs": [
+    "https://www.facebook.com/escalademontesquieu/",
+    "https://www.instagram.com/escalade_montesquieu/",
+    "https://twitter.com/MontesEscalade",
+    "https://www.linkedin.com/in/arthaud-proust/"
+    ]
+}
 
 
 </script>
-
 
 <meta name="description" content="@yield('description', config('app.description'))"/>
 <meta name="author" content="Arthaud Proust">
 <meta name="subject" content="Escalade">
 <meta name="language" content="FR">
 <meta name="owner" content="Arthaud Proust">
-<meta name="target" content="all">
-<meta name="robots" content="all"/>
+<meta name="target" content="@yield('robots', 'all')">
+<meta name="robots" content="@yield('robots', 'all')"/>
 <meta name="theme-color" content="#222">
 
 

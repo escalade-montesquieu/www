@@ -16,6 +16,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+
+    @yield('head')
 </head>
 <body class="font-sans text-body text-black-dark bg-white-light antialiased">
 

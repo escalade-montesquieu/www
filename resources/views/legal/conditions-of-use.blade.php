@@ -1,4 +1,6 @@
 <x-app-layout>
+    @section('robots', 'noindex, follow')
+
     <section class="container lg:mt-40">
         <h1 class="text-h1 mb-4">Conditions d'utilisation</h1>
         <section class="AboutLayout-section">

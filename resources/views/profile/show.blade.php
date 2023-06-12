@@ -1,4 +1,6 @@
 <x-app-layout>
+    @section('robots', 'noindex, follow')
+
     <article class="container max-w-2xl flex flex-coool gap-4 mt-10 lg:mt-32">
         {{ Breadcrumbs::render('profile') }}
 

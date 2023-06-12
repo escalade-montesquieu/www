@@ -1,4 +1,6 @@
 <x-auth-layout>
+    @section('robots', 'noindex, follow')
+
     <div class="flex flex-coool items-center pb-8">
         <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
         <h4 class="text-h4">Réinitialiser votre mot de passe</h4>

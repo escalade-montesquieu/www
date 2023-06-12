@@ -1,4 +1,6 @@
 <x-app-layout>
+    @section('robots', 'noindex, follow')
+
     <section class="container lg:mt-40">
         <h1 class="text-h1 mb-4">Politique RGPD</h1>
 
