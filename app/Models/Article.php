@@ -14,7 +14,7 @@ class Article extends Model implements Sortable
     use SoftDeletes, HasFactory;
     use SortableTrait;
 
-    public static int $countPinned = 3;
+    public static int $countPinned = 4;
 
     protected $fillable = [
         'title',
