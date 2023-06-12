@@ -24,3 +24,5 @@ php artisan migrate --force
 
 # stop maintenance mode
 php artisan up
+
+php artisan sitemap:generate
