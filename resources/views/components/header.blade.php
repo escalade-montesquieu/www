@@ -1,4 +1,11 @@
-<div x-data="{ isOpen: false }" class="z-40 sticky top-0">
+<nav
+    class="fixed top-0 left-0 -translate-y-full focus-within:translate-y-0 z-50 flex flex-col gap-2 bg-white-dark p-6">
+    <ul class="nav-accessibility" aria-label="Navigation d'accès rapide">
+        <li><a href="#main">Accéder au contenu principal</a></li>
+        <li><a href="#navigation">Accéder à la navigation</a></li>
+    </ul>
+</nav>
+<div id="navigation" x-data="{ isOpen: false }" class="z-40 sticky top-0">
     <header class="flex w-full bg-white-medium">
         <div class="container flex flex-row items-center justify-between h-header">
             <button class="md:hidden" @click="isOpen = true">

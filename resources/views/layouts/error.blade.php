@@ -3,7 +3,7 @@
 
         <x-header/>
 
-        <main class="container max-w-xl mt-20 min-h-full space-y-6">
+        <main id="main" class="container max-w-xl mt-20 min-h-full space-y-6">
             <img src="{{ asset('/assets/svg/bug.svg') }}" alt=" "/>
             {{ $slot }}
         </main>

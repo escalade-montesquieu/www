@@ -3,7 +3,7 @@
 
         <x-header/>
 
-        <main>
+        <main id="main">
             {{ $slot }}
         </main>
     </div>
