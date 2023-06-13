@@ -26,6 +26,8 @@
         </button>
     @endif
 
+    <div id="messagesAnchor"></div>
+
     @if($isSeenPopupVisible)
         <section class="fixed z-50 top-0 left-0 h-screen w-full flex flex-col justify-center items-center">
             <div class="container h-full py-20 flex flex-col justify-center">
