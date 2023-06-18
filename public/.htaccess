@@ -6,8 +6,11 @@
     RewriteEngine On
 
     # Handle Authorization Header
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -19,3 +22,71 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# 1 month =
+# 2592000
+
+# 1 week =
+# 604800
+
+# 60 hours =
+# 216000
+
+# 10 minutes =
+# 600
+<IfModule mod_headers.c>
+
+    <Files "manifest.json">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
+    </Files>
+
+    <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
+        Header set Cache-Control "max-age=216000, public"
+    </FilesMatch>
+
+    <FilesMatch "\\.(css)$">
+        Header set Cache-Control "max-age=216000, public"
+    </FilesMatch>
+
+    <FilesMatch "\\.(js)$">
+        Header set Cache-Control "max-age=216000, private"
+    </FilesMatch>
+
+    <FilesMatch "\\.(x?html?|php)$">
+        Header set Cache-Control "max-age=600, private, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+
+<IfModule mod_expires.c>
+  # Enable expirations
+  ExpiresActive On
+  # Default directive
+  ExpiresDefault "access plus 216000 seconds"
+
+  # My favicon
+  ExpiresByType image/x-icon "access plus 1 week"
+
+  # Images
+  ExpiresByType image/gif "access plus 216000 seconds"
+  ExpiresByType image/png "access plus 216000 seconds"
+  ExpiresByType image/jpg "access plus 216000 seconds"
+  ExpiresByType image/jpeg "access plus 216000 seconds"
+
+  # CSS
+  ExpiresByType text/css "access 216000 seconds"
+
+  # Javascript
+  ExpiresByType application/javascript "access plus 216000 seconds"
+</IfModule>
+
+
+# protect the htaccess file
+<files .htaccess>
+    order allow,deny
+    deny from all
+</files>
+
+# protection de la lecture des répertoires
+Options -Indexes

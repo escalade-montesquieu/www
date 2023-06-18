@@ -17,6 +17,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'description' => env('APP_DESCRIPTION'),
+
+    'deploy_secret' => env('DEPLOY_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -41,7 +45,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +86,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +189,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Intervention\Image\ImageServiceProvider::class,
+        Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -194,6 +200,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
 
     ],
 
@@ -210,6 +217,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
 ];

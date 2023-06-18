@@ -1,0 +1,101 @@
+@import "buttons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .h-real-screen {
+        /*@formatter:off*/
+        height: 100vh;
+        height: 100svh;
+        /*@formatter:on*/
+    }
+
+    .flex-coool {
+        @apply flex-col;
+    }
+
+    .text-h1 {
+        @apply text-5xl lg:text-6xl font-bold lg:font-extrabold;
+    }
+
+    .text-h2 {
+        @apply text-3xl lg:text-5xl font-light;
+    }
+
+    .text-h3 {
+        @apply text-2xl lg:text-3xl font-bold lg:font-semibold;
+    }
+
+    .text-h4 {
+        @apply text-xl lg:text-2xl font-semibold;
+    }
+
+    .text-body {
+        @apply text-lg lg:text-xl font-normal;
+    }
+
+    .text-cta {
+        @apply text-lg lg:text-xl font-bold;
+    }
+
+    .text-label {
+        @apply text-base lg:text-lg font-normal;
+    }
+
+    .markdown a,
+    .link {
+        @apply text-blue-medium hover:underline underline-offset-2;
+    }
+
+    .richtext a {
+        @apply link;
+    }
+
+    .link-offcanvas {
+        @apply text-h3 py-2;
+    }
+
+    .link-nav {
+        @apply flex flex-row items-center text-cta;
+    }
+
+    .link-nav:hover {
+        @apply underline underline-offset-4;
+    }
+
+    .link-stretch::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .icon {
+        @apply h-6 w-6 stroke-2;
+    }
+
+    .avatar {
+        @apply h-8 w-8 rounded-full object-cover;
+    }
+
+    .avatar-big {
+        @apply h-14 w-14 rounded-full object-cover;
+    }
+
+    .breadcrumb {
+        @apply w-full flex flex-row flex-wrap text-label gap-3 whitespace-nowrap text-ellipsis overflow-hidden;
+    }
+
+    .breadcrumb-item {
+        @apply whitespace-nowrap overflow-hidden min-w-0 flex-1 text-left text-ellipsis;
+    }
+
+    .containing-iframe,
+    .containing-iframe iframe {
+        @apply h-full w-full;
+    }
+}
