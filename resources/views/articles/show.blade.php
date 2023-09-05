@@ -14,12 +14,7 @@
         <section
             class="items-end grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-16">
             @foreach($article->resources as $resource)
-                <article>
-                    @if($resource['data']['title'])
-                        <h4 class="text-h4 mb-2">{{ $resource['data']['title'] }}</h4>
-                    @endif
-                    <x-articles.resource :resource="$resource"/>
-                </article>
+                <x-articles.resource :resource="$resource"/>
             @endforeach
         </section>
     </section>

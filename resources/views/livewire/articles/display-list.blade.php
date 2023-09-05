@@ -1,6 +1,7 @@
 <div class="flex flex-coool gap-16">
     @if(!$onlyPinned)
-        <section class="sticky top-header bg-white-light py-4 -my-4 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-16">
+        <section
+            class="sticky top-header bg-white-light z-10 py-4 -my-4 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-16">
             <div class="col-span-full lg:col-span-4">
                 <label for="orderBy">Ordonner par</label>
                 <select wire:model="orderBy" id="orderBy" name="orderBy" class="input w-full">

@@ -33,12 +33,15 @@ class ArticleResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpan('full'),
+                Forms\Components\TextInput::make('link')
+                    ->translateLabel()
+                    ->maxLength(255)
+                    ->columnSpan('full'),
                 Forms\Components\MarkdownEditor::make('content')
                     ->toolbarButtons([
                         'italic',
                         'bold',
                         'strike',
-                        'link',
                         'bulletList',
                         'orderedList',
                         'redo',
@@ -50,23 +53,37 @@ class ArticleResource extends Resource
 
                 Forms\Components\Builder::make('resources')
                     ->blocks([
+                        Forms\Components\Builder\Block::make(ArticleResourceType::LINK->value)
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->translateLabel()
+                                    ->default('Article')
+                                    ->placeholder('Ex: Interview de Micka Mawem')
+                                    ->required(),
+                                Forms\Components\TextInput::make('url')
+                                    ->translateLabel()
+                                    ->placeholder('Ex: https://example.com/...')
+                                    ->required(),
+                            ]),
                         Forms\Components\Builder\Block::make(ArticleResourceType::YOUTUBE_VIDEO->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
                                     ->translateLabel()
-                                    ->placeholder('Petit rick roll'),
+                                    ->default('Vidéo')
+                                    ->placeholder('Ex: Vidéo'),
                                 Forms\Components\TextInput::make('url')
                                     ->translateLabel()
-                                    ->placeholder('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+                                    ->placeholder('Ex: https://youtube.com/watch?v=dQw4w9WgXcQ')
                                     ->required(),
                             ]),
                         Forms\Components\Builder\Block::make(ArticleResourceType::INTERNAL_PHOTO->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
-                                    ->placeholder('Photos')
+                                    ->placeholder('Ex: Photo')
+                                    ->default('Photo')
                                     ->translateLabel(),
                                 Forms\Components\Select::make('gallery_id')
-                                    ->label('Gallerie photo')
+                                    ->label('Galerie photo')
                                     ->options(Gallery::all()->pluck('title', 'id'))
                                     ->searchable()
                                     ->reactive(),
@@ -82,19 +99,21 @@ class ArticleResource extends Resource
                         Forms\Components\Builder\Block::make(ArticleResourceType::EXTERNAL_PHOTO->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
-                                    ->placeholder('Photos')
+                                    ->placeholder('Ex: Photo')
+                                    ->default('Photo')
                                     ->translateLabel(),
                                 Forms\Components\TextInput::make('url')
-                                    ->placeholder('https://picsum.photos/200/300')
+                                    ->placeholder('Ex: https://picsum.photos/200/300')
+                                    ->translateLabel()
                                     ->required(),
                             ]),
                         Forms\Components\Builder\Block::make(ArticleResourceType::EMBED->value)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
-                                    ->placeholder('Vidéo')
+                                    ->placeholder('Ex: Vidéo Redbull')
                                     ->translateLabel(),
                                 Forms\Components\TextInput::make('content')
-                                    ->placeholder('<iframe src=https://></iframe>')
+                                    ->placeholder('Ex: <iframe src=https://></iframe>')
                                     ->required(),
                             ]),
                     ])
