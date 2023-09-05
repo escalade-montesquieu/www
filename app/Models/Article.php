@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\ArticleResourceType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
@@ -18,6 +20,7 @@ class Article extends Model implements Sortable
 
     protected $fillable = [
         'title',
+        'link',
         'content',
         'resources',
         'order_column',
@@ -41,6 +44,21 @@ class Article extends Model implements Sortable
     public function getFirstResourceAttribute(): array|bool
     {
         return current($this->resources);
+    }
+
+    public function getFirstImageResourceAttribute(): ?array
+    {
+        return collect($this->resources)->whereIn('type', [ArticleResourceType::EXTERNAL_PHOTO->value, ArticleResourceType::INTERNAL_PHOTO])->first();
+    }
+
+    public function getFirstNotLinkResourceAttribute(): ?array
+    {
+        return collect($this->resources)->where('type', '!=', ArticleResourceType::LINK->value)->first();
+    }
+
+    public function getLinkResourcesAttribute(): Collection
+    {
+        return collect($this->resources)->where('type', ArticleResourceType::LINK->value);
     }
 
     public function getIsPinnedAttribute(): bool

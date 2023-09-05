@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryResource\RelationManagers\PhotosRelationManager;
 use App\Filament\Resources\PhotoResource\Pages;
-use App\Filament\Resources\PhotoResource\RelationManagers;
 use App\Models\Photo;
 use Closure;
 use Filament\Forms;
