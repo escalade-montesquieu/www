@@ -12,7 +12,7 @@ class PhotosRelationManager extends RelationManager
 {
     protected static string $relationship = 'photos';
 
-    protected static ?string $recordTitleAttribute = 'src';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
