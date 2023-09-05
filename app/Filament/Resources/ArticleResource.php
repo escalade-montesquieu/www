@@ -17,6 +17,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ArticleResource extends Resource
 {
@@ -33,10 +34,6 @@ class ArticleResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpan('full'),
-                Forms\Components\TextInput::make('link')
-                    ->translateLabel()
-                    ->maxLength(255)
-                    ->columnSpan('full'),
                 Forms\Components\MarkdownEditor::make('content')
                     ->toolbarButtons([
                         'italic',
@@ -50,7 +47,39 @@ class ArticleResource extends Resource
                     ->translateLabel()
                     ->maxLength(16777215)
                     ->columnSpan('full'),
+                Forms\Components\TextInput::make('link')
+                    ->label('Lien vers la ressource')
+                    ->placeholder('Ex: https://planetgrimpe.com/...')
+                    ->translateLabel()
+                    ->maxLength(255)
+                    ->columnSpan('full')
+                    ->reactive()
+                    ->afterStateUpdated(function (Closure $get, Closure $set, ?string $state) {
+                        if (!$state || !getYoutubeIdFromUrl($state)) {
+                            return;
+                        }
 
+                        $resources = $get('resources');
+
+                        foreach ($resources as $uuid => $resource) {
+                            if ($resource['type'] === ArticleResourceType::YOUTUBE_VIDEO->value) {
+                                $resources[$uuid]['data']['url'] = $state;
+                                $set('resources', $resources);
+                                return;
+                            }
+                        }
+
+                        $newUuid = (string)Str::uuid();
+                        $resources[$newUuid] = [
+                            'type' => ArticleResourceType::YOUTUBE_VIDEO->value,
+                            'data' => [
+                                'title' => null,
+                                'url' => $state
+                            ]
+                        ];
+
+                        $set('resources', $resources);
+                    }),
                 Forms\Components\Builder::make('resources')
                     ->blocks([
                         Forms\Components\Builder\Block::make(ArticleResourceType::LINK->value)
