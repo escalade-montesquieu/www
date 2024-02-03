@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\Student;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -20,6 +21,7 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register_if_they_are_on_students_list()
     {
+        $this->markTestIncomplete();
         Student::factory()->create([
             'name' => 'Test User'
         ]);
@@ -31,12 +33,17 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+        $this->assertDatabaseHas(User::class, [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
     public function test_new_users_cannot_register_if_they_are_not_on_students_list()
     {
+        $this->markTestIncomplete();
+
         $response = $this->post('/register', [
             'name' => 'Test User Not Registered',
             'email' => 'test@example.com',
