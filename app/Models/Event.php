@@ -37,18 +37,23 @@ class Event extends Model
         return $this->belongsTo(EventCategory::class);
     }
 
-    public function getIsUserParticipatingAttribute(): bool
+    public function isParticipating(User $user): bool
     {
-        if (!Auth::check()) {
-            return false;
-        }
-        return $this->participants()->where('id', Auth::user()->id)->count();
+        return $this->participants()->where('id', $user->id)->count();
     }
 
     public function participants(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
             ->withTimestamps();
+    }
+
+    public function getIsUserParticipatingAttribute(): bool
+    {
+        if (!Auth::check()) {
+            return false;
+        }
+        return $this->participants()->where('id', Auth::user()->id)->count();
     }
 
     public function getIsPastAttribute(): bool
@@ -58,7 +63,11 @@ class Event extends Model
 
     public function getIsFullAttribute(): bool
     {
-        return $this->participants()->count() === $this->max_places;
+        if ($this->max_places === null || $this->max_places < 0) {
+            return false;
+        }
+
+        return $this->participants()->count() >= $this->max_places;
     }
 
     public function getHarnessesNeededAttribute(): int

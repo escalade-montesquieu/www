@@ -23,11 +23,31 @@ class EventPolicy
 
     public function participate(User $user, Event $event): bool
     {
-        return !$event->isPast;
+        if ($event->is_past) {
+            return false;
+        }
+
+        if ($event->is_full) {
+            return false;
+        }
+
+        if ($event->isParticipating($user)) {
+            return false;
+        }
+
+        return true;
     }
 
     public function unparticipate(User $user, Event $event): bool
     {
-        return !$event->isPast;
+        if ($event->is_past) {
+            return false;
+        }
+
+        if (!$event->isParticipating($user)) {
+            return false;
+        }
+
+        return true;
     }
 }
